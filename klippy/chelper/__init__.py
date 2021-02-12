@@ -199,20 +199,11 @@ def check_build_code(sources, target):
     obj_times = get_mtimes([target])
     return not obj_times or max(src_times) > min(obj_times)
 
-# Check if the current gcc version supports a particular command-line option
 def check_gcc_option(option):
     cmd = "%s %s -S -o /dev/null -xc /dev/null > /dev/null 2>&1" % (
         GCC_CMD, option)
     res = os.system(cmd)
     return res == 0
-
-# Check if the current gcc version supports a particular command-line option
-def do_build_code(cmd):
-    res = os.system(cmd)
-    if res:
-        msg = "Unable to build C code module (error=%s)" % (res,)
-        logging.error(msg)
-        raise Exception(msg)
 
 FFI_main = None
 FFI_lib = None
@@ -232,7 +223,7 @@ def get_ffi():
             else:
                 cmd = "%s %s" % (GCC_CMD, COMPILE_ARGS)
             logging.info("Building C code module %s", DEST_LIB)
-            do_build_code(cmd % (destlib, ' '.join(srcfiles)))
+            os.system(cmd % (destlib, ' '.join(srcfiles)))
         FFI_main = cffi.FFI()
         for d in defs_all:
             FFI_main.cdef(d)
@@ -263,7 +254,7 @@ def run_hub_ctrl(enable_power):
     destlib = get_abs_files(hubdir, [HC_TARGET])[0]
     if check_build_code(srcfiles, destlib):
         logging.info("Building C code module %s", HC_TARGET)
-        do_build_code(HC_COMPILE_CMD % (destlib, ' '.join(srcfiles)))
+        os.system(HC_COMPILE_CMD % (destlib, ' '.join(srcfiles)))
     os.system(HC_CMD % (hubdir, enable_power))
 
 
