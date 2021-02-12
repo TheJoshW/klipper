@@ -1,6 +1,6 @@
 // Serial port command queuing
 //
-// Copyright (C) 2016-2021  Kevin O'Connor <kevin@koconnor.net>
+// Copyright (C) 2016-2020  Kevin O'Connor <kevin@koconnor.net>
 //
 // This file may be distributed under the terms of the GNU GPLv3 license.
 
@@ -123,27 +123,24 @@ pollreactor_update_timer(struct pollreactor *pr, int pos, double waketime)
 
 // Internal code to invoke timer callbacks
 static int
-pollreactor_check_timers(struct pollreactor *pr, double eventtime, int busy)
+pollreactor_check_timers(struct pollreactor *pr, double eventtime)
 {
     if (eventtime >= pr->next_timer) {
-        // Find and run pending timers
         pr->next_timer = PR_NEVER;
         int i;
         for (i=0; i<pr->num_timers; i++) {
             struct pollreactor_timer *timer = &pr->timers[i];
             double t = timer->waketime;
             if (eventtime >= t) {
-                busy = 1;
                 t = timer->callback(pr->callback_data, eventtime);
                 timer->waketime = t;
             }
             if (t < pr->next_timer)
                 pr->next_timer = t;
         }
+        if (eventtime >= pr->next_timer)
+            return 0;
     }
-    if (busy)
-        return 0;
-    // Calculate sleep duration
     double timeout = ceil((pr->next_timer - eventtime) * 1000.);
     return timeout < 1. ? 1 : (timeout > 1000. ? 1000 : (int)timeout);
 }
@@ -153,14 +150,11 @@ static void
 pollreactor_run(struct pollreactor *pr)
 {
     double eventtime = get_monotonic();
-    int busy = 1;
     while (! pr->must_exit) {
-        int timeout = pollreactor_check_timers(pr, eventtime, busy);
-        busy = 0;
+        int timeout = pollreactor_check_timers(pr, eventtime);
         int ret = poll(pr->fds, pr->num_fds, timeout);
         eventtime = get_monotonic();
         if (ret > 0) {
-            busy = 1;
             int i;
             for (i=0; i<pr->num_fds; i++)
                 if (pr->fds[i].revents)
@@ -627,7 +621,7 @@ retransmit_event(struct serialqueue *sq, double eventtime)
     pthread_mutex_lock(&sq->lock);
 
     // Retransmit all pending messages
-    uint8_t buf[MESSAGE_MAX * MAX_PENDING_BLOCKS + 1];
+    uint8_t buf[MESSAGE_MAX * MESSAGE_SEQ_MASK + 1];
     int buflen = 0, first_buflen = 0;
     buf[buflen++] = MESSAGE_SYNC;
     struct queue_message *qm;
@@ -665,11 +659,13 @@ retransmit_event(struct serialqueue *sq, double eventtime)
     return waketime;
 }
 
-// Construct a block of data to be sent to the serial port
-static int
-build_and_send_command(struct serialqueue *sq, uint8_t *buf, double eventtime)
+// Construct a block of data and send to the serial port
+static void
+build_and_send_command(struct serialqueue *sq, double eventtime)
 {
-    int len = MESSAGE_HEADER_SIZE;
+    struct queue_message *out = message_alloc();
+    out->len = MESSAGE_HEADER_SIZE;
+
     while (sq->ready_bytes) {
         // Find highest priority message (message with lowest req_clock)
         uint64_t min_clock = MAX_CLOCK;
@@ -687,13 +683,13 @@ build_and_send_command(struct serialqueue *sq, uint8_t *buf, double eventtime)
             }
         }
         // Append message to outgoing command
-        if (len + qm->len > MESSAGE_MAX - MESSAGE_TRAILER_SIZE)
+        if (out->len + qm->len > sizeof(out->msg) - MESSAGE_TRAILER_SIZE)
             break;
         list_del(&qm->node);
         if (list_empty(&cq->ready_queue) && list_empty(&cq->stalled_queue))
             list_del(&cq->node);
-        memcpy(&buf[len], qm->msg, qm->len);
-        len += qm->len;
+        memcpy(&out->msg[out->len], qm->msg, qm->len);
+        out->len += qm->len;
         sq->ready_bytes -= qm->len;
         if (qm->notify_id) {
             // Message requires notification - add to notify list
@@ -705,21 +701,23 @@ build_and_send_command(struct serialqueue *sq, uint8_t *buf, double eventtime)
     }
 
     // Fill header / trailer
-    len += MESSAGE_TRAILER_SIZE;
-    buf[MESSAGE_POS_LEN] = len;
-    buf[MESSAGE_POS_SEQ] = MESSAGE_DEST | (sq->send_seq & MESSAGE_SEQ_MASK);
-    uint16_t crc = crc16_ccitt(buf, len - MESSAGE_TRAILER_SIZE);
-    buf[len - MESSAGE_TRAILER_CRC] = crc >> 8;
-    buf[len - MESSAGE_TRAILER_CRC+1] = crc & 0xff;
-    buf[len - MESSAGE_TRAILER_SYNC] = MESSAGE_SYNC;
+    out->len += MESSAGE_TRAILER_SIZE;
+    out->msg[MESSAGE_POS_LEN] = out->len;
+    out->msg[MESSAGE_POS_SEQ] = (MESSAGE_DEST
+                                 | (sq->send_seq & MESSAGE_SEQ_MASK));
+    uint16_t crc = crc16_ccitt(out->msg, out->len - MESSAGE_TRAILER_SIZE);
+    out->msg[out->len - MESSAGE_TRAILER_CRC] = crc >> 8;
+    out->msg[out->len - MESSAGE_TRAILER_CRC+1] = crc & 0xff;
+    out->msg[out->len - MESSAGE_TRAILER_SYNC] = MESSAGE_SYNC;
 
-    // Store message block
+    // Send message
+    int ret = write(sq->serial_fd, out->msg, out->len);
+    if (ret < 0)
+        report_errno("write", ret);
+    sq->bytes_write += out->len;
     if (eventtime > sq->idle_time)
         sq->idle_time = eventtime;
-    sq->idle_time += len * sq->baud_adjust;
-    struct queue_message *out = message_alloc();
-    memcpy(out->msg, buf, len);
-    out->len = len;
+    sq->idle_time += out->len * sq->baud_adjust;
     out->sent_time = eventtime;
     out->receive_time = sq->idle_time;
     if (list_empty(&sq->sent_queue))
@@ -728,9 +726,8 @@ build_and_send_command(struct serialqueue *sq, uint8_t *buf, double eventtime)
     if (!sq->rtt_sample_seq)
         sq->rtt_sample_seq = sq->send_seq;
     sq->send_seq++;
-    sq->need_ack_bytes += len;
+    sq->need_ack_bytes += out->len;
     list_add_tail(&out->node, &sq->sent_queue);
-    return len;
 }
 
 // Determine the time the next serial data should be sent
@@ -812,24 +809,12 @@ static double
 command_event(struct serialqueue *sq, double eventtime)
 {
     pthread_mutex_lock(&sq->lock);
-    uint8_t buf[MESSAGE_MAX * MAX_PENDING_BLOCKS];
-    int buflen = 0;
     double waketime;
     for (;;) {
         waketime = check_send_command(sq, eventtime);
-        if (waketime != PR_NOW || buflen + MESSAGE_MAX > sizeof(buf)) {
-            if (buflen) {
-                // Write message blocks
-                int ret = write(sq->serial_fd, buf, buflen);
-                if (ret < 0)
-                    report_errno("write", ret);
-                sq->bytes_write += buflen;
-                buflen = 0;
-            }
-            if (waketime != PR_NOW)
-                break;
-        }
-        buflen += build_and_send_command(sq, &buf[buflen], eventtime);
+        if (waketime != PR_NOW)
+            break;
+        build_and_send_command(sq, eventtime);
     }
     pthread_mutex_unlock(&sq->lock);
     return waketime;
