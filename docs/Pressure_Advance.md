@@ -1,11 +1,12 @@
+# Pressure advance
+
 This document provides information on tuning the "pressure advance"
 configuration variable for a particular nozzle and filament. The
 pressure advance feature can be helpful in reducing ooze. For more
 information on how pressure advance is implemented see the
 [kinematics](Kinematics.md) document.
 
-Tuning pressure advance
-=======================
+## Tuning pressure advance
 
 Pressure advance does two useful things - it reduces ooze during
 non-extrude moves and it reduces blobbing during cornering. This guide
@@ -21,7 +22,7 @@ Use a slicer to generate g-code for the large hollow square found in
 [docs/prints/square_tower.stl](prints/square_tower.stl). Use a high
 speed (eg, 100mm/s), zero infill, and a coarse layer height (the layer
 height should be around 75% of the nozzle diameter). Make sure any
-"dynamic acceleration control" is disabled in the slicer.
+"dynamic acceleration control" and "scarf joint" seams are disabled in the slicer.
 
 Prepare for the test by issuing the following G-Code command:
 ```
@@ -83,8 +84,7 @@ the configuration file and issue a RESTART command. The RESTART
 command will clear the test state and return the acceleration and
 cornering speeds to their normal values.
 
-Important Notes
-===============
+## Important Notes
 
 * The pressure advance value is dependent on the extruder, the nozzle,
   and the filament. It is common for filament from different

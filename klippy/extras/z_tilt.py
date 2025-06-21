@@ -41,7 +41,7 @@ class ZAdjustHelper:
             s.set_trapq(None)
         # Move each z stepper (sorted from lowest to highest) until they match
         positions = [(-a, s) for a, s in zip(adjustments, self.z_steppers)]
-        positions.sort()
+        positions.sort(key=(lambda k: k[0]))
         first_stepper_offset, first_stepper = positions[0]
         z_low = curpos[2] - first_stepper_offset
         for i in range(len(positions)-1):
@@ -108,7 +108,7 @@ class RetryHelper:
         return self.increasing > 1
     def check_retry(self, z_positions):
         if self.max_retries == 0:
-            return
+            return "done"
         error = round(max(z_positions) - min(z_positions),6)
         self.gcode.respond_info(
             "Retries: %d/%d %s: %0.6f tolerance: %0.6f" % (
@@ -127,15 +127,8 @@ class RetryHelper:
 class ZTilt:
     def __init__(self, config):
         self.printer = config.get_printer()
-        z_positions = config.get('z_positions').split('\n')
-        try:
-            z_positions = [line.split(',', 1)
-                           for line in z_positions if line.strip()]
-            self.z_positions = [(float(zp[0].strip()), float(zp[1].strip()))
-                                for zp in z_positions]
-        except:
-            raise config.error("Unable to parse z_positions in %s" % (
-                config.get_name()))
+        self.z_positions = config.getlists('z_positions', seps=(',', '\n'),
+                                           parser=float, count=2)
         self.retry_helper = RetryHelper(config)
         self.probe_helper = probe.ProbePointsHelper(config, self.probe_finalize)
         self.probe_helper.minimum_points(2)

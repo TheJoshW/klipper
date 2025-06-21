@@ -1,9 +1,10 @@
+# API server
+
 This document describes Klipper's Application Programmer Interface
 (API). This interface enables external applications to query and
 control the Klipper host software.
 
-Enabling the API socket
-=======================
+## Enabling the API socket
 
 In order to use the API server, the klippy.py host software must be
 started with the `-a` parameter. For example:
@@ -15,8 +16,11 @@ This causes the host software to create a Unix Domain Socket. A client
 can then open a connection on that socket and send commands to
 Klipper.
 
-Request format
-==============
+See the [Moonraker](https://github.com/Arksine/moonraker) project for
+a popular tool that can forward HTTP requests to Klipper's API Server
+Unix Domain Socket.
+
+## Request format
 
 Messages sent and received on the socket are JSON encoded strings
 terminated by an ASCII 0x03 character:
@@ -36,8 +40,7 @@ be on a single line, and it will automatically append the 0x03
 terminator when transmitting a request. (The Klipper API server does
 not have a newline requirement.)
 
-API Protocol
-============
+## API Protocol
 
 The command protocol used on the communication socket is inspired by
 [json-rpc](https://www.jsonrpc.org/).
@@ -90,8 +93,7 @@ which could cause the associated response to be sent out of order with
 respect to responses from other requests. A JSON request will never
 pause the processing of future JSON requests.
 
-Subscriptions
-=============
+## Subscriptions
 
 Some Klipper "endpoint" requests allow one to "subscribe" to future
 asynchronous update messages.
@@ -118,8 +120,7 @@ with "endpoint" specific contents to the response template and then
 send that template. If a "response_template" field is not provided
 then it defaults to an empty dictionary (`{}`).
 
-Available "endpoints"
-=====================
+## Available "endpoints"
 
 By convention, Klipper "endpoints" are of the form
 `<module_name>/<some_name>`. When making a request to an "endpoint",
@@ -281,6 +282,125 @@ window" interface. Parsing content from the G-Code terminal output is
 discouraged. Use the "objects/subscribe" endpoint to obtain updates on
 Klipper's state.
 
+### motion_report/dump_stepper
+
+This endpoint is used to subscribe to Klipper's internal stepper
+queue_step command stream for a stepper. Obtaining these low-level
+motion updates may be useful for diagnostic and debugging
+purposes. Using this endpoint may increase Klipper's system load.
+
+A request may look like:
+`{"id": 123, "method":"motion_report/dump_stepper",
+"params": {"name": "stepper_x", "response_template": {}}}`
+and might return:
+`{"id": 123, "result": {"header": ["interval", "count", "add"]}}`
+and might later produce asynchronous messages such as:
+`{"params": {"first_clock": 179601081, "first_time": 8.98,
+"first_position": 0, "last_clock": 219686097, "last_time": 10.984,
+"data": [[179601081, 1, 0], [29573, 2, -8685], [16230, 4, -1525],
+[10559, 6, -160], [10000, 976, 0], [10000, 1000, 0], [10000, 1000, 0],
+[10000, 1000, 0], [9855, 5, 187], [11632, 4, 1534], [20756, 2, 9442]]}}`
+
+The "header" field in the initial query response is used to describe
+the fields found in later "data" responses.
+
+### motion_report/dump_trapq
+
+This endpoint is used to subscribe to Klipper's internal "trapezoid
+motion queue". Obtaining these low-level motion updates may be useful
+for diagnostic and debugging purposes. Using this endpoint may
+increase Klipper's system load.
+
+A request may look like:
+`{"id": 123, "method": "motion_report/dump_trapq", "params":
+{"name": "toolhead", "response_template":{}}}`
+and might return:
+`{"id": 1, "result": {"header": ["time", "duration",
+"start_velocity", "acceleration", "start_position", "direction"]}}`
+and might later produce asynchronous messages such as:
+`{"params": {"data": [[4.05, 1.0, 0.0, 0.0, [300.0, 0.0, 0.0],
+[0.0, 0.0, 0.0]], [5.054, 0.001, 0.0, 3000.0, [300.0, 0.0, 0.0],
+[-1.0, 0.0, 0.0]]]}}`
+
+The "header" field in the initial query response is used to describe
+the fields found in later "data" responses.
+
+### adxl345/dump_adxl345
+
+This endpoint is used to subscribe to ADXL345 accelerometer data.
+Obtaining these low-level motion updates may be useful for diagnostic
+and debugging purposes. Using this endpoint may increase Klipper's
+system load.
+
+A request may look like:
+`{"id": 123, "method":"adxl345/dump_adxl345",
+"params": {"sensor": "adxl345", "response_template": {}}}`
+and might return:
+`{"id": 123,"result":{"header":["time","x_acceleration","y_acceleration",
+"z_acceleration"]}}`
+and might later produce asynchronous messages such as:
+`{"params":{"overflows":0,"data":[[3292.432935,-535.44309,-1529.8374,9561.4],
+[3292.433256,-382.45935,-1606.32927,9561.48375]]}}`
+
+The "header" field in the initial query response is used to describe
+the fields found in later "data" responses.
+
+### angle/dump_angle
+
+This endpoint is used to subscribe to
+[angle sensor data](Config_Reference.md#angle). Obtaining these
+low-level motion updates may be useful for diagnostic and debugging
+purposes. Using this endpoint may increase Klipper's system load.
+
+A request may look like:
+`{"id": 123, "method":"angle/dump_angle",
+"params": {"sensor": "my_angle_sensor", "response_template": {}}}`
+and might return:
+`{"id": 123,"result":{"header":["time","angle"]}}`
+and might later produce asynchronous messages such as:
+`{"params":{"position_offset":3.151562,"errors":0,
+"data":[[1290.951905,-5063],[1290.952321,-5065]]}}`
+
+The "header" field in the initial query response is used to describe
+the fields found in later "data" responses.
+
+### load_cell/dump_force
+
+This endpoint is used to subscribe to force data produced by a load_cell.
+Using this endpoint may increase Klipper's system load.
+
+A request may look like:
+`{"id": 123, "method":"load_cell/dump_force",
+"params": {"sensor": "load_cell", "response_template": {}}}`
+and might return:
+`{"id": 123,"result":{"header":["time", "force (g)", "counts", "tare_counts"]}}`
+and might later produce asynchronous messages such as:
+`{"params":{"data":[[3292.432935, 40.65, 562534, -234467]]}}`
+
+The "header" field in the initial query response is used to describe
+the fields found in later "data" responses.
+
+### load_cell_probe/dump_taps
+
+This endpoint is used to subscribe to details of probing "tap" events.
+Using this endpoint may increase Klipper's system load.
+
+A request may look like:
+`{"id": 123, "method":"load_cell/dump_force",
+"params": {"sensor": "load_cell", "response_template": {}}}`
+and might return:
+`{"id": 123,"result":{"header":["probe_tap_event"]}}`
+and might later produce asynchronous messages such as:
+```
+{"params":{"tap":'{
+   "time": [118032.28039, 118032.2834, ...],
+   "force": [-459.4213119680034, -458.1640702543264, ...],
+}}}
+```
+
+This data can be used to render:
+* The time/force graph
+
 ### pause_resume/cancel
 
 This endpoint is similar to running the "PRINT_CANCEL" G-Code command.
@@ -318,3 +438,130 @@ might return:
 
 As with the "gcode/script" endpoint, this endpoint only completes
 after any pending G-Code commands complete.
+
+### bed_mesh/dump_mesh
+
+Dumps the configuration and state for the current mesh and all
+saved profiles.
+
+For example:
+`{"id": 123, "method": "bed_mesh/dump_mesh"}`
+
+might return:
+
+```
+{
+    "current_mesh": {
+        "name": "eddy-scan-test",
+        "probed_matrix": [...],
+        "mesh_matrix": [...],
+        "mesh_params": {
+            "x_count": 9,
+            "y_count": 9,
+            "mesh_x_pps": 2,
+            "mesh_y_pps": 2,
+            "algo": "bicubic",
+            "tension": 0.5,
+            "min_x": 20,
+            "max_x": 330,
+            "min_y": 30,
+            "max_y": 320
+        }
+    },
+    "profiles": {
+        "default": {
+            "points": [...],
+            "mesh_params": {
+                "min_x": 20,
+                "max_x": 330,
+                "min_y": 30,
+                "max_y": 320,
+                "x_count": 9,
+                "y_count": 9,
+                "mesh_x_pps": 2,
+                "mesh_y_pps": 2,
+                "algo": "bicubic",
+                "tension": 0.5
+            }
+        },
+        "eddy-scan-test": {
+            "points": [...],
+            "mesh_params": {
+                "x_count": 9,
+                "y_count": 9,
+                "mesh_x_pps": 2,
+                "mesh_y_pps": 2,
+                "algo": "bicubic",
+                "tension": 0.5,
+                "min_x": 20,
+                "max_x": 330,
+                "min_y": 30,
+                "max_y": 320
+            }
+        },
+        "eddy-rapid-test": {
+            "points": [...],
+            "mesh_params": {
+                "x_count": 9,
+                "y_count": 9,
+                "mesh_x_pps": 2,
+                "mesh_y_pps": 2,
+                "algo": "bicubic",
+                "tension": 0.5,
+                "min_x": 20,
+                "max_x": 330,
+                "min_y": 30,
+                "max_y": 320
+            }
+        }
+    },
+    "calibration": {
+        "points": [...],
+        "config": {
+            "x_count": 9,
+            "y_count": 9,
+            "mesh_x_pps": 2,
+            "mesh_y_pps": 2,
+            "algo": "bicubic",
+            "tension": 0.5,
+            "mesh_min": [
+                20,
+                30
+            ],
+            "mesh_max": [
+                330,
+                320
+            ],
+            "origin": null,
+            "radius": null
+        },
+        "probe_path": [...],
+        "rapid_path": [...]
+    },
+    "probe_offsets": [
+        0,
+        25,
+        0.5
+    ],
+    "axis_minimum": [
+        0,
+        0,
+        -5,
+        0
+    ],
+    "axis_maximum": [
+        351,
+        358,
+        330,
+        0
+    ]
+}
+```
+
+The `dump_mesh` endpoint takes one optional parameter, `mesh_args`.
+This parameter must be an object, where the keys and values are
+parameters available to [BED_MESH_CALIBRATE](#bed_mesh_calibrate).
+This will update the mesh configuration and probe points using the
+supplied parameters prior to returning the result.   It is recommended
+to omit mesh parameters unless it is desired to visualize the probe points
+and/or travel path before performing `BED_MESH_CALIBRATE`.

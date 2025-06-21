@@ -1,8 +1,113 @@
+# Releases
+
 History of Klipper releases. Please see
 [installation](Installation.md) for information on installing Klipper.
 
-Klipper 0.9.0
-=============
+## Klipper 0.13.0
+
+Available on 20250411. Major changes in this release:
+* New "sweeping vibrations" resonance testing mechanism for input
+  shaper.
+* Fans and GPIO pins can now be assigned a formula (via Jinja2
+  "templates").
+* The bed_mesh code now supports "adaptive bed mesh". The area probed
+  can be adjusted for the size of the print.
+* A new `minimum_cruise_ratio` kinematic parameter has been added (it
+  replaces the previous `max_accel_to_decel` parameter).
+* Several new sensors added:
+  * Support for ldc1612 "eddy" current sensors. This includes probing
+    support, fast "scan" probing, and temperature calibration.
+  * New support for "load cell" measurements. Support for connecting
+    these load cells to hx71x and ads1220 ADC sensors.
+  * Support for BMP180, BMP388, and SHT3x temperature sensors. Support
+    for measuring temperature with ADS1x1x ADC chips.
+  * New lis3dh and icm20948 accelerometer support.
+  * Support for mt6816 and mt6826s "hall angle" sensors.
+* New micro-controller improvements:
+  * New support for rp2350 micro-controllers.
+  * Existing rp2040 chips now run at 200MHz (up from 125Mhz).
+  * The micro-controller code can now define many more commands (up to
+    16384 from 128).
+* Other modules added: aip31068_spi, canbus_stats, error_mcu,
+  garbage_collection, pwm_cycle_time, pwm_tool, garbage_collection.
+* Several bug fixes and code cleanups.
+
+## Klipper 0.12.0
+
+Available on 20231110. Major changes in this release:
+* Support for COPY and MIRROR modes on IDEX printers.
+* Several micro-controller improvements:
+  * Support for new ar100 and hc32f460 architectures.
+  * Support for stm32f7, stm32g0b0, stm32g07x, stm32g4, stm32h723,
+    n32g45x, samc21, and samd21j18 chip variants.
+  * Improved DFU and Katapult reboot handling.
+  * Improved performance on USB to CANbus bridge mode.
+  * Improved performance on "linux mcu".
+  * New support for software based i2c.
+* New hardware support for tmc2240 stepper motor drivers, lis2dw12
+  accelerometers, and aht10 temperature sensors.
+* New axis_twist_compensation and temperature_combined modules added.
+* New support for gcode arcs in XY, XZ, and YZ planes.
+* Several bug fixes and code cleanups.
+
+## Klipper 0.11.0
+
+Available on 20221128. Major changes in this release:
+* Trinamic stepper motor driver "step on both edges" optimization.
+* Support for Python3. The Klipper host code will run with either
+  Python2 or Python3.
+* Enhanced CAN bus support. Support for CAN bus on rp2040, stm32g0,
+  stm32h7, same51, and same54 chips. Support for "USB to CAN bus
+  bridge" mode.
+* Support for CanBoot bootloader.
+* Support for mpu9250 and mpu6050 accelerometers.
+* Improved error handling for max31856, max31855, max31865, and
+  max6675 temperature sensors.
+* It is now possible to configure LEDs to update during long running
+  G-Code commands using LED "template" support.
+* Several micro-controller improvements. New support for stm32h743,
+  stm32h750, stm32l412, stm32g0b1, same70, same51, and same54 chips.
+  Support for i2c reads on atsamd and stm32f0. Hardware pwm support on
+  stm32. Linux mcu signal based event dispatch. New rp2040 support for
+  "make flash", i2c, and rp2040-e5 USB errata.
+* New modules added: angle, dac084S085, exclude_object, led, mpu9250,
+  pca9632, smart_effector, z_thermal_adjust. New deltesian kinematics
+  added. New dump_mcu tool added.
+* Several bug fixes and code cleanups.
+
+## Klipper 0.10.0
+
+Available on 20210929. Major changes in this release:
+* Support for "Multi-MCU Homing". It is now possible for a stepper
+  motor and its endstop to be wired to separate micro-controllers.
+  This simplifies wiring of Z probes on "toolhead boards".
+* Klipper now has a
+  [Community Discord Server](https://discord.klipper3d.org)
+  and a [Community Discourse Server](https://community.klipper3d.org).
+* The [Klipper website](https://www.klipper3d.org) now uses the
+  "mkdocs" infrastructure. There is also a
+  [Klipper Translations](https://github.com/Klipper3d/klipper-translations)
+  project.
+* Automated support for flashing firmware via sdcard on many boards.
+* New kinematic support for "Hybrid CoreXY" and "Hybrid CoreXZ"
+  printers.
+* Klipper now uses `rotation_distance` to configure stepper motor
+  travel distances.
+* The main Klipper host code can now directly communicate with
+  micro-controllers using CAN bus.
+* New "motion analysis" system. Klipper's internal motion updates and
+  sensor results can be tracked and logged for analysis.
+* Trinamic stepper motor drivers are now continuously monitored for
+  error conditions.
+* Support for the rp2040 micro-controller (Raspberry Pi Pico boards).
+* The "make menuconfig" system now utilizes kconfiglib.
+* Many additional modules added: ds18b20, duplicate_pin_override,
+  filament_motion_sensor, palette2, motion_report, pca9533,
+  pulse_counter, save_variables, sdcard_loop, temperature_host,
+  temperature_mcu
+* Several bug fixes and code cleanups.
+
+## Klipper 0.9.0
 
 Available on 20201020. Major changes in this release:
 * Support for "Input Shaping" - a mechanism to counteract printer
@@ -35,13 +140,11 @@ Available on 20201020. Major changes in this release:
   graph_temp_sensor, whconsole
 * Several bug fixes and code cleanups.
 
-Klipper 0.9.1
---------------
+### Klipper 0.9.1
 
 Available on 20201028. Release containing only bug fixes.
 
-Klipper 0.8.0
-=============
+## Klipper 0.8.0
 
 Available on 20191021. Major changes in this release:
 * New G-Code command template support. G-Code in the config file is
@@ -81,8 +184,7 @@ Available on 20191021. Major changes in this release:
   SET_IDLE_TIMEOUT, SET_TEMPERATURE_FAN_TARGET
 * Several bug fixes and code cleanups.
 
-Klipper 0.7.0
-=============
+## Klipper 0.7.0
 
 Available on 20181220. Major changes in this release:
 * Klipper now supports "mesh" bed leveling
@@ -115,8 +217,7 @@ Available on 20181220. Major changes in this release:
     settings, packaging, and more
 * Several bug fixes and code cleanups
 
-Klipper 0.6.0
-=============
+## Klipper 0.6.0
 
 Available on 20180331. Major changes in this release:
 * Enhanced heater and thermistor hardware failure checks
@@ -146,8 +247,7 @@ Available on 20180331. Major changes in this release:
 * Initial support for continuous integration testing on all github commits
 * Several bug fixes and code cleanups
 
-Klipper 0.5.0
-=============
+## Klipper 0.5.0
 
 Available on 20171025. Major changes in this release:
 
@@ -166,8 +266,7 @@ Available on 20171025. Major changes in this release:
   cooling fans.
 * Several bug fixes and code cleanups
 
-Klipper 0.4.0
-=============
+## Klipper 0.4.0
 
 Available on 20170503. Major changes in this release:
 
@@ -186,8 +285,7 @@ Available on 20170503. Major changes in this release:
 * Support for AD595 sensors
 * Several bug fixes and code cleanups
 
-Klipper 0.3.0
-=============
+## Klipper 0.3.0
 
 Available on 20161223. Major changes in this release:
 
@@ -209,8 +307,7 @@ Available on 20161223. Major changes in this release:
   along with help on how to resolve.
 * Several bug fixes and code cleanups
 
-Klipper 0.2.0
-=============
+## Klipper 0.2.0
 
 Initial release of Klipper. Available on 20160525. Major features
 available in the initial release include:
