@@ -28,22 +28,15 @@ command_i2c_set_sw_bus(uint32_t *args)
     struct i2c_software *is = alloc_chunk(sizeof(*is));
     is->ticks = args[3];
     is->addr = (args[4] & 0x7f) << 1; // address format shifted
-    is->scl_in = gpio_in_setup(args[1], 1);
     is->scl_out = gpio_out_setup(args[1], 1);
-    is->sda_in = gpio_in_setup(args[2], 1);
+    is->scl_in = gpio_in_setup(args[1], 1);
     is->sda_out = gpio_out_setup(args[2], 1);
+    is->sda_in = gpio_in_setup(args[2], 1);
     i2cdev_set_software_bus(i2c, is);
 }
 DECL_COMMAND(command_i2c_set_sw_bus,
              "i2c_set_sw_bus oid=%c scl_pin=%u sda_pin=%u"
              " pulse_ticks=%u address=%u");
-
-// The AVR micro-controllers require specialized timing
-#if CONFIG_MACH_AVR
-
-#define i2c_delay(ticks) (void)(ticks)
-
-#else
 
 static void
 i2c_delay(uint32_t ticks)
@@ -53,12 +46,10 @@ i2c_delay(uint32_t ticks)
         ;
 }
 
-#endif
-
 static void
 i2c_software_send_ack(struct i2c_software *is, const uint8_t ack)
 {
-    if (!ack) {
+    if (ack) {
         gpio_out_reset(is->sda_out, 0);
     }
     i2c_delay(is->ticks);
@@ -82,9 +73,8 @@ i2c_software_read_ack(struct i2c_software *is, uint_fast8_t state)
 }
 
 static int
-i2c_software_send_byte(struct i2c_software *is, uint8_t b)
+i2c_software_send_byte(struct i2c_software *is, uint8_t b, uint_fast8_t state)
 {
-    uint_fast8_t state = 2;
     for (uint_fast8_t i = 0; i < 8; i++) {
         if (b & 0x80) {
             if (state != 1)
@@ -122,7 +112,7 @@ i2c_software_read_byte(struct i2c_software *is, uint8_t remaining)
         b |= gpio_in_read(is->sda_in);
         gpio_out_reset(is->scl_out, 0);
     }
-    i2c_software_send_ack(is, remaining == 0);
+    i2c_software_send_ack(is, remaining);
     return b;
 }
 
@@ -138,7 +128,7 @@ i2c_software_start(struct i2c_software *is, uint8_t addr)
     i2c_delay(is->ticks);
     gpio_out_reset(is->scl_out, 0);
 
-    ret = i2c_software_send_byte(is, addr);
+    ret = i2c_software_send_byte(is, addr, 0);
     if (ret == I2C_BUS_NACK)
         return I2C_BUS_START_NACK;
     return ret;
@@ -162,7 +152,7 @@ i2c_software_write(struct i2c_software *is, uint8_t write_len, uint8_t *write)
         goto out;
 
     while (write_len--) {
-        ret = i2c_software_send_byte(is, *write++);
+        ret = i2c_software_send_byte(is, *write++, 1);
         if (ret != I2C_BUS_SUCCESS)
             break;
     }
@@ -183,7 +173,7 @@ i2c_software_read(struct i2c_software *is, uint8_t reg_len, uint8_t *reg
         if (ret != I2C_BUS_SUCCESS)
             goto out;
         while(reg_len--) {
-            ret = i2c_software_send_byte(is, *reg++);
+            ret = i2c_software_send_byte(is, *reg++, 1);
             if (ret != I2C_BUS_SUCCESS)
                 goto out;
         }

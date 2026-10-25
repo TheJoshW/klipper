@@ -56,6 +56,7 @@ class SHT3X:
         self.reactor = self.printer.get_reactor()
         self.i2c = bus.MCU_I2C_from_config(
             config, default_addr=SHT3X_I2C_ADDR, default_speed=100000)
+        self._error = self.printer.command_error
         self.report_time = config.getint('sht3x_report_time', 1, minval=1)
         self.deviceId = config.get('sensor_type')
         self.temp = self.min_temp = self.max_temp = self.humidity = 0.
@@ -79,10 +80,10 @@ class SHT3X:
 
     def _init_sht3x(self):
         # Device Soft Reset
-        self.i2c.i2c_write_wait_ack(SHT3X_CMD['OTHER']['BREAK'])
+        self.i2c.i2c_write(SHT3X_CMD['OTHER']['BREAK'])
         # Break takes ~ 1ms
         self.reactor.pause(self.reactor.monotonic() + .0015)
-        self.i2c.i2c_write_wait_ack(SHT3X_CMD['OTHER']['SOFTRESET'])
+        self.i2c.i2c_write(SHT3X_CMD['OTHER']['SOFTRESET'])
         # Wait <=1.5ms after reset
         self.reactor.pause(self.reactor.monotonic() + .0015)
 
@@ -96,16 +97,29 @@ class SHT3X:
             logging.warning("sht3x: Reading status - checksum error!")
 
         # Enable periodic mode
-        self.i2c.i2c_write_wait_ack(
+        self.i2c.i2c_write(
             SHT3X_CMD['PERIODIC']['2HZ']['HIGH_REP']
         )
-        # Wait <=15.5ms for first measurment
+        # Wait <=15.5ms for first measurement
         self.reactor.pause(self.reactor.monotonic() + .0155)
 
     def _sample_sht3x(self, eventtime):
         try:
-            # Read measurment
-            params = self.i2c.i2c_read(SHT3X_CMD['OTHER']['FETCH'], 6)
+            # Read measurement
+            retries = 5
+            params = None
+            error = None
+            while retries > 0 and params is None:
+                try:
+                    params = self.i2c.i2c_read(
+                        SHT3X_CMD['OTHER']['FETCH'], 6, retry=False
+                    )
+                except self._error as e:
+                    error = e
+                    self.reactor.pause(self.reactor.monotonic() + .5)
+                    retries -= 1
+            if params is None:
+                raise error
 
             response = bytearray(params['response'])
             rtemp  = response[0] << 8
@@ -141,18 +155,11 @@ class SHT3X:
         self._callback(print_time, self.temp)
         return measured_time + self.report_time
 
-    def _split_bytes(self, data):
-        bytes = []
-        for i in range((data.bit_length() + 7) // 8):
-            bytes.append((data >> i*8) & 0xFF)
-        bytes.reverse()
-        return bytes
-
     def _crc8(self, data):
         #crc8 polynomial for 16bit value, CRC8 -> x^8 + x^5 + x^4 + 1
         SHT3X_CRC8_POLYNOMINAL= 0x31
         crc = 0xFF
-        data_bytes = self._split_bytes(data)
+        data_bytes = [data >> 8 & 0xFF, data & 0xFF]
         for byte in data_bytes:
             crc ^= byte
             for _ in range(8):

@@ -30,7 +30,6 @@ timer_is_before(uint32_t time1, uint32_t time2)
 }
 
 static uint32_t timer_repeat_until;
-#define TIMER_IDLE_REPEAT_TICKS timer_from_us(500)
 #define TIMER_REPEAT_TICKS timer_from_us(100)
 
 #define TIMER_MIN_TRY_TICKS timer_from_us(2)
@@ -59,7 +58,7 @@ timer_dispatch_many(void)
                 timer_repeat_until = now + TIMER_REPEAT_TICKS;
                 return now + TIMER_DEFER_REPEAT_TICKS;
             }
-            timer_repeat_until = tru = now + TIMER_IDLE_REPEAT_TICKS;
+            timer_repeat_until = tru = now + TIMER_REPEAT_TICKS;
         }
 
         // Next timer in the past or near future - wait for it to be ready
@@ -67,6 +66,40 @@ timer_dispatch_many(void)
         while (unlikely(diff > 0))
             diff = next - timer_read_time();
         irq_disable();
+    }
+}
+
+// Same as above, but for boards without irqs (or where irqs aren't reentrant)
+uint32_t
+timer_dispatch_many_polling(void)
+{
+    uint32_t tru = timer_repeat_until;
+    for (;;) {
+        // Run the next software timer
+        uint32_t next = sched_timer_dispatch();
+
+        uint32_t now = timer_read_time();
+        int32_t diff = next - now;
+        if (diff > (int32_t)TIMER_MIN_TRY_TICKS)
+            // Schedule next timer normally.
+            return next;
+
+        if (unlikely(timer_is_before(tru, now))) {
+            // Check if there are too many repeat timers
+            if (diff < (int32_t)(-timer_from_us(1000)))
+                try_shutdown("Rescheduled timer in the past");
+            timer_dispatch_task_poll();
+            if (sched_check_set_tasks_busy()) {
+                timer_repeat_until = now + TIMER_REPEAT_TICKS;
+                return now + TIMER_DEFER_REPEAT_TICKS;
+            }
+            timer_repeat_until = tru = now + TIMER_REPEAT_TICKS;
+        }
+
+        // Next timer in the past or near future - wait for it to be ready
+        timer_dispatch_irq_poll();
+        while (unlikely(diff > 0))
+            diff = next - timer_read_time();
     }
 }
 
