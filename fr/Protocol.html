@@ -1646,7 +1646,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>Le protocole de transmission Klipper peut être considéré comme un mécanisme d' <a href="https://en.wikipedia.org/wiki/Remote_procedure_call">Appel de procédure à distance</a> entre le microcontrôleur et l'hôte. Le logiciel du microcontrôleur déclare les commandes que l'hôte peut invoquer ainsi que les messages de réponse qu'il peut générer. L'hôte utilise ces informations pour ordonner au microcontrôleur d'effectuer des actions et d'interpréter les résultats.</p>
 <h3 id="declaration-des-commandes">Déclaration des commandes<a class="headerlink" href="#declaration-des-commandes" title="Permanent link">&para;</a></h3>
 <p>Le logiciel du microcontrôleur déclare une "commande" en utilisant la macro DECL_COMMAND() dans le code C. Par exemple :</p>
-<div class="highlight"><pre><span></span><code>DECL_COMMAND(command_update_digital_out, &quot;update_digital_out oid=%c value=%c&quot;);
+<div class="highlight"><pre><span></span><code>DECL_COMMAND(command_update_digital_out, "update_digital_out oid=%c value=%c");
 </code></pre></div>
 
 <p>Ce qui précède déclare une commande nommée "update_digital_out". Cela permet à l'hôte "d'appeler" cette commande qui entraînerait l'exécution de la fonction C command_update_digital_out() dans le microcontrôleur. Ce qui précède indique également que la commande prend deux paramètres entiers. Lorsque le code C command_update_digital_out() est exécuté, un tableau contenant ces deux entiers lui sera transmis - le premier correspondant à 'oid' et le second correspondant à 'value'.</p>
@@ -1654,7 +1654,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>La compilation du micrologiciel du microcontrôleur collectera toutes les commandes déclarées avec DECL_COMMAND(), déterminera leurs paramètres et s'arrangera pour qu'elles soient appelables.</p>
 <h3 id="declaration-des-reponses">Déclaration des réponses<a class="headerlink" href="#declaration-des-reponses" title="Permanent link">&para;</a></h3>
 <p>Pour envoyer des informations du microcontrôleur à l'hôte, des "réponses" sont générées. Celles-ci sont à la fois déclarées et transmises à l'aide de la macro C sendf(). Par example :</p>
-<div class="highlight"><pre><span></span><code>sendf(&quot;status clock=%u status=%c&quot;, sched_read_time(), sched_is_shutdown());
+<div class="highlight"><pre><span></span><code>sendf("status clock=%u status=%c", sched_read_time(), sched_is_shutdown());
 </code></pre></div>
 
 <p>Ce qui précède transmet un message de réponse "status" qui contient deux paramètres entiers ("clock" et "status"). La construction du microcontrôleur trouve automatiquement tous les appels sendf() et génère des encodeurs pour eux. Le premier paramètre de la fonction sendf() décrit la réponse et il est dans le même format que les déclarations de commande.</p>
@@ -1662,26 +1662,26 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>La macro sendf() ne doit être appelée qu'à partir de commandes ou de gestionnaires de tâches, et elle ne doit pas être appelée à partir d'interruptions ou de timers. Le code n'a pas besoin d'émettre un sendf() en réponse à une commande reçue, le nombre d'appels à sendf() n'est pas limié, et il est possible d'appeler sendf() à tout moment à partir d'un gestionnaire de tâches.</p>
 <h4 id="reponses-de-sortie">Réponses de sortie<a class="headerlink" href="#reponses-de-sortie" title="Permanent link">&para;</a></h4>
 <p>Pour simplifier le débogage, il existe également une fonction C output(). Par exemple :</p>
-<div class="highlight"><pre><span></span><code>output(&quot;La valeur de %u est %s avec une taille de %u.&quot;, x, buf, buf_len);
+<div class="highlight"><pre><span></span><code>output("La valeur de %u est %s avec une taille de %u.", x, buf, buf_len);
 </code></pre></div>
 
 <p>La fonction output() est similaire à printf() - elle est destinée à générer et formater des messages de débogage avec un affichage dans un format compréhensible (ndt : par un humain normalement constitué :-)).</p>
 <h3 id="declarer-des-enumerations">Déclarer des énumérations<a class="headerlink" href="#declarer-des-enumerations" title="Permanent link">&para;</a></h3>
 <p>Les énumérations permettent au code hôte d'utiliser des identificateurs de type chaîne pour des paramètres que le microcontrôleur gère comme des entiers. Ils sont déclarés dans le code du microcontrôleur - par exemple :</p>
-<div class="highlight"><pre><span></span><code>DECL_ENUMERATION(&quot;spi_bus&quot;, &quot;spi&quot;, 0);
+<div class="highlight"><pre><span></span><code>DECL_ENUMERATION("spi_bus", "spi", 0);
 
-DECL_ENUMERATION_RANGE(&quot;pin&quot;, &quot;PC0&quot;, 16, 8);
+DECL_ENUMERATION_RANGE("pin", "PC0", 16, 8);
 </code></pre></div>
 
 <p>Dans le premier exemple, la macro DECL_ENUMERATION() définit une énumération pour les messages de commande/réponse avec un nom de paramètre "spi_bus" ou un nom de paramètre avec un suffixe "_spi_bus". Pour ces paramètres, la chaîne "spi" sera une valeur valide et elle sera transmise comme une valeur entière égale à zéro.</p>
 <p>Il est également possible de déclarer une plage d'énumération. Dans le deuxième exemple, un paramètre "pin" (ou tout paramètre avec le suffixe "_pin") accepterait PC0, PC1, PC2, ..., PC7 comme valeurs valides. Les chaînes seront transmises comme des entiers 16, 17, 18, ..., 23.</p>
 <h3 id="declaration-de-constantes">Déclaration de constantes<a class="headerlink" href="#declaration-de-constantes" title="Permanent link">&para;</a></h3>
 <p>Les constantes peuvent être exportées. Par exemple, les éléments suivants :</p>
-<div class="highlight"><pre><span></span><code>DECL_CONSTANT(&quot;SERIAL_BAUD&quot;, 250000);
+<div class="highlight"><pre><span></span><code>DECL_CONSTANT("SERIAL_BAUD", 250000);
 </code></pre></div>
 
 <p>exporterait une constante nommée "SERIAL_BAUD" avec une valeur de 250000 du microcontrôleur vers l'hôte. Il est également possible de déclarer une constante de type chaîne - par exemple :</p>
-<div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR(&quot;MCU&quot;, &quot;pru&quot;);
+<div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR("MCU", "pru");
 </code></pre></div>
 
 <h2 id="encodage-des-message-de-bas-niveau">Encodage des message de bas niveau<a class="headerlink" href="#encodage-des-message-de-bas-niveau" title="Permanent link">&para;</a></h2>

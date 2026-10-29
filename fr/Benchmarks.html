@@ -1758,7 +1758,7 @@ queue_step oid=2 interval=3000 count=1 add=0
 
 <p>Pour obtenir les tests de moteurs pas à pas, la même séquence de configuration est utilisée, mais seul le premier bloc du test ci-dessus est copié-collé dans la fenêtre console.py.</p>
 <p>Pour produire les tests trouvés dans le document <a href="Features.html">Fonctionnalités</a>, le nombre total de pas par seconde est calculé en multipliant le nombre de steppers actifs par la fréquence mcu nominale et en divisant par le paramètre final ticks. Les résultats sont arrondis au K le plus proche. Par exemple, avec trois steppers actifs :</p>
-<div class="highlight"><pre><span></span><code>ECHO Test result is: {&quot;%.0fK&quot; % (3. * freq / ticks / 1000.)}
+<div class="highlight"><pre><span></span><code>ECHO Test result is: {"%.0fK" % (3. * freq / ticks / 1000.)}
 </code></pre></div>
 
 <p>Les tests sont exécutés avec des paramètres adaptés aux pilotes TMC. Pour les microcontrôleurs prenant en charge <code>STEPPER_BOTH_EDGE=1</code> (comme indiqué dans la ligne <code>MCU config</code> au premier démarrage de console.py), utilisez <code>step_pulse_duration=0</code> et <code>invert_step=-1</code> pour permettre un pas optimisé sur les deux fronts de l'impulsion de pas. Pour les autres microcontrôleurs utiliser un <code>step_pulse_duration</code> correspondant à 100ns.</p>

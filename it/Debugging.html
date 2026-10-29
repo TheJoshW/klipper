@@ -1564,7 +1564,7 @@ make
 <h2 id="analisi-del-movimento-e-registrazione-dei-dati">Analisi del movimento e registrazione dei dati<a class="headerlink" href="#analisi-del-movimento-e-registrazione-dei-dati" title="Permanent link">&para;</a></h2>
 <p>Klipper supporta la registrazione della cronologia dei movimenti interni, che può essere analizzata in seguito. Per utilizzare questa funzione, Klipper deve essere avviato con <a href="API_Server.html">Server API</a> abilitato.</p>
 <p>La registrazione dei dati è abilitata con lo strumento <code>data_logger.py</code>. Per esempio:</p>
-<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/data_logger.py /tmp/klippy_uds mylog -s &#39;*&#39;
+<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/data_logger.py /tmp/klippy_uds mylog -s '*'
 </code></pre></div>
 
 <p>Questo comando si collegherà al Klipper API Server, sottoscriverà le informazioni sullo stato e sul movimento e registrerà i risultati. Vengono generati due file: un file di dati compresso e un file di indice (ad esempio, <code>mylog.json.gz</code> e <code>mylog.index.gz</code>). Dopo aver avviato la registrazione, è possibile completare le stampe e altre azioni: la registrazione continuerà in background. Al termine della registrazione, premi <code>ctrl-c</code> per uscire dallo strumento <code>data_logger.py</code>.</p>
@@ -1579,7 +1579,7 @@ sudo apt-get install python-matplotlib
 </code></pre></div>
 
 <p>One can use the <code>-g</code> option to specify the datasets to graph (it takes a Python literal containing a list of lists). For example:</p>
-<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g &#39;[[&quot;trapq(toolhead,velocity)&quot;], [&quot;trapq(toolhead,accel)&quot;]]&#39;
+<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g '[["trapq(toolhead,velocity)"], ["trapq(toolhead,accel)"]]'
 </code></pre></div>
 
 <p>L'elenco dei set di dati disponibili può essere trovato usando l'opzione <code>-l</code>, ad esempio:</p>
@@ -1587,7 +1587,7 @@ sudo apt-get install python-matplotlib
 </code></pre></div>
 
 <p>È anche possibile specificare le opzioni di stampa matplotlib per ogni set di dati:</p>
-<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g &#39;[[&quot;trapq(toolhead,velocity)?color=red&amp;alpha=0.4&quot;]]&#39;
+<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g '[["trapq(toolhead,velocity)?color=red&amp;alpha=0.4"]]'
 </code></pre></div>
 
 <p>Sono disponibili molte opzioni di matplotlib; alcuni esempi sono "color", "label", "alpha" e "linestyle".</p>

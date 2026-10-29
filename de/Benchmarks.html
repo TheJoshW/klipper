@@ -1758,7 +1758,7 @@ queue_step oid=2 interval=3000 count=1 add=0
 
 <p>Um den Einzel Schrittmotor Benchmark durchzuführen, wird die selbe Konfigurations Sequenz verwendet und nur der erste Block des obigen Tests in das console.py Fenster eingefügt.</p>
 <p>Um die im Dokument <a href="Features.html">Features</a> angegebenen Leistungswerte zu erhalten, wird die Gesamtzahl der Schritte pro Sekunde berechnet, indem die Anzahl der aktiven Schrittmotoren mit der nominellen MCU-Frequenz multipliziert und durch den endgültigen ticks-Parameter geteilt wird. Die Ergebnisse werden auf volle Tausend (K) gerundet. Zum Beispiel bei drei aktiven Schrittmotoren:</p>
-<div class="highlight"><pre><span></span><code>ECHO Test result is: {&quot;%.0fK&quot; % (3. * freq / ticks / 1000.)}
+<div class="highlight"><pre><span></span><code>ECHO Test result is: {"%.0fK" % (3. * freq / ticks / 1000.)}
 </code></pre></div>
 
 <p>Die Leistungstests werden mit für TMC-Treiber geeigneten Parametern durchgeführt. Bei Mikrocontrollern, die <code>STEPPER_BOTH_EDGE=1</code> unterstützen (angezeigt in der Zeile <code>MCU config</code> beim Start von console.py), verwenden Sie <code>step_pulse_duration=0</code> und <code>invert_step=-1</code>, um optimiertes Schalten an beiden Flanken des Schrittimpulses zu aktivieren. Bei anderen Mikrocontrollern verwenden Sie eine <code>step_pulse_duration</code> entsprechend 100 ns.</p>

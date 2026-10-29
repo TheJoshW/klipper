@@ -2248,12 +2248,12 @@ sudo apt install python3-numpy python3-matplotlib libatlas-base-dev libopenblas-
 </code></pre></div>
 
 <p>Ezután a NumPy telepítéséhez a Klipper környezetbe futtassuk a parancsot:</p>
-<div class="highlight"><pre><span></span><code>~/klippy-env/bin/pip install -v &quot;numpy&lt;1.26&quot;
+<div class="highlight"><pre><span></span><code>~/klippy-env/bin/pip install -v "numpy&lt;1.26"
 </code></pre></div>
 
 <p>Vedd figyelembe, hogy a CPU teljesítményétől függően ez <em>sok</em> időt vehet igénybe, akár 10-20 percet is. Legyél türelmes, és várd meg a telepítés befejezését. Bizonyos esetekben, ha a kártyán túl kevés RAM van, a telepítés sikertelen lehet, és engedélyezned kell a swapot. Vedd figyelembe a kényszerített verziót is, mivel a NumPY újabb verzióinak olyan követelményei vannak, amelyek nem feltétlenül teljesülnek egyes klipper python környezetekben.</p>
 <p>A telepítés után ellenőrizd, hogy a parancs nem mutat-e hibát:</p>
-<div class="highlight"><pre><span></span><code>~/klippy-env/bin/python -c &#39;import numpy;&#39;
+<div class="highlight"><pre><span></span><code>~/klippy-env/bin/python -c 'import numpy;'
 </code></pre></div>
 
 <p>A helyes kimenetnek egyszerűen egy új sornak kell lennie.</p>
@@ -2422,16 +2422,16 @@ probe_points: ...
 
 <p>Ez a szkript létrehozza a <code>/tmp/shaper_calibrate_x.png</code> és <code>/tmp/shaper_calibrate_y.png</code> diagramokat a frekvenciaválaszokkal. Az egyes bemeneti shaperek javasolt frekvenciáit is megkapja, valamint azt, hogy melyik bemeneti shaper ajánlott a te beállításodhoz. Például:</p>
 <p><img alt="Resonances" src="img/calibrate-y.png" /></p>
-<div class="highlight"><pre><span></span><code>Illesztett alakító &#39;zv&#39; frekvencia = 34,4 Hz (rezgések = 4,0%, simítás ~= 0,132)
-A túl nagy simítás elkerülése érdekében a &#39;zv&#39;, javasolt max_accel &lt;= 4500 mm/sec^2
-Alkalmazott alakító &#39;mzv&#39; frekvencia = 34,6 Hz (rezgések = 0,0%, simítás ~= 0,170)
-A túl nagy simítás elkerülése érdekében az &#39;mzv&#39; esetében javasolt max_accel &lt;= 3500 mm/sec^2
-Alkalmazott alakító &#39;ei&#39; frekvencia = 41,4 Hz (rezgések = 0,0%, simítás ~= 0,188)
-A túl nagy simítás elkerülése érdekében az &#39;ei&#39;, javasolt max_accel &lt;= 3200 mm/sec^2
-Alkalmazott alakító &#39;2hump_ei&#39; frekvencia = 51,8 Hz (rezgések = 0,0%, simítás ~= 0,201)
-A túl nagy simítás elkerülése érdekében a &#39;2hump_ei&#39; esetében javasolt max_accel &lt;= 3000 mm/sec^2
-Alkalmazott alakító &#39;3hump_ei&#39; frekvencia = 61,8 Hz (rezgések = 0,0%, simítás ~= 0,215)
-A túl nagy simítás elkerülése érdekében a &#39;3hump_ei&#39; esetében javasolt max_accel &lt;= 2800 mm/sec^2
+<div class="highlight"><pre><span></span><code>Illesztett alakító 'zv' frekvencia = 34,4 Hz (rezgések = 4,0%, simítás ~= 0,132)
+A túl nagy simítás elkerülése érdekében a 'zv', javasolt max_accel &lt;= 4500 mm/sec^2
+Alkalmazott alakító 'mzv' frekvencia = 34,6 Hz (rezgések = 0,0%, simítás ~= 0,170)
+A túl nagy simítás elkerülése érdekében az 'mzv' esetében javasolt max_accel &lt;= 3500 mm/sec^2
+Alkalmazott alakító 'ei' frekvencia = 41,4 Hz (rezgések = 0,0%, simítás ~= 0,188)
+A túl nagy simítás elkerülése érdekében az 'ei', javasolt max_accel &lt;= 3200 mm/sec^2
+Alkalmazott alakító '2hump_ei' frekvencia = 51,8 Hz (rezgések = 0,0%, simítás ~= 0,201)
+A túl nagy simítás elkerülése érdekében a '2hump_ei' esetében javasolt max_accel &lt;= 3000 mm/sec^2
+Alkalmazott alakító '3hump_ei' frekvencia = 61,8 Hz (rezgések = 0,0%, simítás ~= 0,215)
+A túl nagy simítás elkerülése érdekében a '3hump_ei' esetében javasolt max_accel &lt;= 2800 mm/sec^2
 Az ajánlott shaper az mzv @ 34,6 Hz.
 </code></pre></div>
 
@@ -2490,36 +2490,36 @@ probe_points: ...
 <p>Ne feledd, hogy a bemeneti formázó simítást hozhat létre az alkatrészekben. A <code>calibrate_shaper.py</code> szkript vagy <code>SHAPER_CALIBRATE</code> parancs által végrehajtott bemeneti formázó automatikus hangolása nem súlyosbítja a simítást, ugyanakkor megpróbálja minimalizálni az ebből eredő rezgéseket. Néha az alakformáló frekvencia optimálistól elmaradó választását hozhatja, vagy talán egyszerűen csak kevésbé simítja az alkatrészeket a nagyobb fennmaradó rezgések rovására. Ezekben az esetekben kérheted a bemeneti formázó maximális simításának korlátozását.</p>
 <p>Nézzük meg az automatikus hangolás következő eredményeit:</p>
 <p><img alt="Resonances" src="img/calibrate-x.png" /></p>
-<div class="highlight"><pre><span></span><code>Illesztett alakító &#39;zv&#39; frekvencia = 57,8 Hz (rezgések = 20,3%, simítás ~= 0,053)
-A túl nagy simítás elkerülése érdekében a &#39;zv&#39;, javasolt max_accel &lt;= 13000 mm/sec^2
-Alkalmazott alakító &#39;mzv&#39; frekvencia = 34,8 Hz (rezgések = 3,6%, simítás ~= 0,168)
-A túl nagy simítás elkerülése érdekében az &#39;mzv&#39; esetében javasolt max_accel &lt;= 3600 mm/sec^2
-Alkalmazott alakító &#39;ei&#39; frekvencia = 48,8 Hz (rezgések = 4,9%, simítás ~= 0,135)
-A túl nagy simítás elkerülése érdekében az &#39;ei&#39;, javasolt max_accel &lt;= 4400 mm/sec^2
-Alkalmazott alakító &#39;2hump_ei&#39; frekvencia = 45,2 Hz (rezgések = 0,1%, simítás ~= 0,264)
-A túl nagy simítás elkerülése érdekében a &#39;2hump_ei&#39; esetében javasolt max_accel &lt;= 2200 mm/sec^2
-Alkalmazott alakító &#39;3hump_ei&#39; frekvencia = 48,0 Hz (rezgések = 0,0%, simítás ~= 0,356)
-A túl nagy simítás elkerülése érdekében a &#39;3hump_ei&#39; esetében javasolt max_accel &lt;= 1500 mm/sec^2
+<div class="highlight"><pre><span></span><code>Illesztett alakító 'zv' frekvencia = 57,8 Hz (rezgések = 20,3%, simítás ~= 0,053)
+A túl nagy simítás elkerülése érdekében a 'zv', javasolt max_accel &lt;= 13000 mm/sec^2
+Alkalmazott alakító 'mzv' frekvencia = 34,8 Hz (rezgések = 3,6%, simítás ~= 0,168)
+A túl nagy simítás elkerülése érdekében az 'mzv' esetében javasolt max_accel &lt;= 3600 mm/sec^2
+Alkalmazott alakító 'ei' frekvencia = 48,8 Hz (rezgések = 4,9%, simítás ~= 0,135)
+A túl nagy simítás elkerülése érdekében az 'ei', javasolt max_accel &lt;= 4400 mm/sec^2
+Alkalmazott alakító '2hump_ei' frekvencia = 45,2 Hz (rezgések = 0,1%, simítás ~= 0,264)
+A túl nagy simítás elkerülése érdekében a '2hump_ei' esetében javasolt max_accel &lt;= 2200 mm/sec^2
+Alkalmazott alakító '3hump_ei' frekvencia = 48,0 Hz (rezgések = 0,0%, simítás ~= 0,356)
+A túl nagy simítás elkerülése érdekében a '3hump_ei' esetében javasolt max_accel &lt;= 1500 mm/sec^2
 Az ajánlott alakító 2hump_ei @ 45,2 Hz.
 </code></pre></div>
 
-<p>Vedd figyelembe, hogy a bejelentett <code>simítás</code> értékek absztrakt vetített értékek. Ezek az értékek különböző konfigurációk összehasonlítására használhatók: minél magasabb az érték, annál nagyobb simítást hoz létre a formázó. Ezek a simítási értékek azonban nem jelentik a simítás valódi mértékét, mivel a tényleges simítás a <a href="#a-max_accel-kivalasztasa"><code>max_accel</code></a> és <code>square_corner_velocity</code> paraméterektől függ. Ezért érdemes néhány tesztnyomatot nyomtatni, hogy lássuk, pontosan mekkora simítást hoz létre a kiválasztott konfiguráció.</p>
+<p>Note that the reported <code>smoothing</code> values are some abstract projected values. These values can be used to compare different configurations: the higher the value, the more smoothing a shaper will create. However, these smoothing scores do not represent any real measure of smoothing, because the actual smoothing depends on <a href="#selecting-max_accel"><code>max_accel</code></a> and <code>square_corner_velocity</code> parameters. Therefore, you should print some test prints to see how much smoothing exactly a chosen configuration creates.</p>
 <p>A fenti példában a javasolt alakító paraméterek nem rosszak, de mi van akkor, ha az X tengelyen kevesebb simítást szeretnél elérni? Megpróbálhatod korlátozni a maximális alakító simítást a következő paranccsal:</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/calibrate_shaper.py /tmp/resonances_x_*.csv -o /tmp/shaper_calibrate_x.png --max_smoothing=0.2
 </code></pre></div>
 
 <p>amely a simítást 0,2 pontszámra korlátozza. Most a következő eredményt kaphatod:</p>
 <p><img alt="Resonances" src="img/calibrate-x-max-smoothing.png" /></p>
-<div class="highlight"><pre><span></span><code>Illesztett alakító &#39;zv&#39; frekvencia = 55,4 Hz (rezgések = 19,7%, simítás ~= 0,057)
-A túl nagy simítás elkerülése érdekében a &#39;zv&#39;, javasolt max_accel &lt;= 12000 mm/sec^2
-Alkalmazott alakító &#39;mzv&#39; frekvencia = 34,6 Hz (rezgések = 3,6%, simítás ~= 0,170)
-A túl nagy simítás elkerülése érdekében az &#39;mzv&#39; esetében javasolt max_accel &lt;= 3500 mm/sec^2
-Alkalmazott alakító &#39;ei&#39; frekvencia = 48,2 Hz (rezgések = 4,8%, simítás ~= 0,139)
-A túl nagy simítás elkerülése érdekében az &#39;ei&#39; esetében javasolt max_accel &lt;= 4300 mm/sec^2
-Alkalmazott alakító &#39;2hump_ei&#39; frekvencia = 52,0 Hz (rezgések = 2,7%, simítás ~= 0,200)
-A túl nagy simítás elkerülése érdekében a &#39;2hump_ei&#39; esetében javasolt max_accel &lt;= 3000 mm/sec^2
-Alkalmazott alakító &#39;3hump_ei&#39; frekvencia = 72,6 Hz (rezgések = 1,4%, simítás ~= 0,155)
-A túl nagy simítás elkerülése érdekében a &#39;3hump_ei&#39; esetében javasolt max_accel &lt;= 3900 mm/sec^2
+<div class="highlight"><pre><span></span><code>Illesztett alakító 'zv' frekvencia = 55,4 Hz (rezgések = 19,7%, simítás ~= 0,057)
+A túl nagy simítás elkerülése érdekében a 'zv', javasolt max_accel &lt;= 12000 mm/sec^2
+Alkalmazott alakító 'mzv' frekvencia = 34,6 Hz (rezgések = 3,6%, simítás ~= 0,170)
+A túl nagy simítás elkerülése érdekében az 'mzv' esetében javasolt max_accel &lt;= 3500 mm/sec^2
+Alkalmazott alakító 'ei' frekvencia = 48,2 Hz (rezgések = 4,8%, simítás ~= 0,139)
+A túl nagy simítás elkerülése érdekében az 'ei' esetében javasolt max_accel &lt;= 4300 mm/sec^2
+Alkalmazott alakító '2hump_ei' frekvencia = 52,0 Hz (rezgések = 2,7%, simítás ~= 0,200)
+A túl nagy simítás elkerülése érdekében a '2hump_ei' esetében javasolt max_accel &lt;= 3000 mm/sec^2
+Alkalmazott alakító '3hump_ei' frekvencia = 72,6 Hz (rezgések = 1,4%, simítás ~= 0,155)
+A túl nagy simítás elkerülése érdekében a '3hump_ei' esetében javasolt max_accel &lt;= 3900 mm/sec^2
 Az ajánlott alakító 3hump_ei @ 72,6 Hz.
 </code></pre></div>
 
@@ -2627,16 +2627,16 @@ TEST_RESONANCES AXIS=0.866025404,-0.5 OUTPUT=raw_data
 
 <p>Ez lefuttatja a teljes tesztet mindkét tengelyre, és létrehozza a csv-kimenetet (<code>/tmp/calibration_data_*.csv</code> alapértelmezés szerint) a frekvenciaválaszról és a javasolt bemeneti alakítókról. Az Octoprint konzolon megkapod az egyes bemeneti alakítók javasolt frekvenciáit is, valamint azt, hogy melyik bemeneti alakítót ajánljuk a Te beállításodhoz. Például:</p>
 <div class="highlight"><pre><span></span><code>A legjobb bemeneti alakító paraméterek kiszámítása az Y tengelyhez
-Beillesztett alakító &#39;zv&#39; frekvencia = 39,0 Hz (rezgések = 13,2%, simítás ~= 0,105)
-A túl nagy simítás elkerülése érdekében a &#39;zv&#39;, javasolt max_accel &lt;= 5900 mm/sec^2
-Alkalmazott alakító &#39;mzv&#39; frekvencia = 36,8 Hz (rezgések = 1,7%, simítás ~= 0,150)
-A túl nagy simítás elkerülése érdekében az &#39;mzv&#39; esetében javasolt max_accel &lt;= 4000 mm/sec^2
-Alkalmazott alakító &#39;ei&#39; frekvencia = 36,6 Hz (rezgések = 2,2%, simítás ~= 0,240)
-A túl nagy simítás elkerülése érdekében az &#39;ei&#39;, javasolt max_accel &lt;= 2500 mm/sec^2
-Alkalmazott alakító &#39;2hump_ei&#39; frekvencia = 48,0 Hz (rezgések = 0,0%, simítás ~= 0,234)
-A túl nagy simítás elkerülése érdekében a &#39;2hump_ei&#39; esetében javasolt max_accel &lt;= 2500 mm/sec^2
-Alkalmazott alakító &#39;3hump_ei&#39; frekvencia = 59,0 Hz (rezgések = 0,0%, simítás ~= 0,235)
-A túl nagy simítás elkerülése érdekében a &#39;3hump_ei&#39; esetében javasolt max_accel &lt;= 2500 mm/sec^2
+Beillesztett alakító 'zv' frekvencia = 39,0 Hz (rezgések = 13,2%, simítás ~= 0,105)
+A túl nagy simítás elkerülése érdekében a 'zv', javasolt max_accel &lt;= 5900 mm/sec^2
+Alkalmazott alakító 'mzv' frekvencia = 36,8 Hz (rezgések = 1,7%, simítás ~= 0,150)
+A túl nagy simítás elkerülése érdekében az 'mzv' esetében javasolt max_accel &lt;= 4000 mm/sec^2
+Alkalmazott alakító 'ei' frekvencia = 36,6 Hz (rezgések = 2,2%, simítás ~= 0,240)
+A túl nagy simítás elkerülése érdekében az 'ei', javasolt max_accel &lt;= 2500 mm/sec^2
+Alkalmazott alakító '2hump_ei' frekvencia = 48,0 Hz (rezgések = 0,0%, simítás ~= 0,234)
+A túl nagy simítás elkerülése érdekében a '2hump_ei' esetében javasolt max_accel &lt;= 2500 mm/sec^2
+Alkalmazott alakító '3hump_ei' frekvencia = 59,0 Hz (rezgések = 0,0%, simítás ~= 0,235)
+A túl nagy simítás elkerülése érdekében a '3hump_ei' esetében javasolt max_accel &lt;= 2500 mm/sec^2
 Ajánlott shaper_type_y = mzv, shaper_freq_y = 36,8 Hz
 </code></pre></div>
 

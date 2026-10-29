@@ -1843,7 +1843,7 @@
 <p>La méthode distante <code>paneldue_beep</code> peut désormais être appelée depuis Klipper. Notez que si la méthode prend des paramètres, ils doivent être fournis en tant qu'arguments de mots clés. Voici un exemple de la façon dont il peut être appelé à partir d'un gcode_macro :</p>
 <div class="highlight"><pre><span></span><code>[gcode_macro PANELDUE_BEEP]
 gcode:
-  {action_call_remote_method(&quot;paneldue_beep&quot;, frequency=300, duration=1.0)}
+  {action_call_remote_method("paneldue_beep", frequency=300, duration=1.0)}
 </code></pre></div>
 
 <p>Lorsque la macro gcode PANELDUE_BEEP est exécutée, Klipper enverra ce qui suit sur le socket : <code>{"action": "run_paneldue_beep", "params": {"frequency": 300, "duration": 1.0}}</code></p>
@@ -1894,9 +1894,9 @@ gcode:
 <h3 id="load_cell_probedump_taps">load_cell_probe/dump_taps<a class="headerlink" href="#load_cell_probedump_taps" title="Permanent link">&para;</a></h3>
 <p>This endpoint is used to subscribe to details of probing "tap" events. Using this endpoint may increase Klipper's system load.</p>
 <p>A request may look like: <code>{"id": 123, "method":"load_cell/dump_force", "params": {"sensor": "load_cell", "response_template": {}}}</code> and might return: <code>{"id": 123,"result":{"header":["probe_tap_event"]}}</code> and might later produce asynchronous messages such as:</p>
-<div class="highlight"><pre><span></span><code>{&quot;params&quot;:{&quot;tap&quot;:&#39;{
-   &quot;time&quot;: [118032.28039, 118032.2834, ...],
-   &quot;force&quot;: [-459.4213119680034, -458.1640702543264, ...],
+<div class="highlight"><pre><span></span><code>{"params":{"tap":'{
+   "time": [118032.28039, 118032.2834, ...],
+   "force": [-459.4213119680034, -458.1640702543264, ...],
 }}}
 </code></pre></div>
 
@@ -1921,105 +1921,105 @@ gcode:
 <p>For example: <code>{"id": 123, "method": "bed_mesh/dump_mesh"}</code></p>
 <p>might return:</p>
 <div class="highlight"><pre><span></span><code>{
-    &quot;current_mesh&quot;: {
-        &quot;name&quot;: &quot;eddy-scan-test&quot;,
-        &quot;probed_matrix&quot;: [...],
-        &quot;mesh_matrix&quot;: [...],
-        &quot;mesh_params&quot;: {
-            &quot;x_count&quot;: 9,
-            &quot;y_count&quot;: 9,
-            &quot;mesh_x_pps&quot;: 2,
-            &quot;mesh_y_pps&quot;: 2,
-            &quot;algo&quot;: &quot;bicubic&quot;,
-            &quot;tension&quot;: 0.5,
-            &quot;min_x&quot;: 20,
-            &quot;max_x&quot;: 330,
-            &quot;min_y&quot;: 30,
-            &quot;max_y&quot;: 320
+    "current_mesh": {
+        "name": "eddy-scan-test",
+        "probed_matrix": [...],
+        "mesh_matrix": [...],
+        "mesh_params": {
+            "x_count": 9,
+            "y_count": 9,
+            "mesh_x_pps": 2,
+            "mesh_y_pps": 2,
+            "algo": "bicubic",
+            "tension": 0.5,
+            "min_x": 20,
+            "max_x": 330,
+            "min_y": 30,
+            "max_y": 320
         }
     },
-    &quot;profiles&quot;: {
-        &quot;default&quot;: {
-            &quot;points&quot;: [...],
-            &quot;mesh_params&quot;: {
-                &quot;min_x&quot;: 20,
-                &quot;max_x&quot;: 330,
-                &quot;min_y&quot;: 30,
-                &quot;max_y&quot;: 320,
-                &quot;x_count&quot;: 9,
-                &quot;y_count&quot;: 9,
-                &quot;mesh_x_pps&quot;: 2,
-                &quot;mesh_y_pps&quot;: 2,
-                &quot;algo&quot;: &quot;bicubic&quot;,
-                &quot;tension&quot;: 0.5
+    "profiles": {
+        "default": {
+            "points": [...],
+            "mesh_params": {
+                "min_x": 20,
+                "max_x": 330,
+                "min_y": 30,
+                "max_y": 320,
+                "x_count": 9,
+                "y_count": 9,
+                "mesh_x_pps": 2,
+                "mesh_y_pps": 2,
+                "algo": "bicubic",
+                "tension": 0.5
             }
         },
-        &quot;eddy-scan-test&quot;: {
-            &quot;points&quot;: [...],
-            &quot;mesh_params&quot;: {
-                &quot;x_count&quot;: 9,
-                &quot;y_count&quot;: 9,
-                &quot;mesh_x_pps&quot;: 2,
-                &quot;mesh_y_pps&quot;: 2,
-                &quot;algo&quot;: &quot;bicubic&quot;,
-                &quot;tension&quot;: 0.5,
-                &quot;min_x&quot;: 20,
-                &quot;max_x&quot;: 330,
-                &quot;min_y&quot;: 30,
-                &quot;max_y&quot;: 320
+        "eddy-scan-test": {
+            "points": [...],
+            "mesh_params": {
+                "x_count": 9,
+                "y_count": 9,
+                "mesh_x_pps": 2,
+                "mesh_y_pps": 2,
+                "algo": "bicubic",
+                "tension": 0.5,
+                "min_x": 20,
+                "max_x": 330,
+                "min_y": 30,
+                "max_y": 320
             }
         },
-        &quot;eddy-rapid-test&quot;: {
-            &quot;points&quot;: [...],
-            &quot;mesh_params&quot;: {
-                &quot;x_count&quot;: 9,
-                &quot;y_count&quot;: 9,
-                &quot;mesh_x_pps&quot;: 2,
-                &quot;mesh_y_pps&quot;: 2,
-                &quot;algo&quot;: &quot;bicubic&quot;,
-                &quot;tension&quot;: 0.5,
-                &quot;min_x&quot;: 20,
-                &quot;max_x&quot;: 330,
-                &quot;min_y&quot;: 30,
-                &quot;max_y&quot;: 320
+        "eddy-rapid-test": {
+            "points": [...],
+            "mesh_params": {
+                "x_count": 9,
+                "y_count": 9,
+                "mesh_x_pps": 2,
+                "mesh_y_pps": 2,
+                "algo": "bicubic",
+                "tension": 0.5,
+                "min_x": 20,
+                "max_x": 330,
+                "min_y": 30,
+                "max_y": 320
             }
         }
     },
-    &quot;calibration&quot;: {
-        &quot;points&quot;: [...],
-        &quot;config&quot;: {
-            &quot;x_count&quot;: 9,
-            &quot;y_count&quot;: 9,
-            &quot;mesh_x_pps&quot;: 2,
-            &quot;mesh_y_pps&quot;: 2,
-            &quot;algo&quot;: &quot;bicubic&quot;,
-            &quot;tension&quot;: 0.5,
-            &quot;mesh_min&quot;: [
+    "calibration": {
+        "points": [...],
+        "config": {
+            "x_count": 9,
+            "y_count": 9,
+            "mesh_x_pps": 2,
+            "mesh_y_pps": 2,
+            "algo": "bicubic",
+            "tension": 0.5,
+            "mesh_min": [
                 20,
                 30
             ],
-            &quot;mesh_max&quot;: [
+            "mesh_max": [
                 330,
                 320
             ],
-            &quot;origin&quot;: null,
-            &quot;radius&quot;: null
+            "origin": null,
+            "radius": null
         },
-        &quot;probe_path&quot;: [...],
-        &quot;rapid_path&quot;: [...]
+        "probe_path": [...],
+        "rapid_path": [...]
     },
-    &quot;probe_offsets&quot;: [
+    "probe_offsets": [
         0,
         25,
         0.5
     ],
-    &quot;axis_minimum&quot;: [
+    "axis_minimum": [
         0,
         0,
         -5,
         0
     ],
-    &quot;axis_maximum&quot;: [
+    "axis_maximum": [
         351,
         358,
         330,
@@ -2028,7 +2028,7 @@ gcode:
 }
 </code></pre></div>
 
-<p>The <code>dump_mesh</code> endpoint takes one optional parameter, <code>mesh_args</code>. This parameter must be an object, where the keys and values are parameters available to <a href="#bed_mesh_calibrate">BED_MESH_CALIBRATE</a>. This will update the mesh configuration and probe points using the supplied parameters prior to returning the result. It is recommended to omit mesh parameters unless it is desired to visualize the probe points and/or travel path before performing <code>BED_MESH_CALIBRATE</code>.</p>
+<p>The <code>dump_mesh</code> endpoint takes one optional parameter, <code>mesh_args</code>. This parameter must be an object, where the keys and values are parameters available to <a href="G-Codes.html#bed_mesh_calibrate">BED_MESH_CALIBRATE</a>. This will update the mesh configuration and probe points using the supplied parameters prior to returning the result. It is recommended to omit mesh parameters unless it is desired to visualize the probe points and/or travel path before performing <code>BED_MESH_CALIBRATE</code>.</p>
 
               
             </article>

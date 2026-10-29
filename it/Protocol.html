@@ -1646,7 +1646,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>Il protocollo di trasmissione Klipper può essere pensato come un meccanismo <a href="https://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a> tra microcontrollore e host. Il software del microcontrollore dichiara i comandi che l'host può richiamare insieme ai messaggi di risposta che può generare. L'host utilizza tali informazioni per comandare al microcontrollore di eseguire azioni e interpretare i risultati.</p>
 <h3 id="dichiarazione-dei-comandi">Dichiarazione dei comandi<a class="headerlink" href="#dichiarazione-dei-comandi" title="Permanent link">&para;</a></h3>
 <p>Il software del microcontrollore dichiara un "comando" utilizzando la macro DECL_COMMAND() nel codice C. Per esempio:</p>
-<div class="highlight"><pre><span></span><code>DECL_COMMAND(command_update_digital_out, &quot;update_digital_out oid=%c value=%c&quot;);
+<div class="highlight"><pre><span></span><code>DECL_COMMAND(command_update_digital_out, "update_digital_out oid=%c value=%c");
 </code></pre></div>
 
 <p>Quanto sopra dichiara un comando denominato "update_digital_out". Ciò consente all'host di "richiamare" questo comando che causerebbe l'esecuzione della funzione C command_update_digital_out() nel microcontrollore. Quanto sopra indica anche che il comando accetta due parametri interi. Quando viene eseguito il codice C command_update_digital_out(), verrà passata una matrice contenente questi due numeri interi: il primo corrispondente all'"oid" e il secondo corrispondente al "valore".</p>
@@ -1654,7 +1654,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>La build del microcontrollore raccoglierà tutti i comandi dichiarati con DECL_COMMAND(), ne determinerà i parametri e farà in modo che siano richiamabili.</p>
 <h3 id="declaring-responses">Declaring responses<a class="headerlink" href="#declaring-responses" title="Permanent link">&para;</a></h3>
 <p>Per inviare informazioni dal microcontrollore all'host viene generata una "risposta". Questi sono sia dichiarati che trasmessi usando la macro C sendf(). Per esempio:</p>
-<div class="highlight"><pre><span></span><code>sendf(&quot;status clock=%u status=%c&quot;, sched_read_time(), sched_is_shutdown());
+<div class="highlight"><pre><span></span><code>sendf("status clock=%u status=%c", sched_read_time(), sched_is_shutdown());
 </code></pre></div>
 
 <p>Quanto sopra trasmette un messaggio di risposta di "stato" che contiene due parametri interi ("clock" e "status"). La build del microcontrollore trova automaticamente tutte le chiamate sendf() e genera codificatori per esse. Il primo parametro della funzione sendf() descrive la risposta ed è nello stesso formato delle dichiarazioni di comando.</p>
@@ -1662,26 +1662,26 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>La macro sendf() deve essere invocata solo da gestori di comandi o attività e non deve essere invocata da interrupt o timer. Il codice non ha bisogno di emettere un sendf() in risposta a un comando ricevuto, non è limitato nel numero di volte in cui sendf() può essere invocato e può invocare sendf() in qualsiasi momento da un task handler.</p>
 <h4 id="risposte-in-output">Risposte in output<a class="headerlink" href="#risposte-in-output" title="Permanent link">&para;</a></h4>
 <p>Per semplificare il debug, esiste anche una funzione C output(). Per esempio:</p>
-<div class="highlight"><pre><span></span><code>output(&quot;Il valore di%u è %s con dimensione %u.&quot;, x, buf, buf_len);
+<div class="highlight"><pre><span></span><code>output("Il valore di%u è %s con dimensione %u.", x, buf, buf_len);
 </code></pre></div>
 
 <p>La funzione output() è simile nell'uso a printf() - è intesa per generare e formattare messaggi arbitrari per il 'consumo umano'.</p>
 <h3 id="dichiarazione-di-enumerazioni">Dichiarazione di enumerazioni<a class="headerlink" href="#dichiarazione-di-enumerazioni" title="Permanent link">&para;</a></h3>
 <p>Le enumerazioni consentono al codice host di utilizzare identificatori di stringa per i parametri che il microcontrollore gestisce come numeri interi. Sono dichiarati nel codice del microcontrollore, ad esempio:</p>
-<div class="highlight"><pre><span></span><code>DECL_ENUMERATION(&quot;spi_bus&quot;, &quot;spi&quot;, 0);
+<div class="highlight"><pre><span></span><code>DECL_ENUMERATION("spi_bus", "spi", 0);
 
-DECL_ENUMERATION_RANGE(&quot;pin&quot;, &quot;PC0&quot;, 16, 8);
+DECL_ENUMERATION_RANGE("pin", "PC0", 16, 8);
 </code></pre></div>
 
 <p>Se il primo esempio, la macro DECL_ENUMERATION() definisce un'enumerazione per qualsiasi messaggio di comando/risposta con nome parametro "spi_bus" o nome parametro con suffisso "_spi_bus". Per quei parametri la stringa "spi" è un valore valido e verrà trasmessa con un valore intero pari a zero.</p>
 <p>È anche possibile dichiarare un intervallo di enumerazione. Nel secondo esempio, un parametro "pin" (o qualsiasi parametro con suffisso "_pin") accetterebbe PC0, PC1, PC2, ..., PC7 come valori validi. Le stringhe verranno trasmesse con numeri interi 16, 17, 18, ..., 23.</p>
 <h3 id="dichiarazione-di-costanti">Dichiarazione di costanti<a class="headerlink" href="#dichiarazione-di-costanti" title="Permanent link">&para;</a></h3>
 <p>Le costanti possono anche essere esportate. Ad esempio, quanto segue:</p>
-<div class="highlight"><pre><span></span><code>DECL_CONSTANT(&quot;SERIAL_BAUD&quot;, 250000);
+<div class="highlight"><pre><span></span><code>DECL_CONSTANT("SERIAL_BAUD", 250000);
 </code></pre></div>
 
 <p>esporterebbe una costante denominata "SERIAL_BAUD" con un valore di 250000 dal microcontrollore all'host. È anche possibile dichiarare una costante che è una stringa, ad esempio:</p>
-<div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR(&quot;MCU&quot;, &quot;pru&quot;);
+<div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR("MCU", "pru");
 </code></pre></div>
 
 <h2 id="codifica-dei-messaggi-di-basso-livello">Codifica dei messaggi di basso livello<a class="headerlink" href="#codifica-dei-messaggi-di-basso-livello" title="Permanent link">&para;</a></h2>

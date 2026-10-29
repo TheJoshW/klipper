@@ -1665,7 +1665,7 @@ results.</p>
 <h3 id="declaring-commands">Declaring commands<a class="headerlink" href="#declaring-commands" title="Permanent link">&para;</a></h3>
 <p>The micro-controller software declares a "command" by using the
 DECL_COMMAND() macro in the C code. For example:</p>
-<div class="highlight"><pre><span></span><code>DECL_COMMAND(command_update_digital_out, &quot;update_digital_out oid=%c value=%c&quot;);
+<div class="highlight"><pre><span></span><code>DECL_COMMAND(command_update_digital_out, "update_digital_out oid=%c value=%c");
 </code></pre></div>
 
 <p>The above declares a command named "update_digital_out". This allows
@@ -1691,7 +1691,7 @@ callable.</p>
 <p>To send information from the micro-controller to the host a "response"
 is generated. These are both declared and transmitted using the
 sendf() C macro. For example:</p>
-<div class="highlight"><pre><span></span><code>sendf(&quot;status clock=%u status=%c&quot;, sched_read_time(), sched_is_shutdown());
+<div class="highlight"><pre><span></span><code>sendf("status clock=%u status=%c", sched_read_time(), sched_is_shutdown());
 </code></pre></div>
 
 <p>The above transmits a "status" response message that contains two
@@ -1711,7 +1711,7 @@ invoked, and it may invoke sendf() at any time from a task handler.</p>
 <h4 id="output-responses">Output responses<a class="headerlink" href="#output-responses" title="Permanent link">&para;</a></h4>
 <p>To simplify debugging, there is also an output() C function. For
 example:</p>
-<div class="highlight"><pre><span></span><code>output(&quot;The value of %u is %s with size %u.&quot;, x, buf, buf_len);
+<div class="highlight"><pre><span></span><code>output("The value of %u is %s with size %u.", x, buf, buf_len);
 </code></pre></div>
 
 <p>The output() function is similar in usage to printf() - it is intended
@@ -1720,9 +1720,9 @@ to generate and format arbitrary messages for human consumption.</p>
 <p>Enumerations allow the host code to use string identifiers for
 parameters that the micro-controller handles as integers. They are
 declared in the micro-controller code - for example:</p>
-<div class="highlight"><pre><span></span><code>DECL_ENUMERATION(&quot;spi_bus&quot;, &quot;spi&quot;, 0);
+<div class="highlight"><pre><span></span><code>DECL_ENUMERATION("spi_bus", "spi", 0);
 
-DECL_ENUMERATION_RANGE(&quot;pin&quot;, &quot;PC0&quot;, 16, 8);
+DECL_ENUMERATION_RANGE("pin", "PC0", 16, 8);
 </code></pre></div>
 
 <p>If the first example, the DECL_ENUMERATION() macro defines an
@@ -1736,13 +1736,13 @@ would accept PC0, PC1, PC2, ..., PC7 as valid values. The strings will
 be transmitted with integers 16, 17, 18, ..., 23.</p>
 <h3 id="declaring-constants">Declaring constants<a class="headerlink" href="#declaring-constants" title="Permanent link">&para;</a></h3>
 <p>Constants can also be exported. For example, the following:</p>
-<div class="highlight"><pre><span></span><code>DECL_CONSTANT(&quot;SERIAL_BAUD&quot;, 250000);
+<div class="highlight"><pre><span></span><code>DECL_CONSTANT("SERIAL_BAUD", 250000);
 </code></pre></div>
 
 <p>would export a constant named "SERIAL_BAUD" with a value of 250000
 from the micro-controller to the host. It is also possible to declare
 a constant that is a string - for example:</p>
-<div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR(&quot;MCU&quot;, &quot;pru&quot;);
+<div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR("MCU", "pru");
 </code></pre></div>
 
 <h2 id="low-level-message-encoding">Low-level message encoding<a class="headerlink" href="#low-level-message-encoding" title="Permanent link">&para;</a></h2>

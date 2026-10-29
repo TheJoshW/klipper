@@ -1952,18 +1952,18 @@ homing_retract_dist: 0
 <div class="highlight"><pre><span></span><code>[gcode_macro SENSORLESS_HOME_X]
 gcode :
     {% set HOME_CUR = 0.700 %}
-    {% set driver_config = printer.configfile.settings[&#39;tmc2209 stepper_x&#39;] %}
+    {% set driver_config = printer.configfile.settings['tmc2209 stepper_x'] %}
     {% set RUN_CUR = driver_config.run_current %}
-    # Définir le courant pour la mise à l&#39;origine sans capteur
+    # Définir le courant pour la mise à l'origine sans capteur
     SET_TMC_CURRENT STEPPER=stepper_x CURRENT={HOME_CUR}
     # Petit pause pour attendre que le drapeau stall flag soit désactivé
     G4 P2000
-    # mise à l&#39;origine
+    # mise à l'origine
     G28 X0
     # Déplacement
     G90
     G1 X5 F1200
-    # Remise du courant d&#39;impression
+    # Remise du courant d'impression
     SET_TMC_CURRENT STEPPER=stepper_x CURRENT={RUN_CUR}
 </code></pre></div>
 
@@ -1981,13 +1981,13 @@ gcode :
 <div class="highlight"><pre><span></span><code>[gcode_macro HOME]
 gcode:
     G90
-    # mise à l&#39;origine Z
+    # mise à l'origine Z
     G28 Z0
     G1 Z10 F1200
-    # mise à l&#39;origine Y
+    # mise à l'origine Y
     G28 Y0
     G1 Y5 F1200
-    # mise à l&#39;origine X
+    # mise à l'origine X
     G4 P2000
     G28 X0
     G1 X5 F1200

@@ -1504,6 +1504,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#tmc5262" class="md-nav__link">
+    [tmc5262]
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1716,6 +1723,13 @@
   
     <nav class="md-nav" aria-label="[load_cell]">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cs1237" class="md-nav__link">
+    CS1237
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#hx711" class="md-nav__link">
@@ -3675,6 +3689,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#tmc5262" class="md-nav__link">
+    [tmc5262]
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3889,6 +3910,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#cs1237" class="md-nav__link">
+    CS1237
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hx711" class="md-nav__link">
     HX711
   </a>
@@ -4066,7 +4094,7 @@
 <div class="highlight"><pre><span></span><code>[mcu]
 serial:
 #   The serial port to connect to the MCU. If unsure (or if it
-#   changes) see the &quot;Where&#39;s my serial port?&quot; section of the FAQ.
+#   changes) see the "Where's my serial port?" section of the FAQ.
 #   This parameter must be provided when using a serial port.
 #baud: 250000
 #   The baud rate to use. The default is 250000.
@@ -4076,25 +4104,25 @@ serial:
 #   CAN bus for communication.
 #canbus_interface:
 #   If using a device connected to a CAN bus then this sets the CAN
-#   network interface to use. The default is &#39;can0&#39;.
+#   network interface to use. The default is 'can0'.
 #restart_method:
 #   This controls the mechanism the host will use to reset the
-#   micro-controller. The choices are &#39;arduino&#39;, &#39;cheetah&#39;, &#39;rpi_usb&#39;,
-#   and &#39;command&#39;. The &#39;arduino&#39; method (toggle DTR) is common on
-#   Arduino boards and clones. The &#39;cheetah&#39; method is a special
-#   method needed for some Fysetc Cheetah boards. The &#39;rpi_usb&#39; method
+#   micro-controller. The choices are 'arduino', 'cheetah', 'rpi_usb',
+#   and 'command'. The 'arduino' method (toggle DTR) is common on
+#   Arduino boards and clones. The 'cheetah' method is a special
+#   method needed for some Fysetc Cheetah boards. The 'rpi_usb' method
 #   is useful on Raspberry Pi boards with micro-controllers powered
 #   over USB - it briefly disables power to all USB ports to
-#   accomplish a micro-controller reset. The &#39;command&#39; method involves
+#   accomplish a micro-controller reset. The 'command' method involves
 #   sending a Klipper command to the micro-controller so that it can
-#   reset itself. The default is &#39;arduino&#39; if the micro-controller
-#   communicates over a serial port, &#39;command&#39; otherwise.
+#   reset itself. The default is 'arduino' if the micro-controller
+#   communicates over a serial port, 'command' otherwise.
 </code></pre></div>
 
 <h3 id="mcu-my_extra_mcu">[mcu my_extra_mcu]<a class="headerlink" href="#mcu-my_extra_mcu" title="Permanent link">&para;</a></h3>
 <p>Zusätzliche Mikrocontroller (Jemand kann eine beliebige Anzahl an Abschnitten mit einer "mcu"-Präfix definieren). Zusätzliche Mikrocontroller fügen zusätzliche Pins hinzu die als Heizeinheiten, Schrittmotor, Lüfter etc.. konfiguriert werden können. Zum Beispiel, wenn ein Abschnitt "[mcu extra_mcu]" hinzugefügt wird, können Pins wie "extra_mcu:ar9" (wo "ar9" ein Hardware-Pin-Name oder Alias-Name von dem gegebenen mcu ist) woanders in der Konfiguration benutzt werden.</p>
 <div class="highlight"><pre><span></span><code>[mcu my_extra_mcu]
-# See the &quot;mcu&quot; section for configuration parameters.
+# See the "mcu" section for configuration parameters.
 </code></pre></div>
 
 <h2 id="gebrauchliche-kinematik-einstellungen">Gebräuchliche Kinematik Einstellungen<a class="headerlink" href="#gebrauchliche-kinematik-einstellungen" title="Permanent link">&para;</a></h2>
@@ -4112,7 +4140,7 @@ max_velocity:
 #   SET_VELOCITY_LIMIT command. This parameter must be specified.
 max_accel:
 #   Maximum acceleration (in mm/s^2) of the toolhead (relative to the
-#   print). Although this parameter is described as a &quot;maximum&quot;
+#   print). Although this parameter is described as a "maximum"
 #   acceleration, in practice most moves that accelerate or decelerate
 #   will do so at the rate specified here. The value specified here
 #   may be changed at runtime using the SET_VELOCITY_LIMIT command.
@@ -4173,23 +4201,23 @@ microsteps:
 #   0.9 degree motor. The default is 200.
 #gear_ratio:
 #   The gear ratio if the stepper motor is connected to the axis via a
-#   gearbox. For example, one may specify &quot;5:1&quot; if a 5 to 1 gearbox is
+#   gearbox. For example, one may specify "5:1" if a 5 to 1 gearbox is
 #   in use. If the axis has multiple gearboxes one may specify a comma
-#   separated list of gear ratios (for example, &quot;57:11, 2:1&quot;). If a
+#   separated list of gear ratios (for example, "57:11, 2:1"). If a
 #   gear_ratio is specified then rotation_distance specifies the
 #   distance the axis travels for one full rotation of the final gear.
 #   The default is to not use a gear ratio.
 #step_pulse_duration:
 #   The minimum time between the step pulse signal edge and the
-#   following &quot;unstep&quot; signal edge. This is also used to set the
+#   following "unstep" signal edge. This is also used to set the
 #   minimum time between a step pulse and a direction change signal.
 #   The default is 0.000000100 (100ns) for TMC steppers that are
 #   configured in UART or SPI mode, and the default is 0.000002 (which
 #   is 2us) for all other steppers.
 endstop_pin:
 #   Endstop switch detection pin. If this endstop pin is on a
-#   different mcu than the stepper motor then it enables &quot;multi-mcu
-#   homing&quot;. This parameter must be provided for the X, Y, and Z
+#   different mcu than the stepper motor then it enables "multi-mcu
+#   homing". This parameter must be provided for the X, Y, and Z
 #   steppers on cartesian style printers.
 #position_min: 0
 #   Minimum valid distance (in mm) the user may command the stepper to
@@ -4529,7 +4557,7 @@ gear_ratio:
 #   A gear_ratio must be specified and rotation_distance may not be
 #   specified. For example, if the bed has an 80 toothed pulley driven
 #   by a stepper with a 16 toothed pulley then one would specify a
-#   gear ratio of &quot;80:16&quot;. This parameter must be provided.
+#   gear ratio of "80:16". This parameter must be provided.
 
 # The stepper_arm section is used to describe the stepper controlling
 # the carriage on the arm.
@@ -4574,7 +4602,7 @@ gear_ratio:
 #   specified. For example, if the arm has an 80 toothed pulley driven
 #   by a pulley with 16 teeth, which is in turn connected to a 60
 #   toothed pulley driven by a stepper with a 16 toothed pulley, then
-#   one would specify a gear ratio of &quot;80:16, 60:16&quot;. This parameter
+#   one would specify a gear ratio of "80:16, 60:16". This parameter
 #   must be provided.
 position_endstop:
 #   Distance (in mm) between the nozzle and the bed when the nozzle is
@@ -4583,13 +4611,13 @@ position_endstop:
 #   stepper_c this parameter defaults to the value specified for
 #   stepper_a.
 upper_arm_length:
-#   Length (in mm) of the arm connecting the &quot;shoulder joint&quot; to the
-#   &quot;elbow joint&quot;. This parameter must be provided for stepper_a; for
+#   Length (in mm) of the arm connecting the "shoulder joint" to the
+#   "elbow joint". This parameter must be provided for stepper_a; for
 #   stepper_b and stepper_c this parameter defaults to the value
 #   specified for stepper_a.
 lower_arm_length:
-#   Length (in mm) of the arm connecting the &quot;elbow joint&quot; to the
-#   &quot;effector joint&quot;. This parameter must be provided for stepper_a;
+#   Length (in mm) of the arm connecting the "elbow joint" to the
+#   "effector joint". This parameter must be provided for stepper_a;
 #   for stepper_b and stepper_c this parameter defaults to the value
 #   specified for stepper_a.
 #angle:
@@ -4665,7 +4693,7 @@ axis:
 endstop_pin:
 #   Endstop switch detection pin. If this endstop pin is on a
 #   different mcu than the stepper motor(s) moving this carriage,
-#   then it enables &quot;multi-mcu homing&quot;. This parameter must be provided.
+#   then it enables "multi-mcu homing". This parameter must be provided.
 #position_min: 0
 #   Minimum valid distance (in mm) the user may command the carriage to
 #   move to.  The default is 0mm.
@@ -4762,7 +4790,7 @@ carriages: carriage_y1
 </code></pre></div>
 
 <p>Bemerkenswert ist, dass ein <code>[extra_carriage]</code> keine Parameter wie <code>position_min</code>, <code>position_max</code> und <code>position_endstop</code> definiert, sondern sie vom angegebenen <code>primary_carriage</code> erbt und sich damit denselben Bewegungsbereich mit dem primären Schlitten teilt.</p>
-<p>Hinweise zur Konfiguration von IDEX-Aufbauten finden Sie im Abschnitt <a href="#dual-carriage">dual carriage</a>.</p>
+<p>For the references on how to configure IDEX setups, see the <a href="#dual_carriage">dual carriage</a> section.</p>
 <h3 id="keine-kinematik">Keine Kinematik<a class="headerlink" href="#keine-kinematik" title="Permanent link">&para;</a></h3>
 <p>Es ist möglich, eine spezielle Kinematik "none" zu definieren, um die Kinematikunterstützung in Klipper zu deaktivieren. Das kann für die Ansteuerung von Geräten nützlich sein, die keine typischen 3D-Drucker sind, oder zu Debugging-Zwecken.</p>
 <div class="highlight"><pre><span></span><code>[printer]
@@ -4770,7 +4798,7 @@ kinematics: none
 max_velocity: 1
 max_accel: 1
 #   The max_velocity and max_accel parameters must be defined. The
-#   values are not used for &quot;none&quot; kinematics.
+#   values are not used for "none" kinematics.
 </code></pre></div>
 
 <h2 id="ubliche-extruder-und-heizbettunterstutzung">Übliche Extruder und Heizbettunterstützung<a class="headerlink" href="#ubliche-extruder-und-heizbettunterstutzung" title="Permanent link">&para;</a></h2>
@@ -4784,7 +4812,7 @@ microsteps:
 rotation_distance:
 #full_steps_per_rotation:
 #gear_ratio:
-#   See the &quot;stepper&quot; section for a description of the above
+#   See the "stepper" section for a description of the above
 #   parameters. If none of the above parameters are specified then no
 #   stepper will be associated with the nozzle hotend (though a
 #   SYNC_EXTRUDER_MOTION command may associate one at run-time).
@@ -4842,11 +4870,11 @@ heater_pin:
 #   setting may be used to limit the total power output (over extended
 #   periods) to the heater. The default is 1.0.
 sensor_type:
-#   Type of sensor - common thermistors are &quot;EPCOS 100K B57560G104F&quot;,
-#   &quot;ATC Semitec 104GT-2&quot;, &quot;ATC Semitec 104NT-4-R025H42G&quot;, &quot;Generic
-#   3950&quot;,&quot;Honeywell 100K 135-104LAG-J01&quot;, &quot;NTC 100K MGB18-104F39050L32&quot;,
-#   &quot;SliceEngineering 450&quot;, and &quot;TDK NTCG104LH104JT1&quot;. See the
-#   &quot;Temperature sensors&quot; section for other sensors. This parameter
+#   Type of sensor - common thermistors are "EPCOS 100K B57560G104F",
+#   "ATC Semitec 104GT-2", "ATC Semitec 104NT-4-R025H42G", "Generic
+#   3950","Honeywell 100K 135-104LAG-J01", "NTC 100K MGB18-104F39050L32",
+#   "SliceEngineering 450", and "TDK NTCG104LH104JT1". See the
+#   "Temperature sensors" section for other sensors. This parameter
 #   must be provided.
 sensor_pin:
 #   Analog input pin connected to the sensor. This parameter must be
@@ -4869,13 +4897,13 @@ pid_Kd:
 #   (pid_Kd) settings for the PID feedback control system. Klipper
 #   evaluates the PID settings with the following general formula:
 #     heater_pwm = (Kp*error + Ki*integral(error) - Kd*derivative(error)) / 255
-#   Where &quot;error&quot; is &quot;requested_temperature - measured_temperature&quot;
-#   and &quot;heater_pwm&quot; is the requested heating rate with 0.0 being full
+#   Where "error" is "requested_temperature - measured_temperature"
+#   and "heater_pwm" is the requested heating rate with 0.0 being full
 #   off and 1.0 being full on. Consider using the PID_CALIBRATE
 #   command to obtain these parameters. The pid_Kp, pid_Ki, and pid_Kd
 #   parameters must be provided for PID heaters.
 #max_delta: 2.0
-#   On &#39;watermark&#39; controlled heaters this is the number of degrees in
+#   On 'watermark' controlled heaters this is the number of degrees in
 #   Celsius above the target temperature before disabling the heater
 #   as well as the number of degrees below the target before
 #   re-enabling the heater. The default is 2 degrees Celsius.
@@ -4908,7 +4936,7 @@ sensor_pin:
 control:
 min_temp:
 max_temp:
-#   See the &quot;extruder&quot; section for a description of the above parameters.
+#   See the "extruder" section for a description of the above parameters.
 </code></pre></div>
 
 <h2 id="bett-nivelierung-unterstutzung">Bett Nivelierung Unterstützung<a class="headerlink" href="#bett-nivelierung-unterstutzung" title="Permanent link">&para;</a></h2>
@@ -4949,19 +4977,19 @@ max_temp:
 #   and omitted for rectangular beds.
 #mesh_origin:
 #   Defines the center X, Y coordinate of the mesh for round beds. This
-#   coordinate is relative to the probe&#39;s location. It may be useful
+#   coordinate is relative to the probe's location. It may be useful
 #   to adjust the mesh_origin in an effort to maximize the size of the
 #   mesh radius. Default is 0, 0. This parameter must be omitted for
 #   rectangular beds.
 #mesh_min:
 #   Defines the minimum X, Y coordinate of the mesh for rectangular
-#   beds. This coordinate is relative to the probe&#39;s location. This
+#   beds. This coordinate is relative to the probe's location. This
 #   will be the first point probed, nearest to the origin. This
 #   parameter must be provided for rectangular beds.
 #mesh_max:
 #   Defines the maximum X, Y coordinate of the mesh for rectangular
 #   beds. Adheres to the same principle as mesh_min, however this will
-#   be the furthest point probed from the bed&#39;s origin. This parameter
+#   be the furthest point probed from the bed's origin. This parameter
 #   must be provided for rectangular beds.
 #probe_count: 3, 3
 #   For rectangular beds, this is a comma separate pair of integer
@@ -4996,12 +5024,12 @@ max_temp:
 #mesh_pps: 2, 2
 #   A comma separated pair of integers X, Y defining the number of
 #   points per segment to interpolate in the mesh along each axis. A
-#   &quot;segment&quot; can be defined as the space between each probed point.
+#   "segment" can be defined as the space between each probed point.
 #   The user may enter a single value which will be applied to both
 #   axes. Default is 2, 2.
 #algorithm: lagrange
-#   The interpolation algorithm to use. May be either &quot;lagrange&quot; or
-#   &quot;bicubic&quot;. This option will not affect 3x3 grids, which are forced
+#   The interpolation algorithm to use. May be either "lagrange" or
+#   "bicubic". This option will not affect 3x3 grids, which are forced
 #   to use lagrange sampling. Default is lagrange.
 #bicubic_tension: .2
 #   When using the bicubic algorithm the tension parameter above may
@@ -5026,7 +5054,7 @@ max_temp:
 #  For rectangular beds this applies to travel on the X axis, and for round beds
 #  it applies to the entire radius.  The tool must be able to travel the amount
 #  specified outside of the mesh.  This value is used to optimize the travel
-#  path when performing a &quot;rapid scan&quot;.  The minimum value that may be specified
+#  path when performing a "rapid scan".  The minimum value that may be specified
 #  is 1.  The default is no overshoot.
 </code></pre></div>
 
@@ -5035,10 +5063,10 @@ max_temp:
 <p>Siehe die <a href="G-Codes.html#bed_tilt">command reference</a> für weitere Informationen.</p>
 <div class="highlight"><pre><span></span><code>[bed_tilt]
 #x_adjust: 0
-#   The amount to add to each move&#39;s Z height for each mm on the X
+#   The amount to add to each move's Z height for each mm on the X
 #   axis. The default is 0.
 #y_adjust: 0
-#   The amount to add to each move&#39;s Z height for each mm on the Y
+#   The amount to add to each move's Z height for each mm on the Y
 #   axis. The default is 0.
 #z_adjust: 0
 #   The amount to add to the Z height when the nozzle is nominally at
@@ -5136,8 +5164,8 @@ max_temp:
 <div class="highlight"><pre><span></span><code>[z_tilt]
 #z_positions:
 #   A list of X, Y coordinates (one per line; subsequent lines
-#   indented) describing the location of each bed &quot;pivot point&quot;. The
-#   &quot;pivot point&quot; is the point where the bed attaches to the given Z
+#   indented) describing the location of each bed "pivot point". The
+#   "pivot point" is the point where the bed attaches to the given Z
 #   stepper. It is described using nozzle coordinates (the X, Y position
 #   of the nozzle if it could move directly above the point). The
 #   first entry corresponds to stepper_z, the second to stepper_z1,
@@ -5155,7 +5183,7 @@ max_temp:
 #   The height (in mm) that the head should be commanded to move to
 #   just prior to starting a probe operation. The default is 5.
 #retries: 0
-#   Number of times to retry if the probed points aren&#39;t within
+#   Number of times to retry if the probed points aren't within
 #   tolerance.
 #retry_tolerance: 0
 #   If retries are enabled then retry if largest and smallest probed
@@ -5200,7 +5228,7 @@ max_temp:
 #   Safety limit if an adjustment greater than this value is requested
 #   quad_gantry_level will abort.
 #retries: 0
-#   Number of times to retry if the probed points aren&#39;t within
+#   Number of times to retry if the probed points aren't within
 #   tolerance.
 #retry_tolerance: 0
 #   If retries are enabled then retry if largest and smallest probed
@@ -5237,10 +5265,10 @@ max_temp:
 #min_temp:
 #max_temp:
 #   Temperature sensor configuration.
-#   See the &quot;extruder&quot; section for the definition of the above
+#   See the "extruder" section for the definition of the above
 #   parameters.
 #gcode_id:
-#   See the &quot;heater_generic&quot; section for the definition of this
+#   See the "heater_generic" section for the definition of this
 #   parameter.
 </code></pre></div>
 
@@ -5256,7 +5284,7 @@ home_xy_position:
 #   coordinate. The default is 50 mm/s
 #z_hop:
 #   Distance (in mm) to lift the Z axis prior to homing. This is
-#   applied to any homing command, even if it doesn&#39;t home the Z axis.
+#   applied to any homing command, even if it doesn't home the Z axis.
 #   If the Z axis is already homed and the current Z position is less
 #   than z_hop, then this will lift the head to a height of z_hop. If
 #   the Z axis is not already homed the head is lifted by z_hop.
@@ -5280,10 +5308,10 @@ gcode:
 #   The commands listed here must home all axes. This parameter must
 #   be provided.
 #axes: xyz
-#   The axes to override. For example, if this is set to &quot;z&quot; then the
+#   The axes to override. For example, if this is set to "z" then the
 #   override script will only be run when the z axis is homed (eg, via
-#   a &quot;G28&quot; or &quot;G28 Z0&quot; command). Note, the override script should
-#   still home all axes. The default is &quot;xyz&quot; which causes the
+#   a "G28" or "G28 Z0" command). Note, the override script should
+#   still home all axes. The default is "xyz" which causes the
 #   override script to be run in place of all G28 commands.
 #set_position_x:
 #set_position_y:
@@ -5309,7 +5337,7 @@ gcode:
 #   This specifies the phase of the stepper motor driver to expect
 #   when hitting the endstop. It is composed of two numbers separated
 #   by a forward slash character - the phase and the total number of
-#   phases (eg, &quot;7/64&quot;). Only set this value if one is sure the
+#   phases (eg, "7/64"). Only set this value if one is sure the
 #   stepper motor driver is reset every time the mcu is reset. If this
 #   is not set, then the stepper phase will be detected on the first
 #   home and that phase will be used on all subsequent homes.
@@ -5326,15 +5354,15 @@ gcode:
 <p>G-Code-Makros (man kann beliebig viele Abschnitte mit dem Präfix "gcode_macro" definieren). Weitere Informationen finden Sie in der <a href="Command_Templates.html">Anleitung zu Befehlsvorlagen</a>.</p>
 <div class="highlight"><pre><span></span><code>[gcode_macro my_cmd]
 #gcode:
-#   A list of G-Code commands to execute in place of &quot;my_cmd&quot;. See
+#   A list of G-Code commands to execute in place of "my_cmd". See
 #   docs/Command_Templates.md for G-Code format. This parameter must
 #   be provided.
 #variable_&lt;name&gt;:
-#   One may specify any number of options with a &quot;variable_&quot; prefix.
+#   One may specify any number of options with a "variable_" prefix.
 #   The given variable name will be assigned the given value (parsed
 #   as a Python literal) and will be available during macro expansion.
-#   For example, a config with &quot;variable_fan_speed = 75&quot; might have
-#   gcode commands containing &quot;M106 S{ fan_speed * 255 }&quot;. Variables
+#   For example, a config with "variable_fan_speed = 75" might have
+#   gcode commands containing "M106 S{ fan_speed * 255 }". Variables
 #   can be changed at run-time using the SET_GCODE_VARIABLE command
 #   (see docs/Command_Templates.md for details). Variable names may
 #   not use upper case characters.
@@ -5347,7 +5375,7 @@ gcode:
 #   override an existing G-Code command.
 #description: G-Code macro
 #   This will add a short description used at the HELP command or while
-#   using the auto completion feature. Default &quot;G-Code macro&quot;
+#   using the auto completion feature. Default "G-Code macro"
 </code></pre></div>
 
 <h3 id="delayed_gcode">[delayed_gcode]<a class="headerlink" href="#delayed_gcode" title="Permanent link">&para;</a></h3>
@@ -5360,7 +5388,7 @@ gcode:
 #initial_duration: 0.0
 #   The duration of the initial delay (in seconds). If set to a
 #   non-zero value the delayed_gcode will execute the specified number
-#   of seconds after the printer enters the &quot;ready&quot; state. This can be
+#   of seconds after the printer enters the "ready" state. This can be
 #   useful for initialization procedures or a repeating delayed_gcode.
 #   If set to 0 the delayed_gcode will not execute on startup.
 #   Default is 0.
@@ -5380,7 +5408,7 @@ filename:
 #gcode:
 #   A list of G-Code commands to execute on an idle timeout. See
 #   docs/Command_Templates.md for G-Code format. The default is to run
-#   &quot;TURN_OFF_HEATERS&quot; and &quot;M84&quot;.
+#   "TURN_OFF_HEATERS" and "M84".
 #timeout: 600
 #   Idle time (in seconds) to wait before running the above G-Code
 #   commands. The default is 600 seconds.
@@ -5393,7 +5421,7 @@ filename:
 path:
 #   The path of the local directory on the host machine to look for
 #   g-code files. This is a read-only directory (sdcard file writes
-#   are not supported). One may point this to OctoPrint&#39;s upload
+#   are not supported). One may point this to OctoPrint's upload
 #   directory (generally ~/.octoprint/uploads/ ). This parameter must
 #   be provided.
 #on_error_gcode:
@@ -5444,7 +5472,7 @@ path:
 <p>Unterstützung für gcode arc (G2/G3) Befehle.</p>
 <div class="highlight"><pre><span></span><code>[gcode_arcs]
 #resolution: 1.0
-#   An arc will be split into segments. Each segment&#39;s length will
+#   An arc will be split into segments. Each segment's length will
 #   equal the resolution in mm set above. Lower values will produce a
 #   finer arc, but also more work for your machine. Arcs smaller than
 #   the configured value will become straight lines. The default is
@@ -5455,19 +5483,19 @@ path:
 <p>Aktiviert die erweiterten <a href="G-Codes.html#respond">Befehle</a> "M118" und "RESPOND".</p>
 <div class="highlight"><pre><span></span><code>[respond]
 #default_type: echo
-#   Sets the default prefix of the &quot;M118&quot; and &quot;RESPOND&quot; output to one
+#   Sets the default prefix of the "M118" and "RESPOND" output to one
 #   of the following:
-#       echo: &quot;echo: &quot; (This is the default)
-#       command: &quot;// &quot;
-#       error: &quot;!! &quot;
+#       echo: "echo: " (This is the default)
+#       command: "// "
+#       error: "!! "
 #default_prefix: echo:
 #   Directly sets the default prefix. If present, this value will
-#   override the &quot;default_type&quot;.
+#   override the "default_type".
 </code></pre></div>
 
 <h3 id="exclude_object">[exclude_object]<a class="headerlink" href="#exclude_object" title="Permanent link">&para;</a></h3>
 <p>Aktiviert die Unterstützung dafür, einzelne Objekte während des Druckvorgangs auszuschließen oder abzubrechen.</p>
-<p>Weitere Informationen finden Sie in der <a href="Exclude_Object.html">Anleitung zum Ausschließen von Objekten</a> und in der <a href="G-Codes.html#excludeobject">Befehlsreferenz</a>. Ein zu Marlin/RepRapFirmware kompatibles M486-G-Code-Makro finden Sie in der Datei <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg">sample-macros.cfg</a>.</p>
+<p>See the <a href="Exclude_Object.html">exclude objects guide</a> and <a href="G-Codes.html#exclude_object">command reference</a> for additional information. See the <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg">sample-macros.cfg</a> file for a Marlin/RepRapFirmware compatible M486 G-Code macro.</p>
 <div class="highlight"><pre><span></span><code>[exclude_object]
 </code></pre></div>
 
@@ -5527,10 +5555,10 @@ path:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed: 400000
-#   See the &quot;common I2C settings&quot; section for a description of the
-#   above parameters. The default &quot;i2c_speed&quot; is 400000.
+#   See the "common I2C settings" section for a description of the
+#   above parameters. The default "i2c_speed" is 400000.
 #axes_map: x, y, z
-#   See the &quot;adxl345&quot; section for information on this parameter.
+#   See the "adxl345" section for information on this parameter.
 </code></pre></div>
 
 <h3 id="lis2dw">[lis2dw]<a class="headerlink" href="#lis2dw" title="Permanent link">&para;</a></h3>
@@ -5546,7 +5574,7 @@ path:
 #spi_software_sclk_pin:
 #spi_software_mosi_pin:
 #spi_software_miso_pin:
-#   See the &quot;common SPI settings&quot; section for a description of the
+#   See the "common SPI settings" section for a description of the
 #   above parameters.
 #i2c_address:
 #   Default is 25 (0x19). If SA0 is high, it would be 24 (0x18) instead.
@@ -5555,10 +5583,10 @@ path:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed: 400000
-#   See the &quot;common I2C settings&quot; section for a description of the
-#   above parameters. The default &quot;i2c_speed&quot; is 400000.
+#   See the "common I2C settings" section for a description of the
+#   above parameters. The default "i2c_speed" is 400000.
 #axes_map: x, y, z
-#   See the &quot;adxl345&quot; section for information on this parameter.
+#   See the "adxl345" section for information on this parameter.
 </code></pre></div>
 
 <h3 id="lis3dh">[lis3dh]<a class="headerlink" href="#lis3dh" title="Permanent link">&para;</a></h3>
@@ -5574,7 +5602,7 @@ path:
 #spi_software_sclk_pin:
 #spi_software_mosi_pin:
 #spi_software_miso_pin:
-#   See the &quot;common SPI settings&quot; section for a description of the
+#   See the "common SPI settings" section for a description of the
 #   above parameters.
 #i2c_address:
 #   Default is 25 (0x19). If SA0 is high, it would be 24 (0x18) instead.
@@ -5583,10 +5611,10 @@ path:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed: 400000
-#   See the &quot;common I2C settings&quot; section for a description of the
-#   above parameters. The default &quot;i2c_speed&quot; is 400000.
+#   See the "common I2C settings" section for a description of the
+#   above parameters. The default "i2c_speed" is 400000.
 #axes_map: x, y, z
-#   See the &quot;adxl345&quot; section for information on this parameter.
+#   See the "adxl345" section for information on this parameter.
 </code></pre></div>
 
 <h3 id="bmi160">[bmi160]<a class="headerlink" href="#bmi160" title="Permanent link">&para;</a></h3>
@@ -5598,7 +5626,7 @@ path:
 #i2c_mcu:
 #i2c_bus:
 #i2c_speed:
-#   See the &quot;common I2C settings&quot; section for a description of the
+#   See the "common I2C settings" section for a description of the
 #   above parameters. Only used for I2C.
 #cs_pin:
 #spi_speed:
@@ -5606,10 +5634,10 @@ path:
 #spi_software_sclk_pin:
 #spi_software_mosi_pin:
 #spi_software_miso_pin:
-#   See the &quot;common SPI settings&quot; section for a description of the
+#   See the "common SPI settings" section for a description of the
 #   above parameters. Only used for SPI.
 #axes_map: x, y, z
-#   See the &quot;adxl345&quot; section for information on this parameter.
+#   See the "adxl345" section for information on this parameter.
 </code></pre></div>
 
 <p><strong>Wichtig:</strong> Viele BMI160-Module verwenden mehrdeutige Pin-Beschriftungen. Für SPI gilt:</p>
@@ -5630,10 +5658,10 @@ path:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed: 400000
-#   See the &quot;common I2C settings&quot; section for a description of the
-#   above parameters. The default &quot;i2c_speed&quot; is 400000.
+#   See the "common I2C settings" section for a description of the
+#   above parameters. The default "i2c_speed" is 400000.
 #axes_map: x, y, z
-#   See the &quot;adxl345&quot; section for information on this parameter.
+#   See the "adxl345" section for information on this parameter.
 </code></pre></div>
 
 <h3 id="resonance_tester">[resonance_tester]<a class="headerlink" href="#resonance_tester" title="Permanent link">&para;</a></h3>
@@ -5647,8 +5675,8 @@ path:
 #accel_chip:
 #   A name of the accelerometer chip to use for measurements. If
 #   an accelerometer was defined without an explicit name, this parameter
-#   can simply reference it by type, e.g. &quot;accel_chip: adxl345&quot;, otherwise
-#   a full name must be supplied, e.g. &quot;accel_chip: adxl345 my_chip_name&quot;.
+#   can simply reference it by type, e.g. "accel_chip: adxl345", otherwise
+#   a full name must be supplied, e.g. "accel_chip: adxl345 my_chip_name".
 #   Either this, or the next two parameters must be set.
 #accel_chip_x:
 #accel_chip_y:
@@ -5656,15 +5684,15 @@ path:
 #   of the axis. Can be useful, for instance, on bed slinger printer,
 #   if two separate accelerometers are mounted on the bed (for Y axis)
 #   and on the toolhead (for X axis). These parameters have the same
-#   format as &#39;accel_chip&#39; parameter. Only &#39;accel_chip&#39; or these two
+#   format as 'accel_chip' parameter. Only 'accel_chip' or these two
 #   parameters must be provided.
 #accel_chip_z:
 #   A name of the accelerometer chip to use for measurements of Z axis.
-#   This parameter has the same format as &#39;accel_chip&#39;. The default is
+#   This parameter has the same format as 'accel_chip'. The default is
 #   not to configure an accelerometer for Z axis.
 #max_smoothing:
 #   Maximum input shaper smoothing to allow for each axis during shaper
-#   auto-calibration (with &#39;SHAPER_CALIBRATE&#39; command). By default no
+#   auto-calibration (with 'SHAPER_CALIBRATE' command). By default no
 #   maximum smoothing is specified. Refer to Measuring_Resonances guide
 #   for more details on using this feature.
 #move_speed: 50
@@ -5709,15 +5737,15 @@ path:
 <div class="highlight"><pre><span></span><code>[board_pins my_aliases]
 mcu: mcu
 #   A comma separated list of micro-controllers that may use the
-#   aliases. The default is to apply the aliases to the main &quot;mcu&quot;.
+#   aliases. The default is to apply the aliases to the main "mcu".
 aliases:
 aliases_&lt;name&gt;:
-#   A comma separated list of &quot;name=value&quot; aliases to create for the
-#   given micro-controller. For example, &quot;EXP1_1=PE6&quot; would create an
-#   &quot;EXP1_1&quot; alias for the &quot;PE6&quot; pin. However, if &quot;value&quot; is enclosed
-#   in &quot;&lt;&gt;&quot; then &quot;name&quot; is created as a reserved pin (for example,
-#   &quot;EXP1_9=&lt;GND&gt;&quot; would reserve &quot;EXP1_9&quot;). Any number of options
-#   starting with &quot;aliases_&quot; may be specified.
+#   A comma separated list of "name=value" aliases to create for the
+#   given micro-controller. For example, "EXP1_1=PE6" would create an
+#   "EXP1_1" alias for the "PE6" pin. However, if "value" is enclosed
+#   in "&lt;&gt;" then "name" is created as a reserved pin (for example,
+#   "EXP1_9=&lt;GND&gt;" would reserve "EXP1_9"). Any number of options
+#   starting with "aliases_" may be specified.
 </code></pre></div>
 
 <h3 id="include">[include]<a class="headerlink" href="#include" title="Permanent link">&para;</a></h3>
@@ -5740,7 +5768,7 @@ pins:
 <div class="highlight"><pre><span></span><code>[probe]
 pin:
 #   Probe detection pin. If the pin is on a different microcontroller
-#   than the Z steppers then it enables &quot;multi-mcu homing&quot;. This
+#   than the Z steppers then it enables "multi-mcu homing". This
 #   parameter must be provided.
 #deactivate_on_each_sample: True
 #   This determines if Klipper should execute deactivation gcode
@@ -5757,33 +5785,33 @@ z_offset:
 #   triggers. This parameter must be provided.
 #speed: 5.0
 #   Speed (in mm/s) of the Z axis when probing. It may be possible to
-#   change this value at runtime via a &quot;PROBE_SPEED&quot; command
+#   change this value at runtime via a "PROBE_SPEED" command
 #   parameter. The default is 5mm/s.
 #samples: 1
 #   The number of times to probe each point. The probed z-values will
 #   be averaged. It may be possible to change this value at runtime
-#   via a &quot;SAMPLES&quot; command parameter. The default is to probe 1 time.
+#   via a "SAMPLES" command parameter. The default is to probe 1 time.
 #sample_retract_dist: 2.0
 #   The distance (in mm) to lift the toolhead between each sample (if
 #   sampling more than once). It may be possible to change this value
-#   at runtime via a &quot;SAMPLE_RETRACT_DIST&quot; command parameter. The
+#   at runtime via a "SAMPLE_RETRACT_DIST" command parameter. The
 #   default is 2mm.
 #lift_speed:
 #   Speed (in mm/s) of the Z axis when lifting the probe between
 #   samples. It may be possible to change this value at runtime via a
-#   &quot;LIFT_SPEED&quot; command parameter. The default is to use the same
-#   value as the &#39;speed&#39; parameter.
+#   "LIFT_SPEED" command parameter. The default is to use the same
+#   value as the 'speed' parameter.
 #samples_result: average
 #   The calculation method when sampling more than once - either
-#   &quot;median&quot; or &quot;average&quot;. It may be possible to change this value at
-#   runtime via a &quot;SAMPLES_RESULT&quot; command parameter. The default is
+#   "median" or "average". It may be possible to change this value at
+#   runtime via a "SAMPLES_RESULT" command parameter. The default is
 #   average.
 #samples_tolerance: 0.100
 #   The maximum Z distance (in mm) that a sample may differ from other
 #   samples. If this tolerance is exceeded then either an error is
 #   reported or the attempt is restarted (see
 #   samples_tolerance_retries). It may be possible to change this
-#   value at runtime via a &quot;SAMPLES_TOLERANCE&quot; command parameter. The
+#   value at runtime via a "SAMPLES_TOLERANCE" command parameter. The
 #   default is 0.100mm.
 #samples_tolerance_retries: 0
 #   The number of times to retry if a sample is found that exceeds
@@ -5791,7 +5819,7 @@ z_offset:
 #   and the probe attempt is restarted. If a valid set of samples are
 #   not obtained in the given number of retries then an error is
 #   reported. It may be possible to change this value at runtime via a
-#   &quot;SAMPLES_TOLERANCE_RETRIES&quot; command parameter. The default is zero
+#   "SAMPLES_TOLERANCE_RETRIES" command parameter. The default is zero
 #   which causes an error to be reported on the first sample that
 #   exceeds samples_tolerance.
 #activate_gcode:
@@ -5812,7 +5840,7 @@ z_offset:
 <div class="highlight"><pre><span></span><code>[bltouch]
 sensor_pin:
 #   Pin connected to the BLTouch sensor pin. Most BLTouch devices
-#   require a pullup on the sensor pin (prefix the pin name with &quot;^&quot;).
+#   require a pullup on the sensor pin (prefix the pin name with "^").
 #   This parameter must be provided.
 control_pin:
 #   Pin connected to the BLTouch control pin. This parameter must be
@@ -5827,23 +5855,23 @@ control_pin:
 #   this to False. The default is True.
 #probe_with_touch_mode: False
 #   If this is set to True then Klipper will probe with the device in
-#   &quot;touch_mode&quot;. The default is False (probing in &quot;pin_down&quot; mode).
+#   "touch_mode". The default is False (probing in "pin_down" mode).
 #pin_up_reports_not_triggered: True
-#   Set if the BLTouch consistently reports the probe in a &quot;not
-#   triggered&quot; state after a successful &quot;pin_up&quot; command. This should
+#   Set if the BLTouch consistently reports the probe in a "not
+#   triggered" state after a successful "pin_up" command. This should
 #   be True for all genuine BLTouch devices. Read the directions in
 #   docs/BLTouch.md before setting this to False. The default is True.
 #pin_up_touch_mode_reports_triggered: True
-#   Set if the BLTouch consistently reports a &quot;triggered&quot; state after
-#   the commands &quot;pin_up&quot; followed by &quot;touch_mode&quot;. This should be
+#   Set if the BLTouch consistently reports a "triggered" state after
+#   the commands "pin_up" followed by "touch_mode". This should be
 #   True for all genuine BLTouch devices. Read the directions in
 #   docs/BLTouch.md before setting this to False. The default is True.
 #set_output_mode:
 #   Request a specific sensor pin output mode on the BLTouch V3.0 (and
 #   later). This setting should not be used on other types of probes.
-#   Set to &quot;5V&quot; to request a sensor pin output of 5 Volts (only use if
+#   Set to "5V" to request a sensor pin output of 5 Volts (only use if
 #   the controller board needs 5V mode and is 5V tolerant on its input
-#   signal line). Set to &quot;OD&quot; to request the sensor pin output use
+#   signal line). Set to "OD" to request the sensor pin output use
 #   open drain mode. The default is to not request an output mode.
 #x_offset:
 #y_offset:
@@ -5855,7 +5883,7 @@ control_pin:
 #samples_result:
 #samples_tolerance:
 #samples_tolerance_retries:
-#   See the &quot;probe&quot; section for information on these parameters.
+#   See the "probe" section for information on these parameters.
 </code></pre></div>
 
 <h3 id="smart_effector">[smart_effector]<a class="headerlink" href="#smart_effector" title="Permanent link">&para;</a></h3>
@@ -5881,7 +5909,7 @@ pin:
 #recovery_time: 0.4
 #   A delay between the travel moves and the probing moves in seconds. A fast
 #   travel move prior to probing may result in a spurious probe triggering.
-#   This may cause &#39;Probe triggered prior to movement&#39; errors if no delay
+#   This may cause 'Probe triggered prior to movement' errors if no delay
 #   is set. Value 0 disables the recovery delay.
 #   Default value is 0.4.
 #x_offset:
@@ -5902,7 +5930,7 @@ z_offset:
 #activate_gcode:
 #deactivate_gcode:
 #deactivate_on_each_sample:
-#   See the &quot;probe&quot; section for more information on the parameters above.
+#   See the "probe" section for more information on the parameters above.
 </code></pre></div>
 
 <h3 id="probe_eddy_current">[probe_eddy_current]<a class="headerlink" href="#probe_eddy_current" title="Permanent link">&para;</a></h3>
@@ -5915,7 +5943,7 @@ sensor_type: ldc1612
 #   The external crystal frequency (in Hz) of the LDC1612 chip.
 #   The default is 12000000.
 #intb_pin:
-#   MCU gpio pin connected to the ldc1612 sensor&#39;s INTB pin (if
+#   MCU gpio pin connected to the ldc1612 sensor's INTB pin (if
 #   available). The default is to not use the INTB pin.
 #max_sensor_hz:
 #   Maximum expected resonant frequency reported by the sensor (in
@@ -5932,8 +5960,8 @@ sensor_type: ldc1612
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed:
-#   The i2c settings for the sensor chip. See the &quot;common I2C
-#   settings&quot; section for a description of the above parameters.
+#   The i2c settings for the sensor chip. See the "common I2C
+#   settings" section for a description of the above parameters.
 #x_offset:
 #y_offset:
 #   The distance (in mm) between the probe and the nozzle along the
@@ -5945,21 +5973,21 @@ sensor_type: ldc1612
 #samples_result:
 #samples_tolerance:
 #samples_tolerance_retries:
-#   See the &quot;probe&quot; section for information on these parameters. Note
+#   See the "probe" section for information on these parameters. Note
 #   that the settings here apply only to regular probe commands. These
-#   settings do not have an effect if using a probe &quot;METHOD&quot; of
-#   &quot;scan&quot;, &quot;rapid_scan&quot;, or &quot;tap&quot;.
+#   settings do not have an effect if using a probe "METHOD" of
+#   "scan", "rapid_scan", or "tap".
 #tap_threshold:
-#   Descent stop threshold (in Hz/mm) for &quot;tap&quot; probing. Larger values
+#   Descent stop threshold (in Hz/mm) for "tap" probing. Larger values
 #   reduce the chance of the toolhead incorrectly stopping early due
 #   to noise, while increasing the risk of the toolhead not correctly
 #   stopping when it first contacts the bed. See Eddy_Probe.md for
 #   more information. This value may be overridden at run-time using
-#   the &quot;TAP_THRESHOLD&quot; parameter on probe commands.  The default is
-#   to not enable &quot;tap&quot; probing.
+#   the "TAP_THRESHOLD" parameter on probe commands.  The default is
+#   to not enable "tap" probing.
 #tap_z_offset: 0.0
 #   The Z height (in mm) of the nozzle relative to the bed at the
-#   contact point detected during &quot;tap&quot; probing. Nominally this would
+#   contact point detected during "tap" probing. Nominally this would
 #   be 0.0 to indicate the contact point has zero distance, but one
 #   may set this to account for backlash, thermal expansion, a
 #   systemic probing bias, or similar. The default is zero.
@@ -6015,7 +6043,7 @@ calibrate_x: ...
 #enable_pin:
 #microsteps:
 #rotation_distance:
-#   See the &quot;stepper&quot; section for the definition of the above parameters.
+#   See the "stepper" section for the definition of the above parameters.
 #endstop_pin:
 #   If an endstop_pin is defined for the additional stepper then the
 #   stepper will home until the endstop is triggered. Otherwise, the
@@ -6030,7 +6058,7 @@ calibrate_x: ...
 #step_pin:
 #dir_pin:
 #...
-#   See the &quot;extruder&quot; section for available stepper and heater
+#   See the "extruder" section for available stepper and heater
 #   parameters.
 #shared_heater:
 #   This option is deprecated and should no longer be specified.
@@ -6062,7 +6090,7 @@ axis:
 #position_endstop:
 #position_min:
 #position_max:
-#   See the &quot;stepper&quot; section for the definition of the above parameters.
+#   See the "stepper" section for the definition of the above parameters.
 </code></pre></div>
 
 <p>Ein Beispiel für eine Dual-Carriage-Konfiguration mit <code>generic_cartesian</code>-Kinematik finden Sie in der folgenden <a href="https://github.com/Klipper3d/klipper/blob/master/config/example-generic-caretesian.cfg">Beispielkonfiguration</a>. Beachten Sie, dass die <code>[dual_carriage]</code>-Konfiguration in diesem Fall von der oben beschriebenen Konfiguration abweicht:</p>
@@ -6074,8 +6102,8 @@ axis:
 #   defines a dual carriage independent of a `[carriage]` with the same axis
 #   as this one (e.g. on a different gantry).
 #axis:
-#   Axis of a carriage, either x or y. If &#39;primary_carriage&#39; is defined, then
-#   this parameter defaults to the &#39;axis&#39; parameter of that primary carriage,
+#   Axis of a carriage, either x or y. If 'primary_carriage' is defined, then
+#   this parameter defaults to the 'axis' parameter of that primary carriage,
 #   otherwise this parameter must be defined.
 #safe_distance:
 #   The minimum distance (in mm) to enforce between the dual and the primary
@@ -6086,7 +6114,7 @@ axis:
 #   to 0 (or safe_distance is unset and position_min and position_max are
 #   identical for the primary and dual carriages), the carriages proximity
 #   checks will be disabled. Only valid for a dual_carriage with a defined
-#   &#39;primary_carriage&#39;.
+#   'primary_carriage'.
 endstop_pin:
 #position_min:
 position_endstop:
@@ -6099,7 +6127,7 @@ position_max:
 ...
 </code></pre></div>
 
-<p>Weitere Informationen zu den regulären <code>carriage</code>-Parametern finden Sie im Abschnitt <a href="#generic-cartesian">generic cartesian</a>.</p>
+<p>Refer to <a href="#generic-cartesian-kinematics">generic cartesian</a> section for more information on the regular <code>carriage</code> parameters.</p>
 <p>Anschließend muss der Benutzer einen oder mehrere Schrittmotoren definieren, die den Dual Carriage (und gegebenenfalls weitere Schlitten) bewegen, zum Beispiel</p>
 <div class="highlight"><pre><span></span><code>[carriage carriage_x]
 ...
@@ -6144,7 +6172,7 @@ extruder:
 #enable_pin:
 #microsteps:
 #rotation_distance:
-#   See the &quot;stepper&quot; section for the definition of the above
+#   See the "stepper" section for the definition of the above
 #   parameters.
 </code></pre></div>
 
@@ -6156,7 +6184,7 @@ extruder:
 #enable_pin:
 #microsteps:
 #rotation_distance:
-#   See the &quot;stepper&quot; section for a description of these parameters.
+#   See the "stepper" section for a description of these parameters.
 #velocity:
 #   Set the default velocity (in mm/s) for the stepper. This value
 #   will be used if a MANUAL_STEPPER command does not specify a SPEED
@@ -6168,7 +6196,7 @@ extruder:
 #   parameter. The default is zero.
 #endstop_pin:
 #   Endstop switch detection pin. If specified, then one may perform
-#   &quot;homing moves&quot; by adding a STOP_ON_ENDSTOP parameter to
+#   "homing moves" by adding a STOP_ON_ENDSTOP parameter to
 #   MANUAL_STEPPER movement commands.
 #position_min:
 #position_max:
@@ -6184,15 +6212,15 @@ extruder:
 <p>Überprüfung von Heizungen und Temperatursensoren. Die Heizungsüberprüfung ist für jede am Drucker konfigurierte Heizung automatisch aktiviert. Verwenden Sie verify_heater-Abschnitte, um die Standardeinstellungen zu ändern.</p>
 <div class="highlight"><pre><span></span><code>[verify_heater heater_config_name]
 #max_error: 120
-#   The maximum &quot;cumulative temperature error&quot; before raising an
+#   The maximum "cumulative temperature error" before raising an
 #   error. Smaller values result in stricter checking and larger
 #   values allow for more time before an error is reported.
 #   Specifically, the temperature is inspected once a second and if it
-#   is close to the target temperature then an internal &quot;error
-#   counter&quot; is reset; otherwise, if the temperature is below the
+#   is close to the target temperature then an internal "error
+#   counter" is reset; otherwise, if the temperature is below the
 #   target range then the counter is increased by the amount the
 #   reported temperature differs from that range. Should the counter
-#   exceed this &quot;max_error&quot; then an error is raised. The default is
+#   exceed this "max_error" then an error is raised. The default is
 #   120.
 #check_gain_time:
 #   This controls heater verification during initial heating. Smaller
@@ -6200,7 +6228,7 @@ extruder:
 #   more time before an error is reported. Specifically, during
 #   initial heating, as long as the heater increases in temperature
 #   within this time frame (specified in seconds) then the internal
-#   &quot;error counter&quot; is reset. The default is 20 seconds for extruders
+#   "error counter" is reset. The default is 20 seconds for extruders
 #   and 60 seconds for heater_bed.
 #hysteresis: 5
 #   The maximum temperature difference (in Celsius) to a target
@@ -6244,7 +6272,7 @@ extruder:
 #beta:
 #   Alternatively, one may define temperature1, resistance1, and beta
 #   to define the thermistor parameters. This parameter must be
-#   provided when using &quot;beta&quot; to define the thermistor.
+#   provided when using "beta" to define the thermistor.
 </code></pre></div>
 
 <h3 id="adc_temperature">[adc_temperature]<a class="headerlink" href="#adc_temperature" title="Permanent link">&para;</a></h3>
@@ -6258,7 +6286,7 @@ extruder:
 #   Eine Reihe von Temperaturen (in Celsius) und Spannungen (in Volt) zur Verwendung
 #   als Referenz bei der Temperaturumwandlung. Ein Heizabschnitt, der
 #   diesen Sensor verwendet, kann auch die Parameter adc_voltage und voltage_offset
-#   angeben, um die ADC-Spannung zu definieren (siehe Abschnitt &quot;Gemeinsame Temperaturverstärker&quot;
+#   angeben, um die ADC-Spannung zu definieren (siehe Abschnitt "Gemeinsame Temperaturverstärker"
 #   für Details). Mindestens zwei Messungen müssen angegeben werden.
 #temperature1:
 #resistance1:
@@ -6268,7 +6296,7 @@ extruder:
 #   Alternativ kann man eine Reihe von Temperaturen (in Celsius) und Widerständen
 #   (in Ohm) zur Verwendung als Referenz bei der Temperaturumwandlung angeben.
 #   Ein Heizabschnitt, der diesen Sensor verwendet, kann auch einen
-#   Pullup_resistor-Parameter angeben (siehe Abschnitt &quot;Extruder&quot; für Details). Mindestens
+#   Pullup_resistor-Parameter angeben (siehe Abschnitt "Extruder" für Details). Mindestens
 #   zwei Messungen müssen angegeben werden.
 </code></pre></div>
 
@@ -6290,7 +6318,7 @@ extruder:
 #pwm_cycle_time:
 #min_temp:
 #max_temp:
-#   See the &quot;extruder&quot; section for the definition of the above
+#   See the "extruder" section for the definition of the above
 #   parameters.
 </code></pre></div>
 
@@ -6301,10 +6329,10 @@ extruder:
 #sensor_pin:
 #min_temp:
 #max_temp:
-#   See the &quot;extruder&quot; section for the definition of the above
+#   See the "extruder" section for the definition of the above
 #   parameters.
 #gcode_id:
-#   See the &quot;heater_generic&quot; section for the definition of this
+#   See the "heater_generic" section for the definition of this
 #   parameter.
 </code></pre></div>
 
@@ -6316,14 +6344,14 @@ extruder:
 #min_temp:
 #max_temp:
 #   Temperature sensor configuration.
-#   See the &quot;extruder&quot; section for the definition of the above
+#   See the "extruder" section for the definition of the above
 #   parameters.
 #smooth_time:
 #   A time value (in seconds) over which temperature measurements will
 #   be smoothed to reduce the impact of measurement noise. The default
 #   is 2.0 seconds.
 #gcode_id:
-#   See the &quot;heater_generic&quot; section for the definition of this
+#   See the "heater_generic" section for the definition of this
 #   parameter.
 #speed:
 #   The travel speed [mm/s] for xy moves during calibration.  Default
@@ -6356,7 +6384,7 @@ extruder:
 #   not to set the extruder temperature.
 #extruder_heating_z: 50.
 #   The Z location where extruder heating will occur if the
-#   &quot;calibration_extruder_temp&quot; option is set.  Its recommended to heat
+#   "calibration_extruder_temp" option is set.  Its recommended to heat
 #   the extruder some distance from the bed to minimize its impact on
 #   the probe coil temperature.  The default is 50.
 #max_validation_temp: 60.
@@ -6370,10 +6398,10 @@ extruder:
 <h3 id="gebrauchlicher-thermo-widerstand">Gebräuchlicher Thermo-Widerstand<a class="headerlink" href="#gebrauchlicher-thermo-widerstand" title="Permanent link">&para;</a></h3>
 <p>Gemeinsame Thermistoren. Die folgenden Parameter sind in Heizungs Sektionen verfügbar, wenn einer der Sensoren genutzt wird.</p>
 <div class="highlight"><pre><span></span><code>sensor_type:
-#   One of &quot;EPCOS 100K B57560G104F&quot;, &quot;ATC Semitec 104GT-2&quot;,
-#   &quot;ATC Semitec 104NT-4-R025H42G&quot;, &quot;Generic 3950&quot;,
-#   &quot;Honeywell 100K 135-104LAG-J01&quot;, &quot;NTC 100K MGB18-104F39050L32&quot;,
-#   &quot;SliceEngineering 450&quot;, or &quot;TDK NTCG104LH104JT1&quot;
+#   One of "EPCOS 100K B57560G104F", "ATC Semitec 104GT-2",
+#   "ATC Semitec 104NT-4-R025H42G", "Generic 3950",
+#   "Honeywell 100K 135-104LAG-J01", "NTC 100K MGB18-104F39050L32",
+#   "SliceEngineering 450", or "TDK NTCG104LH104JT1"
 sensor_pin:
 #   Analog input pin connected to the thermistor. This parameter must
 #   be provided.
@@ -6389,8 +6417,8 @@ sensor_pin:
 <h3 id="gebrauchliche-temperatur-verstarker">Gebräuchliche Temperatur Verstärker<a class="headerlink" href="#gebrauchliche-temperatur-verstarker" title="Permanent link">&para;</a></h3>
 <p>Gebräuchliche Temperatur Verstärker. Die folgenden Parameter sind in der Heizer Sektion  verfügbar, die einen der Sensoren benutzt.</p>
 <div class="highlight"><pre><span></span><code>sensor_type:
-#   One of &quot;PT100 INA826&quot;, &quot;AD595&quot;, &quot;AD597&quot;, &quot;AD8494&quot;, &quot;AD8495&quot;,
-#   &quot;AD8496&quot;, or &quot;AD8497&quot;.
+#   One of "PT100 INA826", "AD595", "AD597", "AD8494", "AD8495",
+#   "AD8496", or "AD8497".
 sensor_pin:
 #   Analog input pin connected to the sensor. This parameter must be
 #   provided.
@@ -6414,7 +6442,7 @@ sensor_pin:
 <h3 id="maxxxxxx-temperatur-sensoren">MAXxxxxx Temperatur Sensoren<a class="headerlink" href="#maxxxxxx-temperatur-sensoren" title="Permanent link">&para;</a></h3>
 <p>Temperatursensoren der MAXxxxxx-Reihe mit Serial Peripheral Interface (SPI). In Heizungsabschnitten, die einen dieser Sensortypen verwenden, stehen die folgenden Parameter zur Verfügung.</p>
 <div class="highlight"><pre><span></span><code>sensor_type:
-#   One of &quot;MAX6675&quot;, &quot;MAX31855&quot;, &quot;MAX31856&quot;, or &quot;MAX31865&quot;.
+#   One of "MAX6675", "MAX31855", "MAX31856", or "MAX31865".
 sensor_pin:
 #   The chip select line for the sensor chip. This parameter must be
 #   provided.
@@ -6425,7 +6453,7 @@ sensor_pin:
 #spi_software_sclk_pin:
 #spi_software_mosi_pin:
 #spi_software_miso_pin:
-#   See the &quot;common SPI settings&quot; section for a description of the
+#   See the "common SPI settings" section for a description of the
 #   above parameters.
 #tc_type: K
 #tc_use_50Hz_filter: False
@@ -6453,22 +6481,22 @@ sensor_pin:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed:
-#   See the &quot;common I2C settings&quot; section for a description of the
+#   See the "common I2C settings" section for a description of the
 #   above parameters.
 </code></pre></div>
 
 <h3 id="aht10aht20aht21-temperatursensor">AHT10/AHT20/AHT21 Temperatursensor<a class="headerlink" href="#aht10aht20aht21-temperatursensor" title="Permanent link">&para;</a></h3>
 <p>Umgebungssensoren AHT10/AHT15/AHT20/AHT21/AHT30 mit Two Wire Interface (I2C). Beachten Sie, dass diese Sensoren nicht für den Einsatz an Extrudern und Heizbetten vorgesehen sind, sondern für die Überwachung von Umgebungstemperatur (C) und relativer Luftfeuchtigkeit. Siehe <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg">sample-macros.cfg</a> für ein gcode_macro, mit dem zusätzlich zur Temperatur auch die Luftfeuchtigkeit ausgegeben werden kann.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: AHT1X
-#   Must be &quot;AHT1X&quot; , &quot;AHT2X&quot;, &quot;AHT3X&quot;
-#   Some AHT20 sensors can use &quot;AHT1X&quot;
+#   Must be "AHT1X" , "AHT2X", "AHT3X"
+#   Some AHT20 sensors can use "AHT1X"
 #i2c_address:
 #   Default is 56 (0x38). Some AHT10 sensors give the option to use
 #   57 (0x39) by moving a resistor.
 #i2c_mcu:
 #i2c_bus:
 #i2c_speed:
-#   See the &quot;common I2C settings&quot; section for a description of the
+#   See the "common I2C settings" section for a description of the
 #   above parameters.
 #aht10_report_time:
 #   Interval in seconds between readings. Default is 30, minimum is 5
@@ -6477,7 +6505,7 @@ sensor_pin:
 <h3 id="htu21d-sensor">HTU21D sensor<a class="headerlink" href="#htu21d-sensor" title="Permanent link">&para;</a></h3>
 <p>Umgebungssensor der HTU21D-Familie mit Two Wire Interface (I2C). Beachten Sie, dass dieser Sensor nicht für den Einsatz an Extrudern und Heizbetten vorgesehen ist, sondern für die Überwachung von Umgebungstemperatur (C) und relativer Luftfeuchtigkeit. Siehe <a href="https://github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg">sample-macros.cfg</a> für ein gcode_macro, mit dem zusätzlich zur Temperatur auch die Luftfeuchtigkeit ausgegeben werden kann.</p>
 <div class="highlight"><pre><span></span><code>sensor_type:
-#   Must be &quot;HTU21D&quot; , &quot;SI7013&quot;, &quot;SI7020&quot;, &quot;SI7021&quot; or &quot;SHT21&quot;
+#   Must be "HTU21D" , "SI7013", "SI7020", "SI7021" or "SHT21"
 #i2c_address:
 #   Default is 64 (0x40).
 #i2c_mcu:
@@ -6485,7 +6513,7 @@ sensor_pin:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed:
-#   See the &quot;common I2C settings&quot; section for a description of the
+#   See the "common I2C settings" section for a description of the
 #   above parameters.
 #htu21d_hold_master:
 #   If the sensor can hold the I2C buf while reading. If True no other
@@ -6494,11 +6522,11 @@ sensor_pin:
 #htu21d_resolution:
 #   The resolution of temperature and humidity reading.
 #   Valid values are:
-#    &#39;TEMP14_HUM12&#39; -&gt; 14bit for Temp and 12bit for humidity
-#    &#39;TEMP13_HUM10&#39; -&gt; 13bit for Temp and 10bit for humidity
-#    &#39;TEMP12_HUM08&#39; -&gt; 12bit for Temp and 08bit for humidity
-#    &#39;TEMP11_HUM11&#39; -&gt; 11bit for Temp and 11bit for humidity
-#   Default is: &quot;TEMP11_HUM11&quot;
+#    'TEMP14_HUM12' -&gt; 14bit for Temp and 12bit for humidity
+#    'TEMP13_HUM10' -&gt; 13bit for Temp and 10bit for humidity
+#    'TEMP12_HUM08' -&gt; 12bit for Temp and 08bit for humidity
+#    'TEMP11_HUM11' -&gt; 11bit for Temp and 11bit for humidity
+#   Default is: "TEMP11_HUM11"
 #htu21d_report_time:
 #   Interval in seconds between readings. Default is 30
 </code></pre></div>
@@ -6513,7 +6541,7 @@ sensor_pin:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed:
-#   See the &quot;common I2C settings&quot; section for a description of the
+#   See the "common I2C settings" section for a description of the
 #   above parameters.
 </code></pre></div>
 
@@ -6529,7 +6557,7 @@ sensor_pin:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed:
-#   See the &quot;common I2C settings&quot; section for a description of the
+#   See the "common I2C settings" section for a description of the
 #   above parameters.
 #lm75_report_time:
 #   Interval in seconds between readings. Default is 0.8, with minimum
@@ -6540,7 +6568,7 @@ sensor_pin:
 <p>Die Mikrocontroller atsam, atsamd, stm32 und rp2040 enthalten einen internen Temperatursensor. Mit dem Sensor "temperature_mcu" lassen sich diese Temperaturen überwachen.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: temperature_mcu
 #sensor_mcu: mcu
-#   The micro-controller to read from. The default is &quot;mcu&quot;.
+#   The micro-controller to read from. The default is "mcu".
 #sensor_temperature1:
 #sensor_adc1:
 #   Specify the above two parameters (a temperature in Celsius and an
@@ -6559,7 +6587,7 @@ sensor_pin:
 #sensor_adc2:
 #   If sensor_temperature1/sensor_adc1 is specified then one may also
 #   specify sensor_temperature2/sensor_adc2 calibration data. Doing so
-#   may provide calibrated &quot;temperature slope&quot; information. The
+#   may provide calibrated "temperature slope" information. The
 #   default is to use the factory calibration data on the
 #   micro-controller (if applicable) or the nominal values from the
 #   micro-controller specification.
@@ -6570,7 +6598,7 @@ sensor_pin:
 <div class="highlight"><pre><span></span><code>sensor_type: temperature_host
 #sensor_path:
 #   The path to temperature system file. The default is
-#   &quot;/sys/class/thermal/thermal_zone0/temp&quot; which is the temperature
+#   "/sys/class/thermal/thermal_zone0/temp" which is the temperature
 #   system file on a Raspberry Pi computer.
 </code></pre></div>
 
@@ -6592,12 +6620,12 @@ serial_no:
 <p>Kombinierte Temperatursensoren sind virtuelle Temperatursensoren dieauf Basis von mehreren anderen Sensoren erzeugt werden. Dieser Sensor kann in Verbindung mit Extruder als auch heater_generic und Druckbett genutzt werden.</p>
 <div class="highlight"><pre><span></span><code>sensor_type: temperature_combined
 #sensor_list:
-#   Must be provided. List of sensors to combine to new &quot;virtual&quot;
+#   Must be provided. List of sensors to combine to new "virtual"
 #   sensor.
-#   E.g. &#39;temperature_sensor sensor1,extruder,heater_bed&#39;
+#   E.g. 'temperature_sensor sensor1,extruder,heater_bed'
 #combination_method:
 #   Must be provided. Combination method used for the sensor.
-#   Available options are &#39;max&#39;, &#39;min&#39;, &#39;mean&#39;.
+#   Available options are 'max', 'min', 'mean'.
 #maximum_deviation:
 #   Must be provided. Maximum permissible deviation between the sensors
 #   to combine (e.g. 5 degrees). To disable it, use a large value (e.g. 999.9)
@@ -6686,12 +6714,12 @@ pin:
 #tachometer_ppr:
 #tachometer_poll_interval:
 #enable_pin:
-#   See the &quot;fan&quot; section for a description of the above parameters.
+#   See the "fan" section for a description of the above parameters.
 #heater: extruder
 #   Name of the config section defining the heater that this fan is
 #   associated with. If a comma separated list of heater names is
 #   provided here, then the fan will be enabled when any of the given
-#   heaters are enabled. The default is &quot;extruder&quot;.
+#   heaters are enabled. The default is "extruder".
 #heater_temp: 50.0
 #   A temperature (in Celsius) that the heater must drop below before
 #   the fan is disabled. The default is 50 Celsius.
@@ -6715,7 +6743,7 @@ pin:
 #tachometer_ppr:
 #tachometer_poll_interval:
 #enable_pin:
-#   See the &quot;fan&quot; section for a description of the above parameters.
+#   See the "fan" section for a description of the above parameters.
 #fan_speed: 1.0
 #   The fan speed (expressed as a value from 0.0 to 1.0) that the fan
 #   will be set to when a heater or stepper driver is active.
@@ -6733,7 +6761,7 @@ pin:
 #   Name of the config section defining the heater/stepper that this fan
 #   is associated with. If a comma separated list of heater/stepper names
 #   is provided here, then the fan will be enabled when any of the given
-#   heaters/steppers are enabled. The default heater is &quot;extruder&quot;, the
+#   heaters/steppers are enabled. The default heater is "extruder", the
 #   default stepper is all of them.
 </code></pre></div>
 
@@ -6752,14 +6780,14 @@ pin:
 #tachometer_ppr:
 #tachometer_poll_interval:
 #enable_pin:
-#   See the &quot;fan&quot; section for a description of the above parameters.
+#   See the "fan" section for a description of the above parameters.
 #sensor_type:
 #sensor_pin:
 #control:
 #max_delta:
 #min_temp:
 #max_temp:
-#   See the &quot;extruder&quot; section for a description of the above parameters.
+#   See the "extruder" section for a description of the above parameters.
 #pid_Kp:
 #pid_Ki:
 #pid_Kd:
@@ -6767,8 +6795,8 @@ pin:
 #   (pid_Kd) settings for the PID feedback control system. Klipper
 #   evaluates the PID settings with the following general formula:
 #     fan_pwm = max_power - (Kp*e + Ki*integral(e) - Kd*derivative(e)) / 255
-#   Where &quot;e&quot; is &quot;target_temperature - measured_temperature&quot; and
-#   &quot;fan_pwm&quot; is the requested fan rate with 0.0 being full off and
+#   Where "e" is "target_temperature - measured_temperature" and
+#   "fan_pwm" is the requested fan rate with 0.0 being full off and
 #   1.0 being full on. The pid_Kp, pid_Ki, and pid_Kd parameters must
 #   be provided when the PID control algorithm is enabled.
 #pid_deriv_time: 2.0
@@ -6805,7 +6833,7 @@ pin:
 #tachometer_ppr:
 #tachometer_poll_interval:
 #enable_pin:
-#   See the &quot;fan&quot; section for a description of the above parameters.
+#   See the "fan" section for a description of the above parameters.
 </code></pre></div>
 
 <h2 id="leds">LEDs<a class="headerlink" href="#leds" title="Permanent link">&para;</a></h2>
@@ -6843,7 +6871,7 @@ pin:
 #   The pin connected to the neopixel. This parameter must be
 #   provided.
 #chain_count:
-#   The number of Neopixel chips that are &quot;daisy chained&quot; to the
+#   The number of Neopixel chips that are "daisy chained" to the
 #   provided pin. The default is 1 (which indicates only a single
 #   Neopixel is connected to the pin).
 #color_order: GRB
@@ -6855,7 +6883,7 @@ pin:
 #initial_GREEN: 0.0
 #initial_BLUE: 0.0
 #initial_WHITE: 0.0
-#   See the &quot;led&quot; section for information on these parameters.
+#   See the "led" section for information on these parameters.
 </code></pre></div>
 
 <h3 id="dotstar">[dotstar]<a class="headerlink" href="#dotstar" title="Permanent link">&para;</a></h3>
@@ -6868,11 +6896,11 @@ clock_pin:
 #   The pin connected to the clock line of the dotstar. This parameter
 #   must be provided.
 #chain_count:
-#   See the &quot;neopixel&quot; section for information on this parameter.
+#   See the "neopixel" section for information on this parameter.
 #initial_RED: 0.0
 #initial_GREEN: 0.0
 #initial_BLUE: 0.0
-#   See the &quot;led&quot; section for information on these parameters.
+#   See the "led" section for information on these parameters.
 </code></pre></div>
 
 <h3 id="pca9533">[pca9533]<a class="headerlink" href="#pca9533" title="Permanent link">&para;</a></h3>
@@ -6886,13 +6914,13 @@ clock_pin:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed:
-#   See the &quot;common I2C settings&quot; section for a description of the
+#   See the "common I2C settings" section for a description of the
 #   above parameters.
 #initial_RED: 0.0
 #initial_GREEN: 0.0
 #initial_BLUE: 0.0
 #initial_WHITE: 0.0
-#   See the &quot;led&quot; section for information on these parameters.
+#   See the "led" section for information on these parameters.
 </code></pre></div>
 
 <h3 id="pca9632">[pca9632]<a class="headerlink" href="#pca9632" title="Permanent link">&para;</a></h3>
@@ -6906,7 +6934,7 @@ clock_pin:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed:
-#   See the &quot;common I2C settings&quot; section for a description of the
+#   See the "common I2C settings" section for a description of the
 #   above parameters.
 #color_order: RGBW
 #   Set the pixel order of the LED (using a string containing the
@@ -6915,7 +6943,7 @@ clock_pin:
 #initial_GREEN: 0.0
 #initial_BLUE: 0.0
 #initial_WHITE: 0.0
-#   See the &quot;led&quot; section for information on these parameters.
+#   See the "led" section for information on these parameters.
 </code></pre></div>
 
 <h2 id="zusatzliche-servomotoren-schalter-und-andere-pins">Zusätzliche Servomotoren, Schalter und andere Pins<a class="headerlink" href="#zusatzliche-servomotoren-schalter-und-andere-pins" title="Permanent link">&para;</a></h2>
@@ -6998,14 +7026,14 @@ pin:
 #   implementation and may be significantly different than the
 #   requested cycle_time. The default is False.
 #scale:
-#   This parameter can be used to alter how the &#39;value&#39; and
-#   &#39;shutdown_value&#39; parameters are interpreted for pwm pins. If
-#   provided, then the &#39;value&#39; parameter should be between 0.0 and
-#   &#39;scale&#39;. This may be useful when configuring a PWM pin that
-#   controls a stepper voltage reference. The &#39;scale&#39; can be set to
+#   This parameter can be used to alter how the 'value' and
+#   'shutdown_value' parameters are interpreted for pwm pins. If
+#   provided, then the 'value' parameter should be between 0.0 and
+#   'scale'. This may be useful when configuring a PWM pin that
+#   controls a stepper voltage reference. The 'scale' can be set to
 #   the equivalent stepper amperage if the PWM were fully enabled, and
-#   then the &#39;value&#39; parameter can be specified using the desired
-#   amperage for the stepper. The default is to not scale the &#39;value&#39;
+#   then the 'value' parameter can be specified using the desired
+#   amperage for the stepper. The default is to not scale the 'value'
 #   parameter.
 #maximum_mcu_duration:
 #static_value:
@@ -7038,7 +7066,7 @@ pin:
 #cycle_time: 0.100
 #hardware_pwm: False
 #scale:
-#   See the &quot;output_pin&quot; section for the definition of these parameters.
+#   See the "output_pin" section for the definition of these parameters.
 </code></pre></div>
 
 <h3 id="pwm_cycle_time">[pwm_cycle_time]<a class="headerlink" href="#pwm_cycle_time" title="Permanent link">&para;</a></h3>
@@ -7049,7 +7077,7 @@ pin:
 #shutdown_value:
 #cycle_time: 0.100
 #scale:
-#   See the &quot;output_pin&quot; section for information on these parameters.
+#   See the "output_pin" section for information on these parameters.
 </code></pre></div>
 
 <h3 id="static_digital_output">[static_digital_output]<a class="headerlink" href="#static_digital_output" title="Permanent link">&para;</a></h3>
@@ -7058,7 +7086,7 @@ pin:
 pins:
 #   A comma separated list of pins to be set as GPIO output pins. The
 #   pin will be set to a high level unless the pin name is prefaced
-#   with &quot;!&quot;. This parameter must be provided.
+#   with "!". This parameter must be provided.
 </code></pre></div>
 
 <h3 id="multi_pin">[multi_pin]<a class="headerlink" href="#multi_pin" title="Permanent link">&para;</a></h3>
@@ -7083,7 +7111,7 @@ cs_pin:
 #spi_software_sclk_pin:
 #spi_software_mosi_pin:
 #spi_software_miso_pin:
-#   See the &quot;common SPI settings&quot; section for a description of the
+#   See the "common SPI settings" section for a description of the
 #   above parameters.
 #chain_position:
 #chain_length:
@@ -7108,23 +7136,23 @@ run_current:
 #   The resistance (in ohms) of the motor sense resistor. The default
 #   is 0.110 ohms.
 #stealthchop_threshold: 0
-#   The velocity (in mm/s) to set the &quot;stealthChop&quot; threshold to. When
-#   set, &quot;stealthChop&quot; mode will be enabled if the stepper motor
-#   velocity is below this value. Note that the &quot;sensorless homing&quot;
+#   The velocity (in mm/s) to set the "stealthChop" threshold to. When
+#   set, "stealthChop" mode will be enabled if the stepper motor
+#   velocity is below this value. Note that the "sensorless homing"
 #   code may temporarily override this setting during homing
-#   operations. The default is 0, which disables &quot;stealthChop&quot; mode.
+#   operations. The default is 0, which disables "stealthChop" mode.
 #coolstep_threshold:
-#   The velocity (in mm/s) to set the TMC driver internal &quot;CoolStep&quot;
+#   The velocity (in mm/s) to set the TMC driver internal "CoolStep"
 #   threshold to. If set, the coolstep feature will be enabled when
 #   the stepper motor velocity is near or above this value. Important
-#   - if coolstep_threshold is set and &quot;sensorless homing&quot; is used,
+#   - if coolstep_threshold is set and "sensorless homing" is used,
 #   then one must ensure that the homing speed is above the coolstep
 #   threshold! The default is to not enable the coolstep feature.
 #high_velocity_threshold:
-#   The velocity (in mm/s) to set the TMC driver internal &quot;high
-#   velocity&quot; threshold (THIGH) to. This is typically used to disable
-#   the &quot;CoolStep&quot; feature at high speeds. The default is to not set a
-#   TMC &quot;high velocity&quot; threshold.
+#   The velocity (in mm/s) to set the TMC driver internal "high
+#   velocity" threshold (THIGH) to. This is typically used to disable
+#   the "CoolStep" feature at high speeds. The default is to not set a
+#   TMC "high velocity" threshold.
 #driver_MSLUT0: 2863314260
 #driver_MSLUT1: 1251300522
 #driver_MSLUT2: 608774441
@@ -7148,7 +7176,7 @@ run_current:
 #   non-linear stepper movement. The values specified above are the default
 #   values used by the driver. The value must be specified as a decimal integer
 #   (hex form is not supported). In order to compute the wave table fields,
-#   see the tmc2130 &quot;Calculation Sheet&quot; from the Trinamic website.
+#   see the tmc2130 "Calculation Sheet" from the Trinamic website.
 #driver_IHOLDDELAY: 8
 #driver_TPOWERDOWN: 0
 #driver_TBL: 1
@@ -7177,10 +7205,10 @@ run_current:
 #diag1_pin:
 #   The micro-controller pin attached to one of the DIAG lines of the
 #   TMC2130 chip. Only a single diag pin should be specified. The pin
-#   is &quot;active low&quot; and is thus normally prefaced with &quot;^!&quot;. Setting
-#   this creates a &quot;tmc2130_stepper_x:virtual_endstop&quot; virtual pin
-#   which may be used as the stepper&#39;s endstop_pin. Doing this enables
-#   &quot;sensorless homing&quot;. (Be sure to also set driver_SGT to an
+#   is "active low" and is thus normally prefaced with "^!". Setting
+#   this creates a "tmc2130_stepper_x:virtual_endstop" virtual pin
+#   which may be used as the stepper's endstop_pin. Doing this enables
+#   "sensorless homing". (Be sure to also set driver_SGT to an
 #   appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
 </code></pre></div>
@@ -7217,11 +7245,11 @@ run_current:
 #   The resistance (in ohms) of the motor sense resistor. The default
 #   is 0.110 ohms.
 #stealthchop_threshold: 0
-#   The velocity (in mm/s) to set the &quot;stealthChop&quot; threshold to. When
-#   set, &quot;stealthChop&quot; mode will be enabled if the stepper motor
-#   velocity is below this value. Note that the &quot;sensorless homing&quot;
+#   The velocity (in mm/s) to set the "stealthChop" threshold to. When
+#   set, "stealthChop" mode will be enabled if the stepper motor
+#   velocity is below this value. Note that the "sensorless homing"
 #   code may temporarily override this setting during homing
-#   operations. The default is 0, which disables &quot;stealthChop&quot; mode.
+#   operations. The default is 0, which disables "stealthChop" mode.
 #driver_MULTISTEP_FILT: True
 #driver_IHOLDDELAY: 8
 #driver_TPOWERDOWN: 20
@@ -7254,12 +7282,12 @@ run_current:
 #hold_current:
 #sense_resistor: 0.110
 #stealthchop_threshold: 0
-#   See the &quot;tmc2208&quot; section for the definition of these parameters.
+#   See the "tmc2208" section for the definition of these parameters.
 #coolstep_threshold:
-#   The velocity (in mm/s) to set the TMC driver internal &quot;CoolStep&quot;
+#   The velocity (in mm/s) to set the TMC driver internal "CoolStep"
 #   threshold to. If set, the coolstep feature will be enabled when
 #   the stepper motor velocity is near or above this value. Important
-#   - if coolstep_threshold is set and &quot;sensorless homing&quot; is used,
+#   - if coolstep_threshold is set and "sensorless homing" is used,
 #   then one must ensure that the homing speed is above the coolstep
 #   threshold! The default is to not enable the coolstep feature.
 #uart_address:
@@ -7293,10 +7321,10 @@ run_current:
 #   above list.
 #diag_pin:
 #   The micro-controller pin attached to the DIAG line of the TMC2209
-#   chip. The pin is normally prefaced with &quot;^&quot; to enable a pullup.
-#   Setting this creates a &quot;tmc2209_stepper_x:virtual_endstop&quot; virtual
-#   pin which may be used as the stepper&#39;s endstop_pin. Doing this
-#   enables &quot;sensorless homing&quot;. (Be sure to also set driver_SGTHRS to
+#   chip. The pin is normally prefaced with "^" to enable a pullup.
+#   Setting this creates a "tmc2209_stepper_x:virtual_endstop" virtual
+#   pin which may be used as the stepper's endstop_pin. Doing this
+#   enables "sensorless homing". (Be sure to also set driver_SGTHRS to
 #   an appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
 </code></pre></div>
@@ -7316,7 +7344,7 @@ cs_pin:
 #spi_software_sclk_pin:
 #spi_software_mosi_pin:
 #spi_software_miso_pin:
-#   See the &quot;common SPI settings&quot; section for a description of the
+#   See the "common SPI settings" section for a description of the
 #   above parameters.
 #interpolate: True
 #   If true, enable step interpolation (the driver will internally
@@ -7379,7 +7407,7 @@ cs_pin:
 #spi_software_sclk_pin:
 #spi_software_mosi_pin:
 #spi_software_miso_pin:
-#   See the &quot;common SPI settings&quot; section for a description of the
+#   See the "common SPI settings" section for a description of the
 #   above parameters.
 #uart_pin:
 #   The pin connected to the TMC2240 DIAG1/SW line. If this parameter
@@ -7405,23 +7433,23 @@ run_current:
 #   The resistance (in ohms) of the resistor between IREF and GND. The
 #   default is 12000.
 #stealthchop_threshold: 0
-#   The velocity (in mm/s) to set the &quot;stealthChop&quot; threshold to. When
-#   set, &quot;stealthChop&quot; mode will be enabled if the stepper motor
-#   velocity is below this value. Note that the &quot;sensorless homing&quot;
+#   The velocity (in mm/s) to set the "stealthChop" threshold to. When
+#   set, "stealthChop" mode will be enabled if the stepper motor
+#   velocity is below this value. Note that the "sensorless homing"
 #   code may temporarily override this setting during homing
-#   operations. The default is 0, which disables &quot;stealthChop&quot; mode.
+#   operations. The default is 0, which disables "stealthChop" mode.
 #coolstep_threshold:
-#   The velocity (in mm/s) to set the TMC driver internal &quot;CoolStep&quot;
+#   The velocity (in mm/s) to set the TMC driver internal "CoolStep"
 #   threshold to. If set, the coolstep feature will be enabled when
 #   the stepper motor velocity is near or above this value. Important
-#   - if coolstep_threshold is set and &quot;sensorless homing&quot; is used,
+#   - if coolstep_threshold is set and "sensorless homing" is used,
 #   then one must ensure that the homing speed is above the coolstep
 #   threshold! The default is to not enable the coolstep feature.
 #high_velocity_threshold:
-#   The velocity (in mm/s) to set the TMC driver internal &quot;high
-#   velocity&quot; threshold (THIGH) to. This is typically used to disable
-#   the &quot;CoolStep&quot; feature at high speeds. The default is to not set a
-#   TMC &quot;high velocity&quot; threshold.
+#   The velocity (in mm/s) to set the TMC driver internal "high
+#   velocity" threshold (THIGH) to. This is typically used to disable
+#   the "CoolStep" feature at high speeds. The default is to not set a
+#   TMC "high velocity" threshold.
 #driver_MSLUT0: 2863314260
 #driver_MSLUT1: 1251300522
 #driver_MSLUT2: 608774441
@@ -7446,7 +7474,7 @@ run_current:
 #   non-linear stepper movement. The values specified above are the default
 #   values used by the driver. The value must be specified as a decimal integer
 #   (hex form is not supported). In order to compute the wave table fields,
-#   see the tmc2130 &quot;Calculation Sheet&quot; from the Trinamic website.
+#   see the tmc2130 "Calculation Sheet" from the Trinamic website.
 #   Additionally, this driver also has the OFFSET_SIN90 field which can be used
 #   to tune a motor with unbalanced coils. See the `Sine Wave Lookup Table`
 #   section in the datasheet for information about this field and how to tune
@@ -7492,10 +7520,10 @@ run_current:
 #diag1_pin:
 #   The micro-controller pin attached to one of the DIAG lines of the
 #   TMC2240 chip. Only a single diag pin should be specified. The pin
-#   is &quot;active low&quot; and is thus normally prefaced with &quot;^!&quot;. Setting
-#   this creates a &quot;tmc2240_stepper_x:virtual_endstop&quot; virtual pin
-#   which may be used as the stepper&#39;s endstop_pin. Doing this enables
-#   &quot;sensorless homing&quot;. (Be sure to also set driver_SGT OR driver_SG4_THRS
+#   is "active low" and is thus normally prefaced with "^!". Setting
+#   this creates a "tmc2240_stepper_x:virtual_endstop" virtual pin
+#   which may be used as the stepper's endstop_pin. Doing this enables
+#   "sensorless homing". (Be sure to also set driver_SGT OR driver_SG4_THRS
 #   to an appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
 </code></pre></div>
@@ -7512,7 +7540,7 @@ cs_pin:
 #spi_software_sclk_pin:
 #spi_software_mosi_pin:
 #spi_software_miso_pin:
-#   See the &quot;common SPI settings&quot; section for a description of the
+#   See the "common SPI settings" section for a description of the
 #   above parameters.
 #chain_position:
 #chain_length:
@@ -7535,23 +7563,23 @@ run_current:
 #   The resistance (in ohms) of the motor sense resistor. The default
 #   is 0.075 ohms.
 #stealthchop_threshold: 0
-#   The velocity (in mm/s) to set the &quot;stealthChop&quot; threshold to. When
-#   set, &quot;stealthChop&quot; mode will be enabled if the stepper motor
-#   velocity is below this value. Note that the &quot;sensorless homing&quot;
+#   The velocity (in mm/s) to set the "stealthChop" threshold to. When
+#   set, "stealthChop" mode will be enabled if the stepper motor
+#   velocity is below this value. Note that the "sensorless homing"
 #   code may temporarily override this setting during homing
-#   operations. The default is 0, which disables &quot;stealthChop&quot; mode.
+#   operations. The default is 0, which disables "stealthChop" mode.
 #coolstep_threshold:
-#   The velocity (in mm/s) to set the TMC driver internal &quot;CoolStep&quot;
+#   The velocity (in mm/s) to set the TMC driver internal "CoolStep"
 #   threshold to. If set, the coolstep feature will be enabled when
 #   the stepper motor velocity is near or above this value. Important
-#   - if coolstep_threshold is set and &quot;sensorless homing&quot; is used,
+#   - if coolstep_threshold is set and "sensorless homing" is used,
 #   then one must ensure that the homing speed is above the coolstep
 #   threshold! The default is to not enable the coolstep feature.
 #high_velocity_threshold:
-#   The velocity (in mm/s) to set the TMC driver internal &quot;high
-#   velocity&quot; threshold (THIGH) to. This is typically used to disable
-#   the &quot;CoolStep&quot; feature at high speeds. The default is to not set a
-#   TMC &quot;high velocity&quot; threshold.
+#   The velocity (in mm/s) to set the TMC driver internal "high
+#   velocity" threshold (THIGH) to. This is typically used to disable
+#   the "CoolStep" feature at high speeds. The default is to not set a
+#   TMC "high velocity" threshold.
 #driver_MSLUT0: 2863314260
 #driver_MSLUT1: 1251300522
 #driver_MSLUT2: 608774441
@@ -7575,7 +7603,7 @@ run_current:
 #   non-linear stepper movement. The values specified above are the default
 #   values used by the driver. The value must be specified as a decimal integer
 #   (hex form is not supported). In order to compute the wave table fields,
-#   see the tmc2130 &quot;Calculation Sheet&quot; from the Trinamic website.
+#   see the tmc2130 "Calculation Sheet" from the Trinamic website.
 #driver_MULTISTEP_FILT: True
 #driver_IHOLDDELAY: 6
 #driver_TPOWERDOWN: 10
@@ -7617,12 +7645,81 @@ run_current:
 #diag1_pin:
 #   The micro-controller pin attached to one of the DIAG lines of the
 #   TMC5160 chip. Only a single diag pin should be specified. The pin
-#   is &quot;active low&quot; and is thus normally prefaced with &quot;^!&quot;. Setting
-#   this creates a &quot;tmc5160_stepper_x:virtual_endstop&quot; virtual pin
-#   which may be used as the stepper&#39;s endstop_pin. Doing this enables
-#   &quot;sensorless homing&quot;. (Be sure to also set driver_SGT to an
+#   is "active low" and is thus normally prefaced with "^!". Setting
+#   this creates a "tmc5160_stepper_x:virtual_endstop" virtual pin
+#   which may be used as the stepper's endstop_pin. Doing this enables
+#   "sensorless homing". (Be sure to also set driver_SGT to an
 #   appropriate sensitivity value.) The default is to not enable
 #   sensorless homing.
+</code></pre></div>
+
+<h3 id="tmc5262">[tmc5262]<a class="headerlink" href="#tmc5262" title="Permanent link">&para;</a></h3>
+<p>Configure a TMC5262 stepper motor driver via SPI. Define a section with a "tmc5262" prefix followed by the name of the corresponding stepper (for example, "[tmc5262 stepper_x]").</p>
+<p>This implementation supports SpreadCycle with a physical endstop.</p>
+<div class="highlight"><pre><span></span><code>[tmc5262 stepper_x]
+cs_pin:
+#   The pin connected to the driver's chip select input. This parameter
+#   must be provided.
+#spi_speed:
+#spi_bus:
+#spi_software_sclk_pin:
+#spi_software_mosi_pin:
+#spi_software_miso_pin:
+#   See the "common SPI settings" section.
+#chain_position:
+#chain_length:
+#   See the tmc5160 section for SPI daisy chain settings.
+#interpolate: True
+#   Enable interpolation to 256 microsteps. The default is True.
+run_current:
+#   Motor current in amps RMS. This parameter must be provided.
+#   Klipper selects the smallest hardware current range that fits this
+#   value. SET_TMC_CURRENT is limited to that range; configure a higher
+#   run_current and restart to select a larger range if needed.
+#hold_current:
+#   Current in amps RMS when the motor is not moving. The default is
+#   run_current. Setting a separate hold_current is not recommended;
+#   see TMC_Drivers.md.
+#rref: 12000
+#   Resistance in ohms of the reference resistor between REF and GND.
+#   Obtain this value from the driver board documentation or schematic.
+#   The default is 12000. The driver uses integrated current sensing,
+#   not an external sense resistor.
+#driver_MSLUT0: 2863314260
+#driver_MSLUT1: 1251300522
+#driver_MSLUT2: 608774441
+#driver_MSLUT3: 269500962
+#driver_MSLUT4: 4227858431
+#driver_MSLUT5: 3048961917
+#driver_MSLUT6: 1227445590
+#driver_MSLUT7: 4211234
+#driver_W0: 2
+#driver_W1: 1
+#driver_W2: 1
+#driver_W3: 1
+#driver_X1: 128
+#driver_X2: 255
+#driver_X3: 255
+#driver_START_SIN: 0
+#driver_START_SIN90: 247
+#driver_OFFSET_SIN90: 0
+#   See the tmc2240 section for Microstep Table settings.
+#driver_MULTISTEP_FILT: True
+#driver_IHOLDDELAY: 7
+#driver_IRUNDELAY: 4
+#driver_TPOWERDOWN: 10
+#driver_TBL: 2
+#driver_TOFF: 3
+#driver_HEND: 2
+#driver_HSTRT: 5
+#driver_FD3: 0
+#driver_DISFDCC: 0
+#driver_TPFD: 4
+#driver_CHM: 0
+#driver_SLOPE_CONTROL: 3
+#   Set the corresponding register field during driver configuration.
+#   See the TMC5262 datasheet for field definitions. The defaults are
+#   shown above.
 </code></pre></div>
 
 <h2 id="konfiguration-des-schrittmotorstroms-wahrend-der-betriebszeit">Konfiguration des Schrittmotorstroms während der Betriebszeit<a class="headerlink" href="#konfiguration-des-schrittmotorstroms-wahrend-der-betriebszeit" title="Permanent link">&para;</a></h2>
@@ -7642,26 +7739,26 @@ i2c_address:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed:
-#   See the &quot;common I2C settings&quot; section for a description of the
+#   See the "common I2C settings" section for a description of the
 #   above parameters.
 #wiper_0:
 #wiper_1:
 #wiper_2:
 #wiper_3:
-#   The value to statically set the given MCP4451 &quot;wiper&quot; to. This is
+#   The value to statically set the given MCP4451 "wiper" to. This is
 #   typically set to a number between 0.0 and 1.0 with 1.0 being the
 #   highest resistance and 0.0 being the lowest resistance. However,
-#   the range may be changed with the &#39;scale&#39; parameter (see below).
+#   the range may be changed with the 'scale' parameter (see below).
 #   If a wiper is not specified then it is left unconfigured.
 #scale:
-#   This parameter can be used to alter how the &#39;wiper_x&#39; parameters
-#   are interpreted. If provided, then the &#39;wiper_x&#39; parameters should
-#   be between 0.0 and &#39;scale&#39;. This may be useful when the MCP4451 is
-#   used to set stepper voltage references. The &#39;scale&#39; can be set to
+#   This parameter can be used to alter how the 'wiper_x' parameters
+#   are interpreted. If provided, then the 'wiper_x' parameters should
+#   be between 0.0 and 'scale'. This may be useful when the MCP4451 is
+#   used to set stepper voltage references. The 'scale' can be set to
 #   the equivalent stepper amperage if the MCP4451 were at its highest
-#   resistance, and then the &#39;wiper_x&#39; parameters can be specified
+#   resistance, and then the 'wiper_x' parameters can be specified
 #   using the desired amperage value for the stepper. The default is
-#   to not scale the &#39;wiper_x&#39; parameters.
+#   to not scale the 'wiper_x' parameters.
 </code></pre></div>
 
 <h3 id="mcp4728">[mcp4728]<a class="headerlink" href="#mcp4728" title="Permanent link">&para;</a></h3>
@@ -7675,7 +7772,7 @@ i2c_address:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed:
-#   See the &quot;common I2C settings&quot; section for a description of the
+#   See the "common I2C settings" section for a description of the
 #   above parameters.
 #channel_a:
 #channel_b:
@@ -7684,18 +7781,18 @@ i2c_address:
 #   The value to statically set the given MCP4728 channel to. This is
 #   typically set to a number between 0.0 and 1.0 with 1.0 being the
 #   highest voltage (2.048V) and 0.0 being the lowest voltage.
-#   However, the range may be changed with the &#39;scale&#39; parameter (see
+#   However, the range may be changed with the 'scale' parameter (see
 #   below). If a channel is not specified then it is left
 #   unconfigured.
 #scale:
-#   This parameter can be used to alter how the &#39;channel_x&#39; parameters
-#   are interpreted. If provided, then the &#39;channel_x&#39; parameters
-#   should be between 0.0 and &#39;scale&#39;. This may be useful when the
-#   MCP4728 is used to set stepper voltage references. The &#39;scale&#39; can
+#   This parameter can be used to alter how the 'channel_x' parameters
+#   are interpreted. If provided, then the 'channel_x' parameters
+#   should be between 0.0 and 'scale'. This may be useful when the
+#   MCP4728 is used to set stepper voltage references. The 'scale' can
 #   be set to the equivalent stepper amperage if the MCP4728 were at
-#   its highest voltage (2.048V), and then the &#39;channel_x&#39; parameters
+#   its highest voltage (2.048V), and then the 'channel_x' parameters
 #   can be specified using the desired amperage value for the
-#   stepper. The default is to not scale the &#39;channel_x&#39; parameters.
+#   stepper. The default is to not scale the 'channel_x' parameters.
 </code></pre></div>
 
 <h3 id="mcp4018">[mcp4018]<a class="headerlink" href="#mcp4018" title="Permanent link">&para;</a></h3>
@@ -7709,23 +7806,23 @@ i2c_address:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed:
-#   See the &quot;common I2C settings&quot; section for a description of the
+#   See the "common I2C settings" section for a description of the
 #   above parameters.
 wiper:
-#   The value to statically set the given MCP4018 &quot;wiper&quot; to. This is
+#   The value to statically set the given MCP4018 "wiper" to. This is
 #   typically set to a number between 0.0 and 1.0 with 1.0 being the
 #   highest resistance and 0.0 being the lowest resistance. However,
-#   the range may be changed with the &#39;scale&#39; parameter (see below).
+#   the range may be changed with the 'scale' parameter (see below).
 #   This parameter must be provided.
 #scale:
-#   This parameter can be used to alter how the &#39;wiper&#39; parameter is
-#   interpreted. If provided, then the &#39;wiper&#39; parameter should be
-#   between 0.0 and &#39;scale&#39;. This may be useful when the MCP4018 is
-#   used to set stepper voltage references. The &#39;scale&#39; can be set to
+#   This parameter can be used to alter how the 'wiper' parameter is
+#   interpreted. If provided, then the 'wiper' parameter should be
+#   between 0.0 and 'scale'. This may be useful when the MCP4018 is
+#   used to set stepper voltage references. The 'scale' can be set to
 #   the equivalent stepper amperage if the MCP4018 is at its highest
-#   resistance, and then the &#39;wiper&#39; parameter can be specified using
+#   resistance, and then the 'wiper' parameter can be specified using
 #   the desired amperage value for the stepper. The default is to not
-#   scale the &#39;wiper&#39; parameter.
+#   scale the 'wiper' parameter.
 </code></pre></div>
 
 <h2 id="display-unterstutzung">Display Unterstützung<a class="headerlink" href="#display-unterstutzung" title="Permanent link">&para;</a></h2>
@@ -7733,15 +7830,15 @@ wiper:
 <p>Unterstützung für ein am Mikrocontroller angeschlossenes Display.</p>
 <div class="highlight"><pre><span></span><code>[display]
 lcd_type:
-#   The type of LCD chip in use. This may be &quot;hd44780&quot;, &quot;hd44780_spi&quot;,
-#   &quot;aip31068_spi&quot;, &quot;st7920&quot;, &quot;emulated_st7920&quot;, &quot;uc1701&quot;, &quot;ssd1306&quot;, or
-#   &quot;sh1106&quot;.
+#   The type of LCD chip in use. This may be "hd44780", "hd44780_spi",
+#   "aip31068_spi", "st7920", "emulated_st7920", "uc1701", "ssd1306", or
+#   "sh1106".
 #   See the display sections below for information on each type and
 #   additional parameters they provide. This parameter must be
 #   provided.
 #display_group:
 #   The name of the display_data group to show on the display. This
-#   controls the content of the screen (see the &quot;display_data&quot; section
+#   controls the content of the screen (see the "display_data" section
 #   for more information). The default is _default_20x4 for hd44780 or
 #   aip31068_spi displays and _default_16x4 for other displays.
 #menu_timeout:
@@ -7759,54 +7856,54 @@ lcd_type:
 #   The pins connected to encoder. 2 pins must be provided when using
 #   encoder. This parameter must be provided when using menu.
 #encoder_steps_per_detent:
-#   How many steps the encoder emits per detent (&quot;click&quot;). If the
+#   How many steps the encoder emits per detent ("click"). If the
 #   encoder takes two detents to move between entries or moves two
 #   entries from one detent, try changing this. Allowed values are 2
 #   (half-stepping) or 4 (full-stepping). The default is 4.
 #click_pin:
-#   The pin connected to &#39;enter&#39; button or encoder &#39;click&#39;. This
+#   The pin connected to 'enter' button or encoder 'click'. This
 #   parameter must be provided when using menu. The presence of an
-#   &#39;analog_range_click_pin&#39; config parameter turns this parameter
+#   'analog_range_click_pin' config parameter turns this parameter
 #   from digital to analog.
 #back_pin:
-#   The pin connected to &#39;back&#39; button. This parameter is optional,
+#   The pin connected to 'back' button. This parameter is optional,
 #   menu can be used without it. The presence of an
-#   &#39;analog_range_back_pin&#39; config parameter turns this parameter from
+#   'analog_range_back_pin' config parameter turns this parameter from
 #   digital to analog.
 #up_pin:
-#   The pin connected to &#39;up&#39; button. This parameter must be provided
+#   The pin connected to 'up' button. This parameter must be provided
 #   when using menu without encoder. The presence of an
-#   &#39;analog_range_up_pin&#39; config parameter turns this parameter from
+#   'analog_range_up_pin' config parameter turns this parameter from
 #   digital to analog.
 #down_pin:
-#   The pin connected to &#39;down&#39; button. This parameter must be
+#   The pin connected to 'down' button. This parameter must be
 #   provided when using menu without encoder. The presence of an
-#   &#39;analog_range_down_pin&#39; config parameter turns this parameter from
+#   'analog_range_down_pin' config parameter turns this parameter from
 #   digital to analog.
 #kill_pin:
-#   The pin connected to &#39;kill&#39; button. This button will call
-#   emergency stop. The presence of an &#39;analog_range_kill_pin&#39; config
+#   The pin connected to 'kill' button. This button will call
+#   emergency stop. The presence of an 'analog_range_kill_pin' config
 #   parameter turns this parameter from digital to analog.
 #analog_pullup_resistor: 4700
 #   The resistance (in ohms) of the pullup attached to the analog
 #   button. The default is 4700 ohms.
 #analog_range_click_pin:
-#   The resistance range for a &#39;enter&#39; button. Range minimum and
+#   The resistance range for a 'enter' button. Range minimum and
 #   maximum comma-separated values must be provided when using analog
 #   button.
 #analog_range_back_pin:
-#   The resistance range for a &#39;back&#39; button. Range minimum and
+#   The resistance range for a 'back' button. Range minimum and
 #   maximum comma-separated values must be provided when using analog
 #   button.
 #analog_range_up_pin:
-#   The resistance range for a &#39;up&#39; button. Range minimum and maximum
+#   The resistance range for a 'up' button. Range minimum and maximum
 #   comma-separated values must be provided when using analog button.
 #analog_range_down_pin:
-#   The resistance range for a &#39;down&#39; button. Range minimum and
+#   The resistance range for a 'down' button. Range minimum and
 #   maximum comma-separated values must be provided when using analog
 #   button.
 #analog_range_kill_pin:
-#   The resistance range for a &#39;kill&#39; button. Range minimum and
+#   The resistance range for a 'kill' button. Range minimum and
 #   maximum comma-separated values must be provided when using analog
 #   button.
 </code></pre></div>
@@ -7815,7 +7912,7 @@ lcd_type:
 <p>Informationen zur Konfiguration von hd44780-Displays (die in Displays vom Typ "RepRapDiscount 2004 Smart Controller" verwendet werden).</p>
 <div class="highlight"><pre><span></span><code>[display]
 lcd_type: hd44780
-#   Set to &quot;hd44780&quot; for hd44780 displays.
+#   Set to "hd44780" for hd44780 displays.
 rs_pin:
 e_pin:
 d4_pin:
@@ -7827,11 +7924,24 @@ d7_pin:
 #hd44780_protocol_init: True
 #   Perform 8-bit/4-bit protocol initialization on an hd44780 display.
 #   This is necessary on real hd44780 devices. However, one may need
-#   to disable this on some &quot;clone&quot; devices. The default is True.
+#   to disable this on some "clone" devices. The default is True.
 #line_length:
 #   Set the number of characters per line for an hd44780 type lcd.
 #   Possible values are 20 (default) and 16. The number of lines is
 #   fixed to 4.
+#hd44780_delay: 0.000040
+#   The minimum time (in seconds) to wait after sending a command
+#   or data byte to the hd44780 chip. Some displays (typically ones
+#   with a slower internal oscillator) need more time than the
+#   default and will show wrong or randomly changing characters.
+#   Only change this if that occurs. In that case, increase the value
+#   in steps of 0.000001 (1us) and check the display over a longer
+#   period (eg, a full print) at each step, as the errors may only
+#   appear sporadically. Once the display is reliable, add a small
+#   margin (a few microseconds) as the display timing can vary with
+#   temperature. Use the lowest reliable value, as the
+#   micro-controller waits for this delay between every byte sent to
+#   the display. The maximum is 0.000060. The default is 0.000040.
 ...
 </code></pre></div>
 
@@ -7839,7 +7949,7 @@ d7_pin:
 <p>Informationen zur Konfiguration eines hd44780_spi-Displays - ein 20x04-Display, das über ein Hardware-Schieberegister angesteuert wird (wird in Druckern auf Mightyboard-Basis verwendet).</p>
 <div class="highlight"><pre><span></span><code>[display]
 lcd_type: hd44780_spi
-#   Set to &quot;hd44780_spi&quot; for hd44780_spi displays.
+#   Set to "hd44780_spi" for hd44780_spi displays.
 latch_pin:
 spi_software_sclk_pin:
 spi_software_mosi_pin:
@@ -7852,7 +7962,7 @@ spi_software_miso_pin:
 #hd44780_protocol_init: True
 #   Perform 8-bit/4-bit protocol initialization on an hd44780 display.
 #   This is necessary on real hd44780 devices. However, one may need
-#   to disable this on some &quot;clone&quot; devices. The default is True.
+#   to disable this on some "clone" devices. The default is True.
 #line_length:
 #   Set the number of characters per line for an hd44780 type lcd.
 #   Possible values are 20 (default) and 16. The number of lines is
@@ -7884,7 +7994,7 @@ spi_software_miso_pin:
 <p>Informationen zur Konfiguration von st7920-Displays (die in Displays vom Typ "RepRapDiscount 12864 Full Graphic Smart Controller" verwendet werden).</p>
 <div class="highlight"><pre><span></span><code>[display]
 lcd_type: st7920
-#   Set to &quot;st7920&quot; for st7920 displays.
+#   Set to "st7920" for st7920 displays.
 cs_pin:
 sclk_pin:
 sid_pin:
@@ -7897,7 +8007,7 @@ sid_pin:
 <p>Informationen zur Konfiguration eines emulierten st7920-Displays - zu finden in manchen "2,4-Zoll-Touchscreen-Geräten" und Ähnlichem.</p>
 <div class="highlight"><pre><span></span><code>[display]
 lcd_type: emulated_st7920
-#   Set to &quot;emulated_st7920&quot; for emulated_st7920 displays.
+#   Set to "emulated_st7920" for emulated_st7920 displays.
 en_pin:
 spi_software_sclk_pin:
 spi_software_mosi_pin:
@@ -7916,13 +8026,13 @@ spi_software_miso_pin:
 <p>Informationen zur Konfiguration von uc1701-Displays (die in Displays vom Typ "MKS Mini 12864" verwendet werden).</p>
 <div class="highlight"><pre><span></span><code>[display]
 lcd_type: uc1701
-#   Set to &quot;uc1701&quot; for uc1701 displays.
+#   Set to "uc1701" for uc1701 displays.
 cs_pin:
 a0_pin:
 #   The pins connected to a uc1701 type lcd. These parameters must be
 #   provided.
 #rst_pin:
-#   The pin connected to the &quot;rst&quot; pin on the lcd. If it is not
+#   The pin connected to the "rst" pin on the lcd. If it is not
 #   specified then the hardware must have a pull-up on the
 #   corresponding lcd line.
 #contrast:
@@ -7935,14 +8045,14 @@ a0_pin:
 <p>Informationen zur Konfiguration der Anzeigen ssd1306 und sh1106.</p>
 <div class="highlight"><pre><span></span><code>[display]
 lcd_type:
-#   Set to either &quot;ssd1306&quot; or &quot;sh1106&quot; for the given display type.
+#   Set to either "ssd1306" or "sh1106" for the given display type.
 #i2c_mcu:
 #i2c_bus:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed:
 #   Optional parameters available for displays connected via an i2c
-#   bus. See the &quot;common I2C settings&quot; section for a description of
+#   bus. See the "common I2C settings" section for a description of
 #   the above parameters.
 #cs_pin:
 #dc_pin:
@@ -7951,9 +8061,9 @@ lcd_type:
 #spi_software_sclk_pin:
 #spi_software_mosi_pin:
 #spi_software_miso_pin:
-#   The pins connected to the lcd when in &quot;4-wire&quot; spi mode. See the
-#   &quot;common SPI settings&quot; section for a description of the parameters
-#   that start with &quot;spi_&quot;. The default is to use i2c mode for the
+#   The pins connected to the lcd when in "4-wire" spi mode. See the
+#   "common SPI settings" section for a description of the parameters
+#   that start with "spi_". The default is to use i2c mode for the
 #   display.
 #reset_pin:
 #   A reset pin may be specified on the display. If it is not
@@ -7964,7 +8074,7 @@ lcd_type:
 #   default is 239.
 #vcomh: 0
 #   Set the Vcomh value on the display. This value is associated with
-#   a &quot;smearing&quot; effect on some OLED displays. The value may range
+#   a "smearing" effect on some OLED displays. The value may range
 #   from 0 to 63. Default is 0.
 #invert: False
 #   TRUE inverts the pixels on certain OLED displays.  The default is
@@ -7995,13 +8105,13 @@ text:
 <p>Diese Funktion kann mit dem Befehl <a href="G-Codes.html#set_led_template">SET_LED_TEMPLATE</a> auch für fortlaufende LED-Aktualisierungen genutzt werden.</p>
 <div class="highlight"><pre><span></span><code>[display_template my_template_name]
 #param_&lt;name&gt;:
-#   One may specify any number of options with a &quot;param_&quot; prefix. The
+#   One may specify any number of options with a "param_" prefix. The
 #   given name will be assigned the given value (parsed as a Python
 #   literal) and will be available during macro expansion. If the
 #   parameter is passed in the call to render() then that value will
 #   be used during macro expansion. For example, a config with
-#   &quot;param_speed = 75&quot; might have a caller with
-#   &quot;render(&#39;my_template_name&#39;, param_speed=80)&quot;. Parameter names may
+#   "param_speed = 75" might have a caller with
+#   "render('my_template_name', param_speed=80)". Parameter names may
 #   not use upper case characters.
 text:
 #   The text to return when the this template is rendered. This field
@@ -8015,9 +8125,9 @@ text:
 <div class="highlight"><pre><span></span><code>[display_glyph my_display_glyph]
 #data:
 #   The display data, stored as 16 lines consisting of 16 bits (1 per
-#   pixel) where &#39;.&#39; is a blank pixel and &#39;*&#39; is an on pixel (e.g.,
-#   &quot;****************&quot; to display a solid horizontal line).
-#   Alternatively, one can use &#39;0&#39; for a blank pixel and &#39;1&#39; for an on
+#   pixel) where '.' is a blank pixel and '*' is an on pixel (e.g.,
+#   "****************" to display a solid horizontal line).
+#   Alternatively, one can use '0' for a blank pixel and '1' for an on
 #   pixel. Put each display line into a separate config line. The
 #   glyph must consist of exactly 16 lines with 16 bits each. This
 #   parameter is optional.
@@ -8034,7 +8144,7 @@ text:
 <h3 id="display-my_extra_display">[display my_extra_display]<a class="headerlink" href="#display-my_extra_display" title="Permanent link">&para;</a></h3>
 <p>Wenn wie oben gezeigt ein primärer Abschnitt [display] in der printer.cfg definiert wurde, können mehrere zusätzliche Displays definiert werden. Beachten Sie, dass zusätzliche Displays derzeit keine Menüfunktionalität unterstützen und daher weder die Optionen "menu" noch eine Tastenkonfiguration unterstützen.</p>
 <div class="highlight"><pre><span></span><code>[display my_extra_display]
-# See the &quot;display&quot; section for available parameters.
+# See the "display" section for available parameters.
 </code></pre></div>
 
 <h3 id="menu">[menu]<a class="headerlink" href="#menu" title="Permanent link">&para;</a></h3>
@@ -8044,20 +8154,20 @@ text:
 <div class="highlight"><pre><span></span><code># Common parameters available for all menu config sections.
 #[menu __some_list __some_name]
 #type: disabled
-#   Permanently disabled menu element, only required attribute is &#39;type&#39;.
+#   Permanently disabled menu element, only required attribute is 'type'.
 #   Allows you to easily disable/hide existing menu items.
 
 #[menu some_name]
 #type:
 #   One of command, input, list, text:
 #       command - basic menu element with various script triggers
-#       input   - same like &#39;command&#39; but has value changing capabilities.
+#       input   - same like 'command' but has value changing capabilities.
 #                 Press will start/stop edit mode.
 #       list    - it allows for menu items to be grouped together in a
 #                 scrollable list.  Add to the list by creating menu
-#                 configurations using &quot;some_list&quot; as a prefix - for
+#                 configurations using "some_list" as a prefix - for
 #                 example: [menu some_list some_item_in_the_list]
-#       vsdlist - same as &#39;list&#39; but will append files from virtual sdcard
+#       vsdlist - same as 'list' but will append files from virtual sdcard
 #                 (will be removed in the future)
 #name:
 #   Name of menu item - evaluated as a template.
@@ -8096,8 +8206,8 @@ text:
 #   Maximum value of range - evaluated as a template. Default 99999.
 #input_step:
 #   Editing step - Must be a positive integer or float value. It has
-#   internal fast rate step. When &quot;(input_max - input_min) /
-#   input_step &gt; 100&quot; then fast rate step is 10 * input_step else fast
+#   internal fast rate step. When "(input_max - input_min) /
+#   input_step &gt; 100" then fast rate step is 10 * input_step else fast
 #   rate step is same input_step.
 #realtime:
 #   This attribute accepts static boolean value. When enabled then
@@ -8164,7 +8274,7 @@ switch_pin:
 #insert_gcode:
 #event_delay:
 #pause_delay:
-#   See the &quot;filament_switch_sensor&quot; section for a description of the
+#   See the "filament_switch_sensor" section for a description of the
 #   above parameters.
 </code></pre></div>
 
@@ -8235,7 +8345,7 @@ adc2:
 #insert_gcode:
 #event_delay:
 #pause_delay:
-#   See the &quot;filament_switch_sensor&quot; section for a description of the
+#   See the "filament_switch_sensor" section for a description of the
 #   above parameters.
 </code></pre></div>
 
@@ -8252,11 +8362,30 @@ sensor_type:
 #   The integer tare value, in raw sensor counts, taken when LOAD_CELL_CALIBRATE
 #   is run. This is the default tare value when klipper starts up.
 #sensor_orientation:
-#   Change the sensor&#39;s orientation. Can be either &#39;normal&#39; or &#39;inverted&#39;.
-#   The default is &#39;normal&#39;. Use &#39;inverted&#39; if the sensor reports a
+#   Change the sensor's orientation. Can be either 'normal' or 'inverted'.
+#   The default is 'normal'. Use 'inverted' if the sensor reports a
 #   decreasing force value when placed under load.
 </code></pre></div>
 
+<h4 id="cs1237">CS1237<a class="headerlink" href="#cs1237" title="Permanent link">&para;</a></h4>
+<p>The CS1237 sensor backend supports both <code>[load_cell]</code> and <code>[load_cell_probe]</code>.</p>
+<div class="highlight"><pre><span></span><code>[load_cell my_cs1237]
+sensor_type: cs1237
+sclk_pin:
+#   The pin connected to the CS1237 clock line. This parameter must be
+#   provided.
+dout_pin:
+#   The pin connected to the bidirectional CS1237 DOUT line. This parameter
+#   must be provided.
+#sample_rate: 640
+#   Valid values for sample_rate are 10, 40, 640, or 1280. The default is 640.
+#gain: 128
+#   Valid values for gain are 1, 2, 64, or 128. The default is 128.
+#reference_output: True
+#   Enable the CS1237 REFO reference output. The default is True.
+</code></pre></div>
+
+<p>Both pins must be on the same MCU. DOUT is bidirectional during configuration.</p>
 <h4 id="hx711">HX711<a class="headerlink" href="#hx711" title="Permanent link">&para;</a></h4>
 <p>Dies ist ein 24-Bit-Chip mit niedriger Abtastrate, der "Bit-Banging"-Kommunikation verwendet. Er eignet sich für Filamentwaagen.</p>
 <div class="highlight"><pre><span></span><code>[load_cell]
@@ -8268,7 +8397,7 @@ dout_pin:
 #   provided.
 #gain: A-128
 #   Valid values for gain are: A-128, A-64, B-32. The default is A-128.
-#   &#39;A&#39; denotes the input channel and the number denotes the gain. Only the 3
+#   'A' denotes the input channel and the number denotes the gain. Only the 3
 #   listed combinations are supported by the chip. Note that changing the gain
 #   setting also selects the channel being read.
 #sample_rate: 80
@@ -8288,7 +8417,7 @@ dout_pin:
 #   provided.
 #gain: A-128
 #   Valid values for gain are A-128, B-64, A-64, B-8.
-#   &#39;A&#39; denotes the input channel and the number denotes the gain setting.
+#   'A' denotes the input channel and the number denotes the gain setting.
 #   Only the 4 listed combinations are supported by the chip. Note that
 #   changing the gain setting also selects the channel being read.
 #sample_rate: 320
@@ -8312,7 +8441,7 @@ cs_pin:
 #spi_software_sclk_pin:
 #spi_software_mosi_pin:
 #spi_software_miso_pin:
-#   See the &quot;common SPI settings&quot; section for a description of the
+#   See the "common SPI settings" section for a description of the
 #   above parameters.
 data_ready_pin:
 #   Pin connected to the ADS1220 data ready line. This parameter must be
@@ -8328,7 +8457,7 @@ data_ready_pin:
 #   The default is False.
 #sample_rate: 660
 #   This chip supports two ranges of sample rates, Normal and Turbo. In turbo
-#   mode the chip&#39;s internal clock runs twice as fast and the SPI communication
+#   mode the chip's internal clock runs twice as fast and the SPI communication
 #   speed is also doubled.
 #   Normal sample rates: 20, 45, 90, 175, 330, 600, 1000
 #   Turbo sample rates: 40, 90, 180, 350, 660, 1200, 2000
@@ -8336,21 +8465,21 @@ data_ready_pin:
 #input_mux:
 #   Input multiplexer configuration, select a pair of pins to use. The first pin
 #   is the positive, AINP, and the second pin is the negative, AINN. Valid
-#   values are: &#39;AIN0_AIN1&#39;, &#39;AIN0_AIN2&#39;, &#39;AIN0_AIN3&#39;, &#39;AIN1_AIN2&#39;, &#39;AIN1_AIN3&#39;,
-#   &#39;AIN2_AIN3&#39;, &#39;AIN1_AIN0&#39;, &#39;AIN3_AIN2&#39;, &#39;AIN0_AVSS&#39;, &#39;AIN1_AVSS&#39;, &#39;AIN2_AVSS&#39;
-#   and &#39;AIN3_AVSS&#39;. If AVSS is used the PGA is bypassed and the pga_bypass
+#   values are: 'AIN0_AIN1', 'AIN0_AIN2', 'AIN0_AIN3', 'AIN1_AIN2', 'AIN1_AIN3',
+#   'AIN2_AIN3', 'AIN1_AIN0', 'AIN3_AIN2', 'AIN0_AVSS', 'AIN1_AVSS', 'AIN2_AVSS'
+#   and 'AIN3_AVSS'. If AVSS is used the PGA is bypassed and the pga_bypass
 #   setting will be forced to True.
 #   The default is AIN0_AIN1.
 #vref:
-#   The selected voltage reference. Valid values are: &#39;internal&#39;, &#39;REF0&#39;, &#39;REF1&#39;
-#   and &#39;analog_supply&#39;. Default is &#39;internal&#39;.
+#   The selected voltage reference. Valid values are: 'internal', 'REF0', 'REF1'
+#   and 'analog_supply'. Default is 'internal'.
 </code></pre></div>
 
 <h4 id="ads131m0x">ADS131M0x<a class="headerlink" href="#ads131m0x" title="Permanent link">&para;</a></h4>
 <p>Der ADS131M0x ist eine Familie schneller 24-Bit-Delta-Sigma-ADCs. Aus dieser Familie werden zwei Sensoren unterstützt: der ADS131M02 mit zwei gleichzeitig abtastenden Differenzkanälen und der ADS131M04 mit vier Kanälen. Sie verfügen über einen programmierbaren Verstärker (PGA) mit Verstärkungen bis 128 und konfigurierbaren Abtastraten bis 64000 Abtastungen pro Sekunde und benötigen ein externes Taktsignal (300 kHz bis 8,4 MHz, nominal 8,192 MHz).</p>
 <div class="highlight"><pre><span></span><code>[load_cell]
 sensor_type: ads131m02
-#   Select &#39;ads131m02&#39; for the 2-channel variant or &#39;ads131m04&#39; for the
+#   Select 'ads131m02' for the 2-channel variant or 'ads131m04' for the
 #   4-channel variant. This parameter must be provided.
 cs_pin:
 #   The pin connected to the chip select line. This parameter must be
@@ -8361,7 +8490,7 @@ cs_pin:
 #spi_software_sclk_pin:
 #spi_software_mosi_pin:
 #spi_software_miso_pin:
-#   See the &quot;common SPI settings&quot; section for a description of the
+#   See the "common SPI settings" section for a description of the
 #   above parameters.
 data_ready_pin:
 #   Pin connected to the data ready (DRDY) line. This parameter must be
@@ -8419,7 +8548,7 @@ sensor_type:
 #   The value is a frequency, in Hz, below which drift will be ignored. This
 #   option requires the SciPy library. Default: None
 #drift_filter_delay: 2
-#   The delay, or &#39;order&#39;, of the drift filter. This controls the number of
+#   The delay, or 'order', of the drift filter. This controls the number of
 #   samples required to make a trigger detection. Can be 1 or 2, the default
 #   is 2.
 #buzz_filter_cutoff_frequency: 100.0
@@ -8427,7 +8556,7 @@ sensor_type:
 #   load cell will be igfiltered outnored. This option requires the SciPy
 #   library. Default: None
 #buzz_filter_delay: 2
-#   The delay, or &#39;order&#39;, of the buzz filter. This controls the number of
+#   The delay, or 'order', of the buzz filter. This controls the number of
 #   samples required to make a trigger detection. Can be 1 or 2, the default
 #   is 2.
 #notch_filter_frequencies: 50, 60
@@ -8452,7 +8581,7 @@ sensor_type:
 #samples_tolerance_retries:
 #activate_gcode:
 #deactivate_gcode:
-#   See the &quot;[probe]&quot; section for a description of the above parameters.
+#   See the "[probe]" section for a description of the above parameters.
 </code></pre></div>
 
 <h2 id="board-spezifische-hardware-unterstutzung">Board spezifische Hardware Unterstützung<a class="headerlink" href="#board-spezifische-hardware-unterstutzung" title="Permanent link">&para;</a></h2>
@@ -8469,7 +8598,7 @@ i2c_address:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #i2c_speed:
-#   See the &quot;common I2C settings&quot; section for a description of the
+#   See the "common I2C settings" section for a description of the
 #   above parameters.
 </code></pre></div>
 
@@ -8478,7 +8607,7 @@ i2c_address:
 <div class="highlight"><pre><span></span><code>[samd_sercom my_sercom]
 sercom:
 #   The name of the sercom bus to configure in the micro-controller.
-#   Available names are &quot;sercom0&quot;, &quot;sercom1&quot;, etc.. This parameter
+#   Available names are "sercom0", "sercom1", etc.. This parameter
 #   must be provided.
 tx_pin:
 #   MOSI pin for SPI communication, or SDA (data) pin for I2C
@@ -8545,24 +8674,24 @@ sensor_pin: my_ads1x1x:AIN0
 
 <h3 id="replicape">[replicape]<a class="headerlink" href="#replicape" title="Permanent link">&para;</a></h3>
 <p>Replicape-Unterstützung - siehe die <a href="Beaglebone.html">Beaglebone-Anleitung</a> und die Datei <a href="https://github.com/Klipper3d/klipper/blob/master/config/generic-replicape.cfg">generic-replicape.cfg</a> für ein Beispiel.</p>
-<div class="highlight"><pre><span></span><code># The &quot;replicape&quot; config section adds &quot;replicape:stepper_x_enable&quot;
+<div class="highlight"><pre><span></span><code># The "replicape" config section adds "replicape:stepper_x_enable"
 # virtual stepper enable pins (for steppers X, Y, Z, E, and H) and
-# &quot;replicape:power_x&quot; PWM output pins (for hotbed, e, h, fan0, fan1,
+# "replicape:power_x" PWM output pins (for hotbed, e, h, fan0, fan1,
 # fan2, and fan3) that may then be used elsewhere in the config file.
 [replicape]
 revision:
-#   The replicape hardware revision. Currently only revision &quot;B3&quot; is
+#   The replicape hardware revision. Currently only revision "B3" is
 #   supported. This parameter must be provided.
 #enable_pin: !gpio0_20
 #   The replicape global enable pin. The default is !gpio0_20 (aka
 #   P9_41).
 host_mcu:
 #   The name of the mcu config section that communicates with the
-#   Klipper &quot;linux process&quot; mcu instance. This parameter must be
+#   Klipper "linux process" mcu instance. This parameter must be
 #   provided.
 #standstill_power_down: False
 #   This parameter controls the CFG6_ENN line on all stepper
-#   motors. True sets the enable lines to &quot;open&quot;. The default is
+#   motors. True sets the enable lines to "open". The default is
 #   False.
 #stepper_x_microstep_mode:
 #stepper_y_microstep_mode:
@@ -8630,15 +8759,15 @@ serial:
 <div class="highlight"><pre><span></span><code>[angle my_angle_sensor]
 sensor_type:
 #   The type of the magnetic hall sensor chip. Available choices are
-#   &quot;a1333&quot;, &quot;as5047d&quot;, &quot;mt6816&quot;, &quot;mt6826s&quot;, and &quot;tle5012b&quot;. This parameter must be
+#   "a1333", "as5047d", "mt6816", "mt6826s", and "tle5012b". This parameter must be
 #   specified.
 #sample_period: 0.000400
 #   The query period (in seconds) to use during measurements. The
 #   default is 0.000400 (which is 2500 samples per second).
 #stepper:
 #   The name of the stepper that the angle sensor is attached to (eg,
-#   &quot;stepper_x&quot;). Setting this value enables an angle calibration
-#   tool. To use this feature, the Python &quot;numpy&quot; package must be
+#   "stepper_x"). Setting this value enables an angle calibration
+#   tool. To use this feature, the Python "numpy" package must be
 #   installed. The default is to not enable angle calibration for the
 #   angle sensor.
 cs_pin:
@@ -8648,7 +8777,7 @@ cs_pin:
 #spi_software_sclk_pin:
 #spi_software_mosi_pin:
 #spi_software_miso_pin:
-#   See the &quot;common SPI settings&quot; section for a description of the
+#   See the "common SPI settings" section for a description of the
 #   above parameters.
 </code></pre></div>
 
@@ -8665,10 +8794,10 @@ cs_pin:
 #spi_software_sclk_pin:
 #spi_software_mosi_pin:
 #spi_software_miso_pin:
-#   Specify the above parameters to use &quot;software based SPI&quot;. This
+#   Specify the above parameters to use "software based SPI". This
 #   mode does not require micro-controller hardware support (typically
 #   any general purpose pins may be used). The default is to not use
-#   &quot;software spi&quot;.
+#   "software spi".
 </code></pre></div>
 
 <h3 id="gebrauchliche-i2c-einstellungen">Gebräuchliche I2C Einstellungen<a class="headerlink" href="#gebrauchliche-i2c-einstellungen" title="Permanent link">&para;</a></h3>
@@ -8680,7 +8809,7 @@ cs_pin:
 #   number (not in hex). The default depends on the type of device.
 #i2c_mcu:
 #   The name of the micro-controller that the chip is connected to.
-#   The default is &quot;mcu&quot;.
+#   The default is "mcu".
 #i2c_bus:
 #   If the micro-controller supports multiple I2C busses then one may
 #   specify the micro-controller bus name here. The default depends on
@@ -8688,7 +8817,7 @@ cs_pin:
 #i2c_software_scl_pin:
 #i2c_software_sda_pin:
 #   Specify these parameters to use micro-controller software based
-#   I2C &quot;bit-banging&quot; support. The two parameters should the two pins
+#   I2C "bit-banging" support. The two parameters should the two pins
 #   on the micro-controller to use for the scl and sda wires. The
 #   default is to use hardware based I2C support as specified by the
 #   i2c_bus parameter.

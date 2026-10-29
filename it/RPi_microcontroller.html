@@ -1591,7 +1591,7 @@ gpiochip0 - 54 lines:
         line  17:      unnamed       unused   input  active-high
         line  18:      unnamed       unused   input  active-high
         line  19:      unnamed       unused   input  active-high
-        line  20:      unnamed    &quot;klipper&quot;  output  active-high [used]
+        line  20:      unnamed    "klipper"  output  active-high [used]
         line  21:      unnamed       unused   input  active-high
         line  22:      unnamed       unused   input  active-high
         line  23:      unnamed       unused   input  active-high
@@ -1600,7 +1600,7 @@ gpiochip0 - 54 lines:
         line  26:      unnamed       unused   input  active-high
         line  27:      unnamed       unused   input  active-high
         line  28:      unnamed       unused   input  active-high
-        line  29:      unnamed       &quot;led0&quot;  output  active-high [used]
+        line  29:      unnamed       "led0"  output  active-high [used]
         line  30:      unnamed       unused   input  active-high
         line  31:      unnamed       unused   input  active-high
         line  32:      unnamed       unused   input  active-high
@@ -1628,7 +1628,7 @@ gpiochip0 - 54 lines:
 gpiochip1 - 8 lines:
         line   0:      unnamed       unused   input  active-high
         line   1:      unnamed       unused   input  active-high
-        line   2:      unnamed       &quot;led1&quot;  output   active-low [used]
+        line   2:      unnamed       "led1"  output   active-low [used]
         line   3:      unnamed       unused   input  active-high
         line   4:      unnamed       unused   input  active-high
         line   5:      unnamed       unused   input  active-high
@@ -1638,7 +1638,7 @@ gpiochip1 - 8 lines:
 
 <h2 id="opzionale-hardware-pwm">Opzionale: Hardware PWM<a class="headerlink" href="#opzionale-hardware-pwm" title="Permanent link">&para;</a></h2>
 <p>I Raspberry Pi hanno due canali PWM (PWM0 e PWM1) che sono esposti sull'intestazione o, in caso contrario, possono essere instradati ai pin gpio esistenti. Il demone mcu Linux utilizza l'interfaccia sysfs pwmchip per controllare i dispositivi hardware pwm sugli host Linux. L'interfaccia sysfs pwm non è esposta per impostazione predefinita su un Raspberry e può essere attivata aggiungendo una riga a <code>/boot/config.txt</code>:</p>
-<div class="highlight"><pre><span></span><code># Abilita l&#39;interfaccia sysfs di pwmchip
+<div class="highlight"><pre><span></span><code># Abilita l'interfaccia sysfs di pwmchip
 dtoverlay=pwm,pin=12,func=4
 </code></pre></div>
 

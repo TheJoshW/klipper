@@ -1609,10 +1609,10 @@ optional arguments:
 <h2 id="caracteristiques-des-cartes">Caractéristiques des cartes<a class="headerlink" href="#caracteristiques-des-cartes" title="Permanent link">&para;</a></h2>
 <p>Les cartes les plus courantes devraient être disponibles, mais il est possible d'ajouter une nouvelle définition de carte si nécessaire. Les définitions de cartes sont situées dans <code>~/klipper/scripts/spi_flash/board_defs.py</code>. Les définitions sont stockées dans un dictionnaire, par exemple :</p>
 <div class="highlight"><pre><span></span><code><span class="n">BOARD_DEFS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;generic-lpc1768&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;mcu&#39;</span><span class="p">:</span> <span class="s2">&quot;lpc1768&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;spi_bus&#39;</span><span class="p">:</span> <span class="s2">&quot;ssp1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;cs_pin&quot;</span><span class="p">:</span> <span class="s2">&quot;P0.6&quot;</span>
+    <span class="s1">'generic-lpc1768'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'mcu'</span><span class="p">:</span> <span class="s2">"lpc1768"</span><span class="p">,</span>
+        <span class="s1">'spi_bus'</span><span class="p">:</span> <span class="s2">"ssp1"</span><span class="p">,</span>
+        <span class="s2">"cs_pin"</span><span class="p">:</span> <span class="s2">"P0.6"</span>
     <span class="p">},</span>
     <span class="o">...&lt;</span><span class="n">further</span> <span class="n">definitions</span><span class="o">&gt;</span>
 <span class="p">}</span>
@@ -1635,7 +1635,7 @@ optional arguments:
 <p>Avant de créer une nouvelle définition de carte, il faut vérifier si une définition de carte existante répond aux critères nécessaires pour la nouvelle carte. Si c'est le cas, un <code>BOARD_ALIAS</code> peut être spécifié. Par exemple, l'alias suivant peut être ajouté pour spécifier "ma nouvelle carte" comme alias de "générique-lpc1768" :</p>
 <div class="highlight"><pre><span></span><code><span class="n">BOARD_ALIASES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="o">...&lt;</span><span class="n">previous</span> <span class="n">aliases</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="s1">&#39;my-new-board&#39;</span><span class="p">:</span> <span class="n">BOARD_DEFS</span><span class="p">[</span><span class="s1">&#39;generic-lpc1768&#39;</span><span class="p">],</span>
+    <span class="s1">'my-new-board'</span><span class="p">:</span> <span class="n">BOARD_DEFS</span><span class="p">[</span><span class="s1">'generic-lpc1768'</span><span class="p">],</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -1652,7 +1652,7 @@ make clean
 make menuconfig
 make
 ./scripts/flash-sdcard.sh /dev/ttyACM0 btt-octopus-f446-v1
-[[[éteindre-allumer manuellement la carte de l&#39;imprimante quand vous y êtes invité]]]
+[[[éteindre-allumer manuellement la carte de l'imprimante quand vous y êtes invité]]]
 ./scripts/flash-sdcard.sh -c /dev/ttyACM0 btt-octopus-f446-v1
 sudo service klipper start
 </code></pre></div>
@@ -1667,7 +1667,7 @@ make menuconfig
 make
 ./scripts/flash-sdcard.sh /dev/ttyACM0 btt-octopus-f446-v1
 sudo shutdown -h now
-[[[attendre que le RPi s&#39;arrête, puis éteindre-allumer et ssh à nouveau sur le RPi quand il a redémarré]]]
+[[[attendre que le RPi s'arrête, puis éteindre-allumer et ssh à nouveau sur le RPi quand il a redémarré]]]
 sudo service klipper stop
 cd ~/klipper
 ./scripts/flash-sdcard.sh -c /dev/ttyACM0 btt-octopus-f446-v1

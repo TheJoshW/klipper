@@ -1111,40 +1111,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    生成负载图
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#klippylog" class="md-nav__link">
-    从klippy.log文件中提取信息
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#simulavr" class="md-nav__link">
-    使用 simulavr 测试
-  </a>
-  
-    <nav class="md-nav" aria-label="使用 simulavr 测试">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gtkwavesimulavr" class="md-nav__link">
-    在gtkwave中使用simulavr
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1473,40 +1439,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    生成负载图
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#klippylog" class="md-nav__link">
-    从klippy.log文件中提取信息
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#simulavr" class="md-nav__link">
-    使用 simulavr 测试
-  </a>
-  
-    <nav class="md-nav" aria-label="使用 simulavr 测试">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gtkwavesimulavr" class="md-nav__link">
-    在gtkwave中使用simulavr
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1564,7 +1496,7 @@ make
 <h2 id="_4">运动分析和数据记录<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>Klipper支持记录其内部运动历史，稍后可以对其进行分析。若要使用此功能，Klipper必须在启用<a href="API_Server.html">API服务器</a>的情况下启动。</p>
 <p>使用 <code>data_logger.py</code> 工具启用数据日志记录。例如：</p>
-<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/data_logger.py /tmp/klippy_uds mylog -s &#39;*&#39;
+<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/data_logger.py /tmp/klippy_uds mylog -s '*'
 </code></pre></div>
 
 <p>此命令将连接到Klipper API服务器，订阅状态和运动信息，并记录结果。生成两个文件-一个压缩数据文件和一个索引文件（例如<code>mylog.json.gz</code>和<code>mylog.index.gz</code>）。启动日志记录后，可以完成打印和其他操作-日志记录将在后台继续。完成日志记录后，点击 <code>ctrl-c</code>退出 <code>data_logger.py</code> 工具。</p>
@@ -1579,7 +1511,7 @@ sudo apt-get install python-matplotlib
 </code></pre></div>
 
 <p>可以使用<code>-g</code>选项来指定要绘制图形的数据集(它接受一个包含列表的列表Python文字)。例如：</p>
-<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g &#39;[[&quot;trapq(toolhead,velocity)&quot;], [&quot;trapq(toolhead,accel)&quot;]]&#39;
+<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g '[["trapq(toolhead,velocity)"], ["trapq(toolhead,accel)"]]'
 </code></pre></div>
 
 <p>可用数据集的列表可以使用 <code>-l</code> 选项找到，例如：</p>
@@ -1587,80 +1519,12 @@ sudo apt-get install python-matplotlib
 </code></pre></div>
 
 <p>还可以为每个数据集指定matplotlib绘图选项：</p>
-<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g &#39;[[&quot;trapq(toolhead,velocity)?color=red&amp;alpha=0.4&quot;]]&#39;
+<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g '[["trapq(toolhead,velocity)?color=red&amp;alpha=0.4"]]'
 </code></pre></div>
 
 <p>有许多matplotlib选项可用；例如“颜色”、“标签”、“阿尔法”和“线条样式”。</p>
 <p><code>motan_graph.py</code>工具支持其他几个命令行选项--使用<code>--help</code>选项查看列表。查看/修改<a href="https://github.com/Klipper3d/klipper/blob/master/scripts/motan/motan_graph.py">motan_graph.py</a>脚本本身可能也很方便。</p>
-<p><code>data_logger.py</code>工具产生的原始数据日志遵循<a href="API_Server.html">API服务器</a>中描述的格式。使用如下所示的Unix命令检查数据可能很有用：<code>GunZip&lt;mylog.json.gz|tr‘\03’\n‘|less</code></p>
-<h2 id="_5">生成负载图<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>Klippy日志文件（/tmp/klippy.log）存储了关于带宽、微控制器负载和主机缓冲区负载的统计数据。在打印之后，绘制这些统计数字可能会很有用。</p>
-<p>为了生成图形，有必要安装"matplotlib"包：</p>
-<div class="highlight"><pre><span></span><code>sudo apt-get update
-sudo apt-get install python-matplotlib
-</code></pre></div>
-
-<p>然后可以使用以下方式生成图形：</p>
-<div class="highlight"><pre><span></span><code>~/klipper/scripts/graphstats.py /tmp/klippy.log -o loadgraph.png
-</code></pre></div>
-
-<p>然后结果可以通过<strong>loadgraph.png</strong>查看。</p>
-<p>可以产生不同的图表。更多信息请运行：<code>~/klipper/scripts/graphstats.py --help</code></p>
-<h2 id="klippylog">从klippy.log文件中提取信息<a class="headerlink" href="#klippylog" title="Permanent link">&para;</a></h2>
-<p>Klippy的日志文件（/tmp/klippy.log）也包含调试信息。有一个logextract.py脚本，在分析微控制器停机或类似问题时可能很有用。它通常是这样运行的：</p>
-<div class="highlight"><pre><span></span><code>mkdir work_directory
-cd work_directory
-cp /tmp/klippy.log .
-~/klipper/scripts/logextract.py ./klippy.log
-</code></pre></div>
-
-<p>该脚本将提取打印机的配置文件，并提取 MCU 的关闭信息。来自 MCU 关闭的信息转储（如果存在的话）将按时间戳重新排序，以协助诊断因果关系的情况。</p>
-<h2 id="simulavr">使用 simulavr 测试<a class="headerlink" href="#simulavr" title="Permanent link">&para;</a></h2>
-<p><a href="http://www.nongnu.org/simulavr/">simulavr</a>工具可以模拟 Atmel ATmega 微控制器。本章描述了如何通过simulavr运行测试gcode文件。由于该工具需要大量cpu资源，建议在台式机（而不是树莓派）上运行。</p>
-<p>要使用Simavr，请下载Simavr包并在支持Python的情况下进行编译。请注意，构建系统可能需要安装一些包(如SWIG)才能构建Python模块。</p>
-<div class="highlight"><pre><span></span><code>git clone git://git.savannah.nongnu.org/simulavr.git
-cd simulavr
-make python
-make build
-</code></pre></div>
-
-<p>确保在上述编译后存在类似<strong>./Build/pysimavr/_pysimavr.*.so</strong>的文件：</p>
-<div class="highlight"><pre><span></span><code>ls ./build/pysimulavr/_pysimulavr.*.so
-</code></pre></div>
-
-<p>此命令应报告特定文件(例如<strong>./build/pysimulavr/_pysimulavr.cpython-39-x86_64-linux-gnu.so</strong>)，而不是错误)。</p>
-<p>如果您使用的是基于Debian的系统(Debian、Ubuntu等)。您可以安装以下程序包并生成*.deb文件，以便在系统范围内安装simavr：</p>
-<div class="highlight"><pre><span></span><code>sudo apt update
-sudo apt install g++ make cmake swig rst2pdf help2man texinfo
-make cfgclean python debian
-sudo dpkg -i build/debian/python3-simulavr*.deb
-</code></pre></div>
-
-<p>要编译Klipper以便在simulavr中使用，请运行：</p>
-<div class="highlight"><pre><span></span><code>cd /path/to/klipper
-make menuconfig
-</code></pre></div>
-
-<p>并针对AVR atmega644P编写了微控制器软件，并选择了SIMULAVR软件仿真支持。然后可以编译Klipper(运行<code>make</code>)，然后使用以下命令开始模拟：</p>
-<div class="highlight"><pre><span></span><code>PYTHONPATH=/path/to/simulavr/build/pysimulavr/ ./scripts/avrsim.py out/klipper.elf
-</code></pre></div>
-
-<p>请注意，如果您已经在系统范围内安装了python3-simavr，则不需要设置<code>PYTHONPATH</code>，只需将其作为模拟器</p>
-<div class="highlight"><pre><span></span><code>./scripts/avrsim.py out/klipper.elf
-</code></pre></div>
-
-<p>然后，在另一个窗口中运行simulavr，可以运行以下内容，从一个文件（例如，"test.gcode"）中读取gcode，用Klippy处理它，并将其发送到simulavr中运行的Klipper（关于建立python虚拟环境的必要步骤，见<a href="Installation.html">安装</a>）：</p>
-<div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ./klippy/klippy.py config/generic-simulavr.cfg -i test.gcode -v
-</code></pre></div>
-
-<h3 id="gtkwavesimulavr">在gtkwave中使用simulavr<a class="headerlink" href="#gtkwavesimulavr" title="Permanent link">&para;</a></h3>
-<p>simulavr的一个有用的功能是它能够创建具有准确事件时间的信号波生成文件。要做到这一点，请按照上面的指示，在命令行运行avrsim.py请使用：</p>
-<div class="highlight"><pre><span></span><code>PYTHONPATH=/path/to/simulavr/src/python/ ./scripts/avrsim.py out/klipper.elf -t PORTA.PORT,PORTC.PORT
-</code></pre></div>
-
-<p>以上将创建一个文件<strong>avrsim.vcd</strong>，其中包括PORTA和PORTB上的GPIO的每个变化信息。然后可以用gtkwave来查看：</p>
-<div class="highlight"><pre><span></span><code>gtkwave avrsim.vcd
-</code></pre></div>
+<p><code>data_logger.py</code>工具产生的原始数据日志遵循<a href="API_Server.html">API服务器</a>中描述的格式。使用如下所示的Unix命令检查数据可能很有用：`GunZip</p>
 
               
             </article>

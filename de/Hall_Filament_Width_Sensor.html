@@ -1493,14 +1493,14 @@
 <h2 id="vorlage-fur-menu-variablen">Vorlage für Menü Variablen<a class="headerlink" href="#vorlage-fur-menu-variablen" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>[menu __main __filament __width_current]
 type: command
-enable: {&#39;hall_filament_width_sensor&#39; in printer}
-name: Dia: {&#39;%.2F&#39; % printer.hall_filament_width_sensor.Diameter}
+enable: {'hall_filament_width_sensor' in printer}
+name: Dia: {'%.2F' % printer.hall_filament_width_sensor.Diameter}
 index: 0
 
 [menu __main __filament __raw_width_current]
 type: command
-enable: {&#39;hall_filament_width_sensor&#39; in printer}
-name: Raw: {&#39;%4.0F&#39; % printer.hall_filament_width_sensor.Raw}
+enable: {'hall_filament_width_sensor' in printer}
+name: Raw: {'%4.0F' % printer.hall_filament_width_sensor.Raw}
 index: 1
 </code></pre></div>
 

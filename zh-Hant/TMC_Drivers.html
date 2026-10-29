@@ -1952,7 +1952,7 @@ homing_retract_dist: 0
 <div class="highlight"><pre><span></span><code>[gcode_macro SENSORLESS_HOME_X]
 gcode:
     {% set HOME_CUR = 0.700 %}
-    {% set driver_config = printer.configfile.settings[&#39;tmc2209 stepper_x&#39;] %}
+    {% set driver_config = printer.configfile.settings['tmc2209 stepper_x'] %}
     {% set RUN_CUR = driver_config.run_current %}
     # 為無感測器歸位設定電流
     SET_TMC_CURRENT STEPPER=stepper_x CURRENT={HOME_CUR}

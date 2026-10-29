@@ -1770,7 +1770,7 @@
 <h3 id="atmega2560">Atmega2560<a class="headerlink" href="#atmega2560" title="Permanent link">&para;</a></h3>
 <p>这个芯片通常出现在 "Arduino Mega" 中，在3D打印机主板中也十分普遍。</p>
 <p>要刷写引导程序本身，请使用类似以下的方法：</p>
-<div class="highlight"><pre><span></span><code>wget &#39;https://github.com/arduino/Arduino/raw/1.8.5/hardware/arduino/avr/bootloaders/stk500v2/stk500boot_v2_mega2560.hex&#39;
+<div class="highlight"><pre><span></span><code>wget 'https://github.com/arduino/Arduino/raw/1.8.5/hardware/arduino/avr/bootloaders/stk500v2/stk500boot_v2_mega2560.hex'
 
 avrdude -cavrispv2 -patmega2560 -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m -U efuse:w:0xFD:m -U hfuse:w:0xD8:m -U lfuse:w:0xFF:m
 avrdude -cavrispv2 -patmega2560 -P/dev/ttyACM0 -b115200 -U flash:w:stk500boot_v2_mega2560.hex
@@ -1784,7 +1784,7 @@ avrdude -cavrispv2 -patmega2560 -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 <h3 id="atmega1280">Atmega1280<a class="headerlink" href="#atmega1280" title="Permanent link">&para;</a></h3>
 <p>这个芯片通常出现在早期版本的 "Arduino Mega "中。</p>
 <p>要刷写引导程序本身，请使用类似以下的方法：</p>
-<div class="highlight"><pre><span></span><code>wget &#39;https://github.com/arduino/Arduino/raw/1.8.5/hardware/arduino/avr/bootloaders/atmega/ATmegaBOOT_168_atmega1280.hex&#39;
+<div class="highlight"><pre><span></span><code>wget 'https://github.com/arduino/Arduino/raw/1.8.5/hardware/arduino/avr/bootloaders/atmega/ATmegaBOOT_168_atmega1280.hex'
 
 avrdude -cavrispv2 -patmega1280 -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m -U efuse:w:0xF5:m -U hfuse:w:0xDA:m -U lfuse:w:0xFF:m
 avrdude -cavrispv2 -patmega1280 -P/dev/ttyACM0 -b115200 -U flash:w:ATmegaBOOT_168_atmega1280.hex
@@ -1798,7 +1798,7 @@ avrdude -cavrispv2 -patmega1280 -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 <h3 id="atmega1284p">Atmega1284p<a class="headerlink" href="#atmega1284p" title="Permanent link">&para;</a></h3>
 <p>这种芯片通常出现在 "Melzi "式的3D打印机主板上。</p>
 <p>要刷写引导程序本身，请使用类似以下的方法：</p>
-<div class="highlight"><pre><span></span><code>wget &#39;https://github.com/Lauszus/Sanguino/raw/1.0.2/bootloaders/optiboot/optiboot_atmega1284p.hex&#39;
+<div class="highlight"><pre><span></span><code>wget 'https://github.com/Lauszus/Sanguino/raw/1.0.2/bootloaders/optiboot/optiboot_atmega1284p.hex'
 
 avrdude -cavrispv2 -patmega1284p -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m -U efuse:w:0xFD:m -U hfuse:w:0xDE:m -U lfuse:w:0xFF:m
 avrdude -cavrispv2 -patmega1284p -P/dev/ttyACM0 -b115200 -U flash:w:optiboot_atmega1284p.hex
@@ -1821,7 +1821,7 @@ avrdude -cavrispv2 -patmega1284p -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 
 <h3 id="atmega168">Atmega168<a class="headerlink" href="#atmega168" title="Permanent link">&para;</a></h3>
 <p>atmega168的闪存空间有限。如果使用引导程序，建议使用Optiboot bootloader。要刷写该引导程序，请使用这个的方法：</p>
-<div class="highlight"><pre><span></span><code>wget &#39;https://github.com/arduino/Arduino/raw/1.8.5/hardware/arduino/avr/bootloaders/optiboot/optiboot_atmega168.hex&#39;
+<div class="highlight"><pre><span></span><code>wget 'https://github.com/arduino/Arduino/raw/1.8.5/hardware/arduino/avr/bootloaders/optiboot/optiboot_atmega168.hex'
 
 avrdude -cavrispv2 -patmega168 -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m -U efuse:w:0x04:m -U hfuse:w:0xDD:m -U lfuse:w:0xFF:m
 avrdude -cavrispv2 -patmega168 -P/dev/ttyACM0 -b115200 -U flash:w:optiboot_atmega168.hex
@@ -1856,18 +1856,18 @@ bossac -U -p /dev/ttyACM0 -R
 SWDIO=24
 SRST=18
 
-echo &quot;Exporting SWCLK and SRST pins.&quot;
+echo "Exporting SWCLK and SRST pins."
 echo $SWCLK &gt; /sys/class/gpio/export
 echo $SRST &gt; /sys/class/gpio/export
-echo &quot;out&quot; &gt; /sys/class/gpio/gpio$SWCLK/direction
-echo &quot;out&quot; &gt; /sys/class/gpio/gpio$SRST/direction
+echo "out" &gt; /sys/class/gpio/gpio$SWCLK/direction
+echo "out" &gt; /sys/class/gpio/gpio$SRST/direction
 
-echo &quot;Setting SWCLK low and pulsing SRST.&quot;
-echo &quot;0&quot; &gt; /sys/class/gpio/gpio$SWCLK/value
-echo &quot;0&quot; &gt; /sys/class/gpio/gpio$SRST/value
-echo &quot;1&quot; &gt; /sys/class/gpio/gpio$SRST/value
+echo "Setting SWCLK low and pulsing SRST."
+echo "0" &gt; /sys/class/gpio/gpio$SWCLK/value
+echo "0" &gt; /sys/class/gpio/gpio$SRST/value
+echo "1" &gt; /sys/class/gpio/gpio$SRST/value
 
-echo &quot;Unexporting SWCLK and SRST pins.&quot;
+echo "Unexporting SWCLK and SRST pins."
 echo $SWCLK &gt; /sys/class/gpio/unexport
 echo $SRST &gt; /sys/class/gpio/unexport
 </code></pre></div>
@@ -1889,7 +1889,7 @@ AT91samd引导加载程序%0。
 </code></pre></div>
 
 <p>获取引导加载程序 - 例如：</p>
-<div class="highlight"><pre><span></span><code>wget &#39;https://github.com/arduino/ArduinoCore-samd/raw/1.8.3/bootloaders/zero/samd21_sam_ba.bin&#39;
+<div class="highlight"><pre><span></span><code>wget 'https://github.com/arduino/ArduinoCore-samd/raw/1.8.3/bootloaders/zero/samd21_sam_ba.bin'
 </code></pre></div>
 
 <p>使用类似下面的 OpenOCD 命令来刷写：</p>
@@ -1911,7 +1911,7 @@ program samd21_sam_ba.bin verify
 </code></pre></div>
 
 <p>获得一个引导程序--很多引导程序可以从<a href="https://github.com/adafruit/uf2-samdx1/releases/latest">https://github.com/adafruit/uf2-samdx1/releases/latest</a>获得。例如：</p>
-<div class="highlight"><pre><span></span><code>wget &#39;https://github.com/adafruit/uf2-samdx1/releases/download/v3.7.0/bootloader-itsybitsy_m4-v3.7.0.bin&#39;
+<div class="highlight"><pre><span></span><code>wget 'https://github.com/adafruit/uf2-samdx1/releases/download/v3.7.0/bootloader-itsybitsy_m4-v3.7.0.bin'
 </code></pre></div>
 
 <p>使用类似下面的 OpenOCD 命令来刷写：</p>
@@ -1934,7 +1934,7 @@ at91samd bootloader 16384
 <h3 id="stm32duino-stm32f103">带有 stm32duino 引导加载程序的 STM32F103<a class="headerlink" href="#stm32duino-stm32f103" title="Permanent link">&para;</a></h3>
 <p>"stm32duino "项目有一个USB功能的引导程序-参见：<a href="https://github.com/rogerclarkmelbourne/STM32duino-bootloader">https://github.com/rogerclarkmelbourne/STM32duino-bootloader</a></p>
 <p>这个引导程序可以通过3.3V的串口用类似以下的命令来刷写：</p>
-<div class="highlight"><pre><span></span><code>wget &#39;https://github.com/rogerclarkmelbourne/STM32duino-bootloader/raw/master/binaries/generic_boot20_pc13.bin&#39;
+<div class="highlight"><pre><span></span><code>wget 'https://github.com/rogerclarkmelbourne/STM32duino-bootloader/raw/master/binaries/generic_boot20_pc13.bin'
 
 stm32flash -w generic_boot20_pc13.bin -v -g 0 /dev/ttyAMA0
 </code></pre></div>

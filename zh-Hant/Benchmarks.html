@@ -1758,7 +1758,7 @@ queue_step oid=2 interval=3000 count=1 add=0
 
 <p>爲了獲得單一步進電機的基準測試，使用了相同的配置序列，但只將上述測試的第一塊剪下並貼上到 console.py 視窗。</p>
 <p>爲了產生 <a href="Features.html">功能</a> 文件中的基準測試結果，每秒總步數的計算方法是將活動步進器的數量與標稱 mcu 頻率相乘，然後除以最終的 ticks 參數。結果四捨五入到最接近的 K。例如，使用三個活動步進器：</p>
-<div class="highlight"><pre><span></span><code>ECHO Test result is: {&quot;%.0fK&quot; % (3. * freq / ticks / 1000.)}
+<div class="highlight"><pre><span></span><code>ECHO Test result is: {"%.0fK" % (3. * freq / ticks / 1000.)}
 </code></pre></div>
 
 <p>基準的執行參數必須和 TMC 驅動相匹配。對於支援 <code>STEPPER_BOTH_EDGE=1</code> 的微控制器（控制檯啟動時<code>MCU config</code>行中會報告）使用 <code>step_pulse_duration=0</code> 和 <code>invert_step=-1</code> 來啟用步進脈衝的兩邊上的優化。對於其他微控制器，使用對應 100ns 的 <code>step_pulse_duration</code>。</p>

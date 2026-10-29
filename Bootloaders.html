@@ -1800,7 +1800,7 @@ chips (both bootloader flashing and application flashing).</p>
 <p>This chip is typically found in the "Arduino Mega" and is very common
 in 3d printer boards.</p>
 <p>To flash the bootloader itself use something like:</p>
-<div class="highlight"><pre><span></span><code>wget &#39;https://github.com/arduino/Arduino/raw/1.8.5/hardware/arduino/avr/bootloaders/stk500v2/stk500boot_v2_mega2560.hex&#39;
+<div class="highlight"><pre><span></span><code>wget 'https://github.com/arduino/Arduino/raw/1.8.5/hardware/arduino/avr/bootloaders/stk500v2/stk500boot_v2_mega2560.hex'
 
 avrdude -cavrispv2 -patmega2560 -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m -U efuse:w:0xFD:m -U hfuse:w:0xD8:m -U lfuse:w:0xFF:m
 avrdude -cavrispv2 -patmega2560 -P/dev/ttyACM0 -b115200 -U flash:w:stk500boot_v2_mega2560.hex
@@ -1815,7 +1815,7 @@ avrdude -cavrispv2 -patmega2560 -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 <p>This chip is typically found in earlier versions of the "Arduino
 Mega".</p>
 <p>To flash the bootloader itself use something like:</p>
-<div class="highlight"><pre><span></span><code>wget &#39;https://github.com/arduino/Arduino/raw/1.8.5/hardware/arduino/avr/bootloaders/atmega/ATmegaBOOT_168_atmega1280.hex&#39;
+<div class="highlight"><pre><span></span><code>wget 'https://github.com/arduino/Arduino/raw/1.8.5/hardware/arduino/avr/bootloaders/atmega/ATmegaBOOT_168_atmega1280.hex'
 
 avrdude -cavrispv2 -patmega1280 -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m -U efuse:w:0xF5:m -U hfuse:w:0xDA:m -U lfuse:w:0xFF:m
 avrdude -cavrispv2 -patmega1280 -P/dev/ttyACM0 -b115200 -U flash:w:ATmegaBOOT_168_atmega1280.hex
@@ -1829,7 +1829,7 @@ avrdude -cavrispv2 -patmega1280 -P/dev/ttyACM0 -b115200 -U lock:w:0x0F:m
 <h3 id="atmega1284p">Atmega1284p<a class="headerlink" href="#atmega1284p" title="Permanent link">&para;</a></h3>
 <p>This chip is commonly found in "Melzi" style 3d printer boards.</p>
 <p>To flash the bootloader itself use something like:</p>
-<div class="highlight"><pre><span></span><code>wget &#39;https://github.com/Lauszus/Sanguino/raw/1.0.2/bootloaders/optiboot/optiboot_atmega1284p.hex&#39;
+<div class="highlight"><pre><span></span><code>wget 'https://github.com/Lauszus/Sanguino/raw/1.0.2/bootloaders/optiboot/optiboot_atmega1284p.hex'
 
 avrdude -cavrispv2 -patmega1284p -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m -U efuse:w:0xFD:m -U hfuse:w:0xDE:m -U lfuse:w:0xFF:m
 avrdude -cavrispv2 -patmega1284p -P/dev/ttyACM0 -b115200 -U flash:w:optiboot_atmega1284p.hex
@@ -1861,7 +1861,7 @@ One can flash an application with it using something like:</p>
 <p>The atmega168 has limited flash space. If using a bootloader, it is
 recommended to use the Optiboot bootloader. To flash that bootloader
 use something like:</p>
-<div class="highlight"><pre><span></span><code>wget &#39;https://github.com/arduino/Arduino/raw/1.8.5/hardware/arduino/avr/bootloaders/optiboot/optiboot_atmega168.hex&#39;
+<div class="highlight"><pre><span></span><code>wget 'https://github.com/arduino/Arduino/raw/1.8.5/hardware/arduino/avr/bootloaders/optiboot/optiboot_atmega168.hex'
 
 avrdude -cavrispv2 -patmega168 -P/dev/ttyACM0 -b115200 -e -u -U lock:w:0x3F:m -U efuse:w:0x04:m -U hfuse:w:0xDD:m -U lfuse:w:0xFF:m
 avrdude -cavrispv2 -patmega168 -P/dev/ttyACM0 -b115200 -U flash:w:optiboot_atmega168.hex
@@ -1912,24 +1912,24 @@ Alternatively, one can use a
 <a href="#running-openocd-on-the-raspberry-pi">Raspberry Pi with OpenOCD</a>.</p>
 <p>When using OpenOCD with the SAMC21, extra steps must be taken to first
 put the chip into Cold Plugging mode if the board makes use of the
-SWD pins for other purposes. If using OpenOCD on a Rasberry Pi, this
+SWD pins for other purposes. If using OpenOCD on a Raspberry Pi, this
 can be done by running the following commands before invoking OpenOCD.</p>
 <div class="highlight"><pre><span></span><code>SWCLK=25
 SWDIO=24
 SRST=18
 
-echo &quot;Exporting SWCLK and SRST pins.&quot;
+echo "Exporting SWCLK and SRST pins."
 echo $SWCLK &gt; /sys/class/gpio/export
 echo $SRST &gt; /sys/class/gpio/export
-echo &quot;out&quot; &gt; /sys/class/gpio/gpio$SWCLK/direction
-echo &quot;out&quot; &gt; /sys/class/gpio/gpio$SRST/direction
+echo "out" &gt; /sys/class/gpio/gpio$SWCLK/direction
+echo "out" &gt; /sys/class/gpio/gpio$SRST/direction
 
-echo &quot;Setting SWCLK low and pulsing SRST.&quot;
-echo &quot;0&quot; &gt; /sys/class/gpio/gpio$SWCLK/value
-echo &quot;0&quot; &gt; /sys/class/gpio/gpio$SRST/value
-echo &quot;1&quot; &gt; /sys/class/gpio/gpio$SRST/value
+echo "Setting SWCLK low and pulsing SRST."
+echo "0" &gt; /sys/class/gpio/gpio$SWCLK/value
+echo "0" &gt; /sys/class/gpio/gpio$SRST/value
+echo "1" &gt; /sys/class/gpio/gpio$SRST/value
 
-echo &quot;Unexporting SWCLK and SRST pins.&quot;
+echo "Unexporting SWCLK and SRST pins."
 echo $SWCLK &gt; /sys/class/gpio/unexport
 echo $SRST &gt; /sys/class/gpio/unexport
 </code></pre></div>
@@ -1955,7 +1955,7 @@ Alternatively, one can use a
 </code></pre></div>
 
 <p>Obtain a bootloader - for example:</p>
-<div class="highlight"><pre><span></span><code>wget &#39;https://github.com/arduino/ArduinoCore-samd/raw/1.8.3/bootloaders/zero/samd21_sam_ba.bin&#39;
+<div class="highlight"><pre><span></span><code>wget 'https://github.com/arduino/ArduinoCore-samd/raw/1.8.3/bootloaders/zero/samd21_sam_ba.bin'
 </code></pre></div>
 
 <p>Flash with OpenOCD commands similar to:</p>
@@ -1988,7 +1988,7 @@ the following chip config:</p>
 
 <p>Obtain a bootloader - several bootloaders are available from
 <a href="https://github.com/adafruit/uf2-samdx1/releases/latest"><a href="https://github.com/adafruit/uf2-samdx1/releases/latest">https://github.com/adafruit/uf2-samdx1/releases/latest</a></a>. For example:</p>
-<div class="highlight"><pre><span></span><code>wget &#39;https://github.com/adafruit/uf2-samdx1/releases/download/v3.7.0/bootloader-itsybitsy_m4-v3.7.0.bin&#39;
+<div class="highlight"><pre><span></span><code>wget 'https://github.com/adafruit/uf2-samdx1/releases/download/v3.7.0/bootloader-itsybitsy_m4-v3.7.0.bin'
 </code></pre></div>
 
 <p>Flash with OpenOCD commands similar to:</p>
@@ -2024,7 +2024,7 @@ future resets boot from flash.</p>
 <p>The "stm32duino" project has a USB capable bootloader - see:
 <a href="https://github.com/rogerclarkmelbourne/STM32duino-bootloader"><a href="https://github.com/rogerclarkmelbourne/STM32duino-bootloader">https://github.com/rogerclarkmelbourne/STM32duino-bootloader</a></a></p>
 <p>This bootloader can be flashed via 3.3V serial with something like:</p>
-<div class="highlight"><pre><span></span><code>wget &#39;https://github.com/rogerclarkmelbourne/STM32duino-bootloader/raw/master/binaries/generic_boot20_pc13.bin&#39;
+<div class="highlight"><pre><span></span><code>wget 'https://github.com/rogerclarkmelbourne/STM32duino-bootloader/raw/master/binaries/generic_boot20_pc13.bin'
 
 stm32flash -w generic_boot20_pc13.bin -v -g 0 /dev/ttyAMA0
 </code></pre></div>
@@ -2147,7 +2147,7 @@ instructions for building the bootloader.</p>
 <p>The first time CanBoot has been flashed it should detect that no application
 is present and enter the bootloader.  If this doesn't occur it is possible to
 enter the bootloader by pressing the reset button twice in succession.</p>
-<p>The <code>flash_can.py</code> utility supplied in the <code>lib/canboot</code> folder may be used to
+<p>The <code>flashtool.py</code> utility supplied in the <code>lib/katapult</code> folder may be used to
 upload Klipper firmware.  The device UUID is necessary to flash.  If you do not
 have a UUID it is possible to query nodes currently running the bootloader:</p>
 <div class="highlight"><pre><span></span><code>python3 flash_can.py -q

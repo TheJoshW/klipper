@@ -2248,12 +2248,12 @@ sudo apt install python3-numpy python3-matplotlib libatlas-base-dev libopenblas-
 </code></pre></div>
 
 <p>Next, in order to install NumPy in the Klipper environment, run the command:</p>
-<div class="highlight"><pre><span></span><code>~/klippy-env/bin/pip install -v &quot;numpy&lt;1.26&quot;
+<div class="highlight"><pre><span></span><code>~/klippy-env/bin/pip install -v "numpy&lt;1.26"
 </code></pre></div>
 
 <p>Note that, depending on the performance of the CPU, it may take <em>a lot</em> of time, up to 10-20 minutes. Be patient and wait for the completion of the installation. On some occasions, if the board has too little RAM the installation may fail and you will need to enable swap. Also note the forced version, due to newer versions of NumPY having requirements that may not be satisfied in some klipper python environments.</p>
 <p>Once installed please check that no errors show from the command:</p>
-<div class="highlight"><pre><span></span><code>~/klippy-env/bin/python -c &#39;import numpy;&#39;
+<div class="highlight"><pre><span></span><code>~/klippy-env/bin/python -c 'import numpy;'
 </code></pre></div>
 
 <p>The correct output should simply be a new line.</p>
@@ -2352,7 +2352,7 @@ probe_points:
 <h4 id="configure-mpu-9520-compatibles-with-pico">Configure MPU-9520 Compatibles With Pico<a class="headerlink" href="#configure-mpu-9520-compatibles-with-pico" title="Permanent link">&para;</a></h4>
 <p>Pico I2C is set to 400000 on default. Simply add the following to the printer.cfg:</p>
 <div class="highlight"><pre><span></span><code>[mcu pico]
-serial: /dev/serial/by-id/&lt;your Pico&#39;s serial ID&gt;
+serial: /dev/serial/by-id/&lt;your Pico's serial ID&gt;
 
 [mpu9250]
 i2c_mcu: pico
@@ -2371,7 +2371,7 @@ pins: pico:gpio23
 <h4 id="configure-mpu-9520-compatibles-with-avr">Configure MPU-9520 Compatibles with AVR<a class="headerlink" href="#configure-mpu-9520-compatibles-with-avr" title="Permanent link">&para;</a></h4>
 <p>AVR I2C will be set to 400000 by the mpu9250 option. Simply add the following to the printer.cfg:</p>
 <div class="highlight"><pre><span></span><code>[mcu nano]
-serial: /dev/serial/by-id/&lt;your nano&#39;s serial ID&gt;
+serial: /dev/serial/by-id/&lt;your nano's serial ID&gt;
 
 [mpu9250]
 i2c_mcu: nano
@@ -2422,16 +2422,16 @@ probe_points: ...
 
 <p>該腳本將生成帶有頻率響應的圖表<code>/tmp/shaper_calibrate_x.png</code>和<code>/tmp/shaper_calibrate_y.png</code>。您還將獲得每個輸入整形器的建議頻率，以及為您的設置推薦的輸入整形器。例如：</p>
 <p><img alt="共振" src="img/calibrate-y.png" /></p>
-<div class="highlight"><pre><span></span><code>Fitted shaper &#39;zv&#39; frequency = 34.4 Hz (vibrations = 4.0%, smoothing ~= 0.132)
-To avoid too much smoothing with &#39;zv&#39;, suggested max_accel &lt;= 4500 mm/sec^2
-Fitted shaper &#39;mzv&#39; frequency = 34.6 Hz (vibrations = 0.0%, smoothing ~= 0.170)
-To avoid too much smoothing with &#39;mzv&#39;, suggested max_accel &lt;= 3500 mm/sec^2
-Fitted shaper &#39;ei&#39; frequency = 41.4 Hz (vibrations = 0.0%, smoothing ~= 0.188)
-To avoid too much smoothing with &#39;ei&#39;, suggested max_accel &lt;= 3200 mm/sec^2
-Fitted shaper &#39;2hump_ei&#39; frequency = 51.8 Hz (vibrations = 0.0%, smoothing ~= 0.201)
-To avoid too much smoothing with &#39;2hump_ei&#39;, suggested max_accel &lt;= 3000 mm/sec^2
-Fitted shaper &#39;3hump_ei&#39; frequency = 61.8 Hz (vibrations = 0.0%, smoothing ~= 0.215)
-To avoid too much smoothing with &#39;3hump_ei&#39;, suggested max_accel &lt;= 2800 mm/sec^2
+<div class="highlight"><pre><span></span><code>Fitted shaper 'zv' frequency = 34.4 Hz (vibrations = 4.0%, smoothing ~= 0.132)
+To avoid too much smoothing with 'zv', suggested max_accel &lt;= 4500 mm/sec^2
+Fitted shaper 'mzv' frequency = 34.6 Hz (vibrations = 0.0%, smoothing ~= 0.170)
+To avoid too much smoothing with 'mzv', suggested max_accel &lt;= 3500 mm/sec^2
+Fitted shaper 'ei' frequency = 41.4 Hz (vibrations = 0.0%, smoothing ~= 0.188)
+To avoid too much smoothing with 'ei', suggested max_accel &lt;= 3200 mm/sec^2
+Fitted shaper '2hump_ei' frequency = 51.8 Hz (vibrations = 0.0%, smoothing ~= 0.201)
+To avoid too much smoothing with '2hump_ei', suggested max_accel &lt;= 3000 mm/sec^2
+Fitted shaper '3hump_ei' frequency = 61.8 Hz (vibrations = 0.0%, smoothing ~= 0.215)
+To avoid too much smoothing with '3hump_ei', suggested max_accel &lt;= 2800 mm/sec^2
 Recommended shaper is mzv @ 34.6 Hz
 </code></pre></div>
 
@@ -2490,36 +2490,36 @@ probe_points: ...
 <p>請記住，輸入整形器可以在部分中創建一些平滑。由 <code>calibrate_shaper.py</code> 腳本或 <code>SHAPER_CALIBRATE</code> 命令執行的輸入整形器的自動調整試圖不加劇平滑，但同時它們試圖最小化產生的振動。有時他們可以對整形器頻率做出次優選擇，或者您可能只是希望以較大的剩余振動為代價來減少零件的平滑度。在這些情況下，您可以請求限制輸入整形器的最大平滑。</p>
 <p>讓我們考慮以下自動調整的結果：</p>
 <p><img alt="共振" src="img/calibrate-x.png" /></p>
-<div class="highlight"><pre><span></span><code>Fitted shaper &#39;zv&#39; frequency = 57.8 Hz (vibrations = 20.3%, smoothing ~= 0.053)
-To avoid too much smoothing with &#39;zv&#39;, suggested max_accel &lt;= 13000 mm/sec^2
-Fitted shaper &#39;mzv&#39; frequency = 34.8 Hz (vibrations = 3.6%, smoothing ~= 0.168)
-To avoid too much smoothing with &#39;mzv&#39;, suggested max_accel &lt;= 3600 mm/sec^2
-Fitted shaper &#39;ei&#39; frequency = 48.8 Hz (vibrations = 4.9%, smoothing ~= 0.135)
-To avoid too much smoothing with &#39;ei&#39;, suggested max_accel &lt;= 4400 mm/sec^2
-Fitted shaper &#39;2hump_ei&#39; frequency = 45.2 Hz (vibrations = 0.1%, smoothing ~= 0.264)
-To avoid too much smoothing with &#39;2hump_ei&#39;, suggested max_accel &lt;= 2200 mm/sec^2
-Fitted shaper &#39;3hump_ei&#39; frequency = 48.0 Hz (vibrations = 0.0%, smoothing ~= 0.356)
-To avoid too much smoothing with &#39;3hump_ei&#39;, suggested max_accel &lt;= 1500 mm/sec^2
+<div class="highlight"><pre><span></span><code>Fitted shaper 'zv' frequency = 57.8 Hz (vibrations = 20.3%, smoothing ~= 0.053)
+To avoid too much smoothing with 'zv', suggested max_accel &lt;= 13000 mm/sec^2
+Fitted shaper 'mzv' frequency = 34.8 Hz (vibrations = 3.6%, smoothing ~= 0.168)
+To avoid too much smoothing with 'mzv', suggested max_accel &lt;= 3600 mm/sec^2
+Fitted shaper 'ei' frequency = 48.8 Hz (vibrations = 4.9%, smoothing ~= 0.135)
+To avoid too much smoothing with 'ei', suggested max_accel &lt;= 4400 mm/sec^2
+Fitted shaper '2hump_ei' frequency = 45.2 Hz (vibrations = 0.1%, smoothing ~= 0.264)
+To avoid too much smoothing with '2hump_ei', suggested max_accel &lt;= 2200 mm/sec^2
+Fitted shaper '3hump_ei' frequency = 48.0 Hz (vibrations = 0.0%, smoothing ~= 0.356)
+To avoid too much smoothing with '3hump_ei', suggested max_accel &lt;= 1500 mm/sec^2
 Recommended shaper is 2hump_ei @ 45.2 Hz
 </code></pre></div>
 
-<p>請注意，報告的“平滑”值是一些抽象的投影值。這些值可用於比較不同的配置：值越高，整形器將創建的平滑度越高。然而，這些平滑分數並不代表任何真正的平滑度量，因為實際的平滑取決於 <a href="#selecting-max-accel"><code>max_accel</code></a> 和 <code>square_corner_velocity</code> 參數。因此，您應該打印一些測試打印，以查看所選配置創建的平滑程度。</p>
+<p>Note that the reported <code>smoothing</code> values are some abstract projected values. These values can be used to compare different configurations: the higher the value, the more smoothing a shaper will create. However, these smoothing scores do not represent any real measure of smoothing, because the actual smoothing depends on <a href="#selecting-max_accel"><code>max_accel</code></a> and <code>square_corner_velocity</code> parameters. Therefore, you should print some test prints to see how much smoothing exactly a chosen configuration creates.</p>
 <p>在上面的示例中，建議的 shaper 參數還不錯，但是如果您想在 X 軸上獲得更少的平滑度怎麼辦？您可以嘗試使用以下命令限制最大整形器平滑：</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/calibrate_shaper.py /tmp/resonances_x_*.csv -o /tmp/shaper_calibrate_x.png --max_smoothing=0.2
 </code></pre></div>
 
 <p>這將平滑限制為 0.2 分。現在您可以得到以下結果：</p>
 <p><img alt="共振" src="img/calibrate-x-max-smoothing.png" /></p>
-<div class="highlight"><pre><span></span><code>Fitted shaper &#39;zv&#39; frequency = 55.4 Hz (vibrations = 19.7%, smoothing ~= 0.057)
-To avoid too much smoothing with &#39;zv&#39;, suggested max_accel &lt;= 12000 mm/sec^2
-Fitted shaper &#39;mzv&#39; frequency = 34.6 Hz (vibrations = 3.6%, smoothing ~= 0.170)
-To avoid too much smoothing with &#39;mzv&#39;, suggested max_accel &lt;= 3500 mm/sec^2
-Fitted shaper &#39;ei&#39; frequency = 48.2 Hz (vibrations = 4.8%, smoothing ~= 0.139)
-To avoid too much smoothing with &#39;ei&#39;, suggested max_accel &lt;= 4300 mm/sec^2
-Fitted shaper &#39;2hump_ei&#39; frequency = 52.0 Hz (vibrations = 2.7%, smoothing ~= 0.200)
-To avoid too much smoothing with &#39;2hump_ei&#39;, suggested max_accel &lt;= 3000 mm/sec^2
-Fitted shaper &#39;3hump_ei&#39; frequency = 72.6 Hz (vibrations = 1.4%, smoothing ~= 0.155)
-To avoid too much smoothing with &#39;3hump_ei&#39;, suggested max_accel &lt;= 3900 mm/sec^2
+<div class="highlight"><pre><span></span><code>Fitted shaper 'zv' frequency = 55.4 Hz (vibrations = 19.7%, smoothing ~= 0.057)
+To avoid too much smoothing with 'zv', suggested max_accel &lt;= 12000 mm/sec^2
+Fitted shaper 'mzv' frequency = 34.6 Hz (vibrations = 3.6%, smoothing ~= 0.170)
+To avoid too much smoothing with 'mzv', suggested max_accel &lt;= 3500 mm/sec^2
+Fitted shaper 'ei' frequency = 48.2 Hz (vibrations = 4.8%, smoothing ~= 0.139)
+To avoid too much smoothing with 'ei', suggested max_accel &lt;= 4300 mm/sec^2
+Fitted shaper '2hump_ei' frequency = 52.0 Hz (vibrations = 2.7%, smoothing ~= 0.200)
+To avoid too much smoothing with '2hump_ei', suggested max_accel &lt;= 3000 mm/sec^2
+Fitted shaper '3hump_ei' frequency = 72.6 Hz (vibrations = 1.4%, smoothing ~= 0.155)
+To avoid too much smoothing with '3hump_ei', suggested max_accel &lt;= 3900 mm/sec^2
 Recommended shaper is 3hump_ei @ 72.6 Hz
 </code></pre></div>
 
@@ -2627,16 +2627,16 @@ TEST_RESONANCES AXIS=0.866025404,-0.5 OUTPUT=raw_data
 
 <p>這將為兩個軸運行完整測試，並為頻率響應和建議的輸入整形器生成 csv 輸出（默認為<code>/tmp/calibration_data_*.csv</code>）。您還將在 Octoprint 控制台上獲得每個輸入整形器的建議頻率，以及為您的設置推薦的輸入整形器。例如：</p>
 <div class="highlight"><pre><span></span><code>Calculating the best input shaper parameters for y axis # 正在計算y軸的最佳輸入整形參數
-Fitted shaper &#39;zv&#39; frequency = 39.0 Hz (vibrations = 13.2%, smoothing ~= 0.105) # 擬合整形「zv」
-To avoid too much smoothing with &#39;zv&#39;, suggested max_accel &lt;= 5900 mm/sec^2 # 為避免使用「zv」方法產生過度平滑，建議最大加速度&lt;=5900 mm/sec^2
-Fitted shaper &#39;mzv&#39; frequency = 36.8 Hz (vibrations = 1.7%, smoothing ~= 0.150) # 擬合整形「mzv」
-To avoid too much smoothing with &#39;mzv&#39;, suggested max_accel &lt;= 4000 mm/sec^2 # 為避免使用「mzv」方法產生過度平滑，建議最大加速度&lt;=4000 mm/sec^2
-Fitted shaper &#39;ei&#39; frequency = 36.6 Hz (vibrations = 2.2%, smoothing ~= 0.240) # 擬合整形「ei」
-To avoid too much smoothing with &#39;ei&#39;, suggested max_accel &lt;= 2500 mm/sec^2 # 為避免使用「ei」方法產生過度平滑，建議最大加速度&lt;=2500 mm/sec^2
-Fitted shaper &#39;2hump_ei&#39; frequency = 48.0 Hz (vibrations = 0.0%, smoothing ~= 0.234) # 擬合整形「2hump_ei」
-To avoid too much smoothing with &#39;2hump_ei&#39;, suggested max_accel &lt;= 2500 mm/sec^2 # 為避免使用「2hump_ei」方法產生過度平滑，建議最大加速度&lt;=2500 mm/sec^2
-Fitted shaper &#39;3hump_ei&#39; frequency = 59.0 Hz (vibrations = 0.0%, smoothing ~= 0.235) # 擬合整形「3hump_ei」
-To avoid too much smoothing with &#39;3hump_ei&#39;, suggested max_accel &lt;= 2500 mm/sec^2 # 為避免使用「3hump_ei」方法產生過度平滑，建議最大加速度&lt;=2500 mm/sec^2
+Fitted shaper 'zv' frequency = 39.0 Hz (vibrations = 13.2%, smoothing ~= 0.105) # 擬合整形「zv」
+To avoid too much smoothing with 'zv', suggested max_accel &lt;= 5900 mm/sec^2 # 為避免使用「zv」方法產生過度平滑，建議最大加速度&lt;=5900 mm/sec^2
+Fitted shaper 'mzv' frequency = 36.8 Hz (vibrations = 1.7%, smoothing ~= 0.150) # 擬合整形「mzv」
+To avoid too much smoothing with 'mzv', suggested max_accel &lt;= 4000 mm/sec^2 # 為避免使用「mzv」方法產生過度平滑，建議最大加速度&lt;=4000 mm/sec^2
+Fitted shaper 'ei' frequency = 36.6 Hz (vibrations = 2.2%, smoothing ~= 0.240) # 擬合整形「ei」
+To avoid too much smoothing with 'ei', suggested max_accel &lt;= 2500 mm/sec^2 # 為避免使用「ei」方法產生過度平滑，建議最大加速度&lt;=2500 mm/sec^2
+Fitted shaper '2hump_ei' frequency = 48.0 Hz (vibrations = 0.0%, smoothing ~= 0.234) # 擬合整形「2hump_ei」
+To avoid too much smoothing with '2hump_ei', suggested max_accel &lt;= 2500 mm/sec^2 # 為避免使用「2hump_ei」方法產生過度平滑，建議最大加速度&lt;=2500 mm/sec^2
+Fitted shaper '3hump_ei' frequency = 59.0 Hz (vibrations = 0.0%, smoothing ~= 0.235) # 擬合整形「3hump_ei」
+To avoid too much smoothing with '3hump_ei', suggested max_accel &lt;= 2500 mm/sec^2 # 為避免使用「3hump_ei」方法產生過度平滑，建議最大加速度&lt;=2500 mm/sec^2
 Recommended shaper_type_y = mzv, shaper_freq_y = 36.8 Hz # 建議shaper_type_y = mzv, shaper_freq_y = 36.8 Hz
 </code></pre></div>
 

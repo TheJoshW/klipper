@@ -1952,9 +1952,9 @@ homing_retract_dist: 0
 <div class="highlight"><pre><span></span><code>[gcode_macro SENSORLESS_HOME_X]
 gcode:
     {% set HOME_CUR = 0.700 %}
-    {% set driver_config = printer.configfile.settings[&#39;tmc2209 stepper_x&#39;] %}
+    {% set driver_config = printer.configfile.settings['tmc2209 stepper_x'] %}
     {% set RUN_CUR = driver_config.run_current %}
-    # Imposta la corrente per l&#39;homing sensorless
+    # Imposta la corrente per l'homing sensorless
     SET_TMC_CURRENT STEPPER=stepper_x CURRENT={HOME_CUR}
     # Fai una pausa per assicurarti che il flag di stallo del driver sia clear
     G4 P2000

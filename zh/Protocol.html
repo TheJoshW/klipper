@@ -1646,7 +1646,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>Klipper传输协议可以被认为是微控制器和主机之间的一个<a href="https://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a>机制。微控制器软件声明了主机可以调用的命令，以及它可以产生的响应信息。主机使用这些信息来命令微控制器执行动作并解释结果。</p>
 <h3 id="_3">宣布命令<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>微控制器软件通过使用C代码中的DECL_COMMAND()宏来声明一个 “命令”。例如：</p>
-<div class="highlight"><pre><span></span><code>DECL_COMMAND(command_update_digital_out, &quot;update_digital_out oid=%c value=%c&quot;);
+<div class="highlight"><pre><span></span><code>DECL_COMMAND(command_update_digital_out, "update_digital_out oid=%c value=%c");
 </code></pre></div>
 
 <p>以上声明了一个名为 "update_digital_out "的命令。这允许主机 “invoke”这个命令，这将使得command_update_digital_out()C函数在微控制器中被执行。上述内容还表明，该命令需要两个整数参数。当command_update_digital_out()C代码被执行时，它将被传递一个包含这两个整数的数组--第一个对应于 "oid"，第二个对应于 "value"。</p>
@@ -1654,7 +1654,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>微控制器固件构建的时候包含所有用DECL_COMMAND()声明的命令，确定其参数，并使得它们可以被调用。</p>
 <h3 id="_4">声明响应<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>当从微控制器向主机发送信息时会产生一个 "响应"。这些都是使用sendf()C语言宏来声明和发送的。例如：</p>
-<div class="highlight"><pre><span></span><code>sendf(&quot;status clock=%u status=%c&quot;, sched_read_time(), sched_is_shutdown());
+<div class="highlight"><pre><span></span><code>sendf("status clock=%u status=%c", sched_read_time(), sched_is_shutdown());
 </code></pre></div>
 
 <p>以上传输了一个 "状态 "响应消息，其中包含两个整数参数（"时钟 "和 "状态"）。微控制器的构建会自动找到所有sendf()的调用，并为其生成编码器。sendf()函数的第一个参数描述了响应，它的格式与命令声明相同。</p>
@@ -1662,26 +1662,26 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>sendf()宏只能从命令或任务处理程序中调用，而不能从中断或定时器中调用。代码不需要在收到命令的响应中发出sendf()，代码也不限制sendf()的调用次数，任务处理程序在在任何时候都可以调用sendf()。</p>
 <h4 id="_5">输出响应<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
 <p>为了简化调试，也有一个output()C函数。例如：</p>
-<div class="highlight"><pre><span></span><code>output(&quot;The value of %u is %s with size %u.&quot;, x, buf, buf_len);
+<div class="highlight"><pre><span></span><code>output("The value of %u is %s with size %u.", x, buf, buf_len);
 </code></pre></div>
 
 <p>output()函数的用法与printf()相似–它的目的是生成和格式化任意的信息供人阅读。</p>
 <h3 id="_6">声明枚举<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>枚举允许主机代码对微控制器作为整数处理的参数使用字符串标识。它们在微控制器代码中被声明-例如：</p>
-<div class="highlight"><pre><span></span><code>DECL_ENUMERATION(&quot;spi_bus&quot;, &quot;spi&quot;, 0);
+<div class="highlight"><pre><span></span><code>DECL_ENUMERATION("spi_bus", "spi", 0);
 
-DECL_ENUMERATION_RANGE(&quot;pin&quot;, &quot;PC0&quot;, 16, 8);
+DECL_ENUMERATION_RANGE("pin", "PC0", 16, 8);
 </code></pre></div>
 
 <p>在第一个例子中，DECL_ENUMERATION()宏定义了一个枚举量可以用于任意的命令/响应消息，这个枚举量的参数名称为 "spi_bus "或参数名称后缀为"_spi_bus "。对于此参数，字符串 "spi "是一个有效的值，它将以一个零的整数值被传递。</p>
 <p>也可以声明一个枚举范围。在第二个例子中，"pin "参数（或任何后缀为"_pin "的参数）将接受PC0、PC1、PC2、...、PC7作为有效值。字符串将被转化成整数16、17、18...23进行传输。</p>
 <h3 id="_7">声明常量<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>常量也可以被导出。例子如下：</p>
-<div class="highlight"><pre><span></span><code>DECL_CONSTANT(&quot;SERIAL_BAUD&quot;, 250000);
+<div class="highlight"><pre><span></span><code>DECL_CONSTANT("SERIAL_BAUD", 250000);
 </code></pre></div>
 
 <p>可以从微控制器向主机输出一个名为 "SERIAL_BAUD "，值为250000的常数。也可以将字符串声明成常量-例如：</p>
-<div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR(&quot;MCU&quot;, &quot;pru&quot;);
+<div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR("MCU", "pru");
 </code></pre></div>
 
 <h2 id="_8">底层消息编码<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>

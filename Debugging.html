@@ -1592,7 +1592,7 @@ micro-controller.</p>
 later analyzed. To use this feature, Klipper must be started with the
 <a href="API_Server.html">API Server</a> enabled.</p>
 <p>Data logging is enabled with the <code>data_logger.py</code> tool. For example:</p>
-<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/data_logger.py /tmp/klippy_uds mylog
+<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/data_logger.py /tmp/klippy_uds mylog -s '*'
 </code></pre></div>
 
 <p>This command will connect to the Klipper API Server, subscribe to
@@ -1620,7 +1620,7 @@ a recent version of <a href="https://python.org">Python</a> and
 
 <p>One can use the <code>-g</code> option to specify the datasets to graph (it takes
 a Python literal containing a list of lists). For example:</p>
-<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g &#39;[[&quot;trapq(toolhead,velocity)&quot;], [&quot;trapq(toolhead,accel)&quot;]]&#39;
+<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g '[["trapq(toolhead,velocity)"], ["trapq(toolhead,accel)"]]'
 </code></pre></div>
 
 <p>The list of available datasets can be found using the <code>-l</code> option -
@@ -1630,7 +1630,7 @@ for example:</p>
 
 <p>It is also possible to specify matplotlib plot options for each
 dataset:</p>
-<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g &#39;[[&quot;trapq(toolhead,velocity)?color=red&amp;alpha=0.4&quot;]]&#39;
+<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g '[["trapq(toolhead,velocity)?color=red&amp;alpha=0.4"]]'
 </code></pre></div>
 
 <p>Many matplotlib options are available; some examples are "color",

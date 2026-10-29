@@ -1682,7 +1682,7 @@ gcode:
 <p>Beachten Sie, dass die Jinja2-Direktive <code>set</code> einem Objekt in der <code>printer</code>-Hierarchie einen lokalen Namen zuweisen kann. Das kann Makros lesbarer machen und Tipparbeit sparen. Zum Beispiel:</p>
 <div class="highlight"><pre><span></span><code>[gcode_macro QUERY_HTU21D]
 gcode:
-    {% set sensor = printer[&quot;htu21d my_sensor&quot;] %}
+    {% set sensor = printer["htu21d my_sensor"] %}
     M117 Temp:{sensor.temperature} Humidity:{sensor.humidity}
 </code></pre></div>
 
@@ -1712,7 +1712,7 @@ gcode:
 [gcode_macro finish_probe]
 gcode:
   # Restore temperature
-  M140 S{printer[&quot;gcode_macro start_probe&quot;].bed_temp}
+  M140 S{printer["gcode_macro start_probe"].bed_temp}
 </code></pre></div>
 
 <p>Berücksichtigen Sie bei der Verwendung von SET_GCODE_VARIABLE unbedingt das zeitliche Verhältnis von Makroauswertung und Befehlsausführung.</p>
@@ -1744,7 +1744,7 @@ gcode:
 <div class="highlight"><pre><span></span><code>[delayed_gcode report_temp]
 initial_duration: 2.
 gcode:
-  {action_respond_info(&quot;Extruder Temp: %.1f&quot; % (printer.extruder0.temperature))}
+  {action_respond_info("Extruder Temp: %.1f" % (printer.extruder0.temperature))}
   UPDATE_DELAYED_GCODE ID=report_temp DURATION=2
 </code></pre></div>
 
@@ -1782,12 +1782,12 @@ gcode:
 <div class="highlight"><pre><span></span><code>[gcode_macro T1]
 gcode:
   ACTIVATE_EXTRUDER extruder=extruder1
-  SAVE_VARIABLE VARIABLE=currentextruder VALUE=&#39;&quot;extruder1&quot;&#39;
+  SAVE_VARIABLE VARIABLE=currentextruder VALUE='"extruder1"'
 
 [gcode_macro T0]
 gcode:
   ACTIVATE_EXTRUDER extruder=extruder
-  SAVE_VARIABLE VARIABLE=currentextruder VALUE=&#39;&quot;extruder&quot;&#39;
+  SAVE_VARIABLE VARIABLE=currentextruder VALUE='"extruder"'
 
 [gcode_macro START_GCODE]
 gcode:

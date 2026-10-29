@@ -1786,7 +1786,7 @@ number of steps per second is calculated by multiplying the number of
 active steppers with the nominal mcu frequency and dividing by the
 final ticks parameter. The results are rounded to the nearest K. For
 example, with three active steppers:</p>
-<div class="highlight"><pre><span></span><code>ECHO Test result is: {&quot;%.0fK&quot; % (3. * freq / ticks / 1000.)}
+<div class="highlight"><pre><span></span><code>ECHO Test result is: {"%.0fK" % (3. * freq / ticks / 1000.)}
 </code></pre></div>
 
 <p>The benchmarks are run with parameters suitable for TMC Drivers. For

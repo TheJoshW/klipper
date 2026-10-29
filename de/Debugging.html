@@ -1564,7 +1564,7 @@ make
 <h2 id="bewegungsanalyse-und-datenerfassung">Bewegungsanalyse und Datenerfassung<a class="headerlink" href="#bewegungsanalyse-und-datenerfassung" title="Permanent link">&para;</a></h2>
 <p>Klipper unterstützt die Protokollierung seiner internen Bewegungshistorie, die später analysiert werden kann. Um diese Funktion zu nutzen, muss Klipper mit aktiviertem <a href="API_Server.html">API-Server</a> gestartet werden.</p>
 <p>Die Datenprotokollierung wird mit dem Werkzeug <code>data_logger.py</code> aktiviert. Zum Beispiel:</p>
-<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/data_logger.py /tmp/klippy_uds mylog -s &#39;*&#39;
+<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/data_logger.py /tmp/klippy_uds mylog -s '*'
 </code></pre></div>
 
 <p>Dieser Befehl verbindet sich mit dem Klipper-API-Server, abonniert Status- und Bewegungsinformationen und protokolliert die Ergebnisse. Es werden zwei Dateien erzeugt - eine komprimierte Datendatei und eine Indexdatei (z. B. <code>mylog.json.gz</code> und <code>mylog.index.gz</code>). Nach dem Start der Protokollierung können Drucke und andere Aktionen abgeschlossen werden - die Protokollierung läuft im Hintergrund weiter. Ist die Protokollierung abgeschlossen, drücken Sie <code>Strg+C</code>, um das Werkzeug <code>data_logger.py</code> zu beenden.</p>
@@ -1579,7 +1579,7 @@ sudo apt-get install python-matplotlib
 </code></pre></div>
 
 <p>Mit der Option <code>-g</code> können die darzustellenden Datensätze angegeben werden (sie erwartet ein Python-Literal mit einer Liste von Listen). Zum Beispiel:</p>
-<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g &#39;[[&quot;trapq(toolhead,velocity)&quot;], [&quot;trapq(toolhead,accel)&quot;]]&#39;
+<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g '[["trapq(toolhead,velocity)"], ["trapq(toolhead,accel)"]]'
 </code></pre></div>
 
 <p>Die Liste der verfügbaren Datensätze lässt sich mit der Option <code>-l</code> ermitteln - zum Beispiel:</p>
@@ -1587,7 +1587,7 @@ sudo apt-get install python-matplotlib
 </code></pre></div>
 
 <p>Es ist auch möglich, für jeden Datensatz matplotlib-Plot-Optionen anzugeben:</p>
-<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g &#39;[[&quot;trapq(toolhead,velocity)?color=red&amp;alpha=0.4&quot;]]&#39;
+<div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g '[["trapq(toolhead,velocity)?color=red&amp;alpha=0.4"]]'
 </code></pre></div>
 
 <p>Viele matplotlib-Optionen sind verfügbar; einige Beispiele sind "color", "label", "alpha" und "linestyle".</p>

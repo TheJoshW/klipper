@@ -1758,7 +1758,7 @@ queue_step oid=2 interval=3000 count=1 add=0
 
 <p>Per ottenere i benchmark del singolo stepper, viene utilizzata la stessa sequenza di configurazione, ma solo il primo blocco del test precedente viene tagliato e incollato nella finestra di console.py.</p>
 <p>Per produrre i benchmark trovati nel documento <a href="Features.html">Features</a>, il numero totale di passi al secondo viene calcolato moltiplicando il numero di stepper attivi per la frequenza nominale mcu e dividendo per il parametro tick finale. I risultati vengono arrotondati alla K più vicina. Ad esempio, con tre stepper attivi:</p>
-<div class="highlight"><pre><span></span><code>ECHO Test result is: {&quot;%.0fK&quot; % (3. * freq / ticks / 1000.)}
+<div class="highlight"><pre><span></span><code>ECHO Test result is: {"%.0fK" % (3. * freq / ticks / 1000.)}
 </code></pre></div>
 
 <p>I benchmark vengono eseguiti con parametri adatti ai driver TMC. Per i microcontrollori che supportano <code>STEPPER_BOTH_EDGE=1</code> (come riportato nella riga <code>MCU config</code> al primo avvio di console.py) usa <code>step_pulse_duration=0</code> e <code>invert_step=-1</code> per abilitare lo stepping ottimizzato su entrambi i bordi del impulso di passo. Per altri microcontrollori usa un <code>step_pulse_duration</code> corrispondente a 100ns.</p>

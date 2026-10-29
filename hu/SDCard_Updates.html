@@ -1609,10 +1609,10 @@ optional arguments:
 <h2 id="alaplap-definiciok">Alaplap definíciók<a class="headerlink" href="#alaplap-definiciok" title="Permanent link">&para;</a></h2>
 <p>A legtöbb általános alaplapnak rendelkezésre kell állnia, azonban szükség esetén új alaplap definíciót is hozzáadhatsz. Az alaplap-definíciók a <code>~/klipper/scripts/spi_flash/board_defs.py</code> állományban találhatók. A definíciókat például lexikonban tároljuk:</p>
 <div class="highlight"><pre><span></span><code><span class="n">BOARD_DEFS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;generic-lpc1768&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;mcu&#39;</span><span class="p">:</span> <span class="s2">&quot;lpc1768&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;spi_bus&#39;</span><span class="p">:</span> <span class="s2">&quot;ssp1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;cs_pin&quot;</span><span class="p">:</span> <span class="s2">&quot;P0.6&quot;</span>
+    <span class="s1">'generic-lpc1768'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'mcu'</span><span class="p">:</span> <span class="s2">"lpc1768"</span><span class="p">,</span>
+        <span class="s1">'spi_bus'</span><span class="p">:</span> <span class="s2">"ssp1"</span><span class="p">,</span>
+        <span class="s2">"cs_pin"</span><span class="p">:</span> <span class="s2">"P0.6"</span>
     <span class="p">},</span>
     <span class="o">...&lt;</span><span class="n">further</span> <span class="n">definitions</span><span class="o">&gt;</span>
 <span class="p">}</span>
@@ -1635,7 +1635,7 @@ optional arguments:
 <p>Egy új alaplap definíció létrehozása előtt ellenőrizni kell, hogy egy meglévő alaplap definíció megfelel-e az új alaplap számára szükséges kritériumoknak. Ha ez a helyzet, akkor egy <code>BOARD_ALIAS</code> adható meg. Például a következő álnév adható hozzá <code>my-new-board</code> álneveként a <code>generic-lpc1768</code> meghatározásához:</p>
 <div class="highlight"><pre><span></span><code><span class="n">BOARD_ALIASES</span> <span class="o">=</span> <span class="p">{</span>
      <span class="o">...&lt;</span><span class="n">previous</span> <span class="n">aliases</span><span class="o">&gt;</span><span class="p">,</span>
-     <span class="s1">&#39;my-new-board&#39;</span><span class="p">:</span> <span class="n">BOARD_DEFS</span><span class="p">[</span><span class="s1">&#39;generic-lpc1768&#39;</span><span class="p">],</span>
+     <span class="s1">'my-new-board'</span><span class="p">:</span> <span class="n">BOARD_DEFS</span><span class="p">[</span><span class="s1">'generic-lpc1768'</span><span class="p">],</span>
 <span class="p">}</span>
 </code></pre></div>
 

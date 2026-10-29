@@ -1646,7 +1646,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>Das Klipper-Übertragungsprotokoll kann als <a href="https://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a>-Mechanismus zwischen Mikrocontroller und Host verstanden werden. Die Mikrocontroller-Software deklariert die Befehle, die der Host aufrufen kann, sowie die Antwortnachrichten, die sie erzeugen kann. Der Host nutzt diese Informationen, um den Mikrocontroller zu Aktionen zu veranlassen und die Ergebnisse zu interpretieren.</p>
 <h3 id="befehle-festlegen">Befehle festlegen<a class="headerlink" href="#befehle-festlegen" title="Permanent link">&para;</a></h3>
 <p>Die Mikrocontroller-Software deklariert einen „command“ mit dem Makro DECL_COMMAND() im C-Code. Zum Beispiel:</p>
-<div class="highlight"><pre><span></span><code>DECL_COMMAND(command_update_digital_out, &quot;update_digital_out oid=%c value=%c&quot;);
+<div class="highlight"><pre><span></span><code>DECL_COMMAND(command_update_digital_out, "update_digital_out oid=%c value=%c");
 </code></pre></div>
 
 <p>Das Obige deklariert einen Befehl namens „update_digital_out“. Damit kann der Host diesen Befehl „aufrufen“, was dazu führt, dass die C-Funktion command_update_digital_out() im Mikrocontroller ausgeführt wird. Das Obige zeigt außerdem, dass der Befehl zwei Ganzzahl-Parameter erwartet. Wenn der C-Code command_update_digital_out() ausgeführt wird, erhält er ein Array mit diesen beiden Ganzzahlen - die erste entspricht 'oid', die zweite 'value'.</p>
@@ -1654,7 +1654,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>Der Mikrocontroller-Build sammelt alle mit DECL_COMMAND() deklarierten Befehle, ermittelt deren Parameter und sorgt dafür, dass sie aufrufbar sind.</p>
 <h3 id="antworten-deklarieren">Antworten deklarieren<a class="headerlink" href="#antworten-deklarieren" title="Permanent link">&para;</a></h3>
 <p>Um Informationen vom Mikrocontroller an den Host zu senden, wird eine „response“ erzeugt. Diese werden mit dem C-Makro sendf() sowohl deklariert als auch übertragen. Zum Beispiel:</p>
-<div class="highlight"><pre><span></span><code>sendf(&quot;status clock=%u status=%c&quot;, sched_read_time(), sched_is_shutdown());
+<div class="highlight"><pre><span></span><code>sendf("status clock=%u status=%c", sched_read_time(), sched_is_shutdown());
 </code></pre></div>
 
 <p>Das Obige überträgt eine „status“-Antwortnachricht, die zwei Ganzzahl-Parameter enthält („clock“ und „status“). Der Mikrocontroller-Build findet automatisch alle sendf()-Aufrufe und erzeugt dafür Kodierer. Der erste Parameter der Funktion sendf() beschreibt die Antwort und hat dasselbe Format wie Befehlsdeklarationen.</p>
@@ -1662,26 +1662,26 @@ queue_step oid=7 interval=11717 count=4 add=1281
 <p>Das Makro sendf() sollte nur aus Befehls- oder Task-Handlern heraus aufgerufen werden und nicht aus Interrupts oder Timern. Der Code muss nicht auf einen empfangenen Befehl mit einem sendf() antworten, die Anzahl der sendf()-Aufrufe ist nicht begrenzt, und sendf() darf jederzeit aus einem Task-Handler aufgerufen werden.</p>
 <h4 id="ausgabe-antworten">Ausgabe-Antworten<a class="headerlink" href="#ausgabe-antworten" title="Permanent link">&para;</a></h4>
 <p>Zur Vereinfachung des Debuggens gibt es außerdem eine C-Funktion output(). Zum Beispiel:</p>
-<div class="highlight"><pre><span></span><code>output(&quot;The value of %u is %s with size %u.&quot;, x, buf, buf_len);
+<div class="highlight"><pre><span></span><code>output("The value of %u is %s with size %u.", x, buf, buf_len);
 </code></pre></div>
 
 <p>Die Funktion output() wird ähnlich wie printf() verwendet - sie ist dazu gedacht, beliebige Nachrichten für menschliche Leser zu erzeugen und zu formatieren.</p>
 <h3 id="aufzahlungen-deklarieren">Aufzählungen deklarieren<a class="headerlink" href="#aufzahlungen-deklarieren" title="Permanent link">&para;</a></h3>
 <p>Aufzählungen erlauben es dem Host-Code, Zeichenketten-Bezeichner für Parameter zu verwenden, die der Mikrocontroller als Ganzzahlen verarbeitet. Sie werden im Mikrocontroller-Code deklariert - zum Beispiel:</p>
-<div class="highlight"><pre><span></span><code>DECL_ENUMERATION(&quot;spi_bus&quot;, &quot;spi&quot;, 0);
+<div class="highlight"><pre><span></span><code>DECL_ENUMERATION("spi_bus", "spi", 0);
 
-DECL_ENUMERATION_RANGE(&quot;pin&quot;, &quot;PC0&quot;, 16, 8);
+DECL_ENUMERATION_RANGE("pin", "PC0", 16, 8);
 </code></pre></div>
 
 <p>Im ersten Beispiel definiert das Makro DECL_ENUMERATION() eine Aufzählung für jede Befehls-/Antwortnachricht mit einem Parameternamen „spi_bus“ oder einem Parameternamen mit der Endung „_spi_bus“. Für diese Parameter ist die Zeichenkette „spi“ ein gültiger Wert und wird mit dem Ganzzahlwert null übertragen.</p>
 <p>Es ist auch möglich, einen Aufzählungsbereich zu deklarieren. Im zweiten Beispiel würde ein Parameter „pin“ (oder ein beliebiger Parameter mit der Endung „_pin“) PC0, PC1, PC2, ..., PC7 als gültige Werte akzeptieren. Die Zeichenketten werden mit den Ganzzahlen 16, 17, 18, ..., 23 übertragen.</p>
 <h3 id="konstanten-deklarieren">Konstanten deklarieren<a class="headerlink" href="#konstanten-deklarieren" title="Permanent link">&para;</a></h3>
 <p>Auch Konstanten können exportiert werden. Zum Beispiel würde Folgendes:</p>
-<div class="highlight"><pre><span></span><code>DECL_CONSTANT(&quot;SERIAL_BAUD&quot;, 250000);
+<div class="highlight"><pre><span></span><code>DECL_CONSTANT("SERIAL_BAUD", 250000);
 </code></pre></div>
 
 <p>eine Konstante namens „SERIAL_BAUD“ mit dem Wert 250000 vom Mikrocontroller zum Host exportieren. Es ist auch möglich, eine Konstante zu deklarieren, die eine Zeichenkette ist - zum Beispiel:</p>
-<div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR(&quot;MCU&quot;, &quot;pru&quot;);
+<div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR("MCU", "pru");
 </code></pre></div>
 
 <h2 id="low-level-nachrichtenkodierung">Low-Level Nachrichtenkodierung<a class="headerlink" href="#low-level-nachrichtenkodierung" title="Permanent link">&para;</a></h2>

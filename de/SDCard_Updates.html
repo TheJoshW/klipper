@@ -1609,10 +1609,10 @@ optional arguments:
 <h2 id="platinendefinitionen">Platinendefinitionen<a class="headerlink" href="#platinendefinitionen" title="Permanent link">&para;</a></h2>
 <p>Die gängigsten Platinen sollten verfügbar sein, bei Bedarf kann jedoch eine neue Platinendefinition hinzugefügt werden. Platinendefinitionen befinden sich in <code>~/klipper/scripts/spi_flash/board_defs.py</code>. Die Definitionen werden in einem Wörterbuch gespeichert, zum Beispiel:</p>
 <div class="highlight"><pre><span></span><code><span class="n">BOARD_DEFS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;generic-lpc1768&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;mcu&#39;</span><span class="p">:</span> <span class="s2">&quot;lpc1768&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;spi_bus&#39;</span><span class="p">:</span> <span class="s2">&quot;ssp1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;cs_pin&quot;</span><span class="p">:</span> <span class="s2">&quot;P0.6&quot;</span>
+    <span class="s1">'generic-lpc1768'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'mcu'</span><span class="p">:</span> <span class="s2">"lpc1768"</span><span class="p">,</span>
+        <span class="s1">'spi_bus'</span><span class="p">:</span> <span class="s2">"ssp1"</span><span class="p">,</span>
+        <span class="s2">"cs_pin"</span><span class="p">:</span> <span class="s2">"P0.6"</span>
     <span class="p">},</span>
     <span class="o">...&lt;</span><span class="n">further</span> <span class="n">definitions</span><span class="o">&gt;</span>
 <span class="p">}</span>
@@ -1635,7 +1635,7 @@ optional arguments:
 <p>Bevor Sie eine neue Platinendefinition erstellen, sollten Sie prüfen, ob eine vorhandene Platinendefinition die für die neue Platine notwendigen Kriterien erfüllt. Ist dies der Fall, kann ein <code>BOARD_ALIAS</code> angegeben werden. Zum Beispiel kann der folgende Alias hinzugefügt werden, um <code>my-new-board</code> als Alias für <code>generic-lpc1768</code> festzulegen:</p>
 <div class="highlight"><pre><span></span><code><span class="n">BOARD_ALIASES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="o">...&lt;</span><span class="n">previous</span> <span class="n">aliases</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="s1">&#39;my-new-board&#39;</span><span class="p">:</span> <span class="n">BOARD_DEFS</span><span class="p">[</span><span class="s1">&#39;generic-lpc1768&#39;</span><span class="p">],</span>
+    <span class="s1">'my-new-board'</span><span class="p">:</span> <span class="n">BOARD_DEFS</span><span class="p">[</span><span class="s1">'generic-lpc1768'</span><span class="p">],</span>
 <span class="p">}</span>
 </code></pre></div>
 

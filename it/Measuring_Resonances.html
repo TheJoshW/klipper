@@ -2248,12 +2248,12 @@ sudo apt install python3-numpy python3-matplotlib libatlas-base-dev libopenblas-
 </code></pre></div>
 
 <p>Quindi, per installare NumPy nell'ambiente Klipper, esegui il comando:</p>
-<div class="highlight"><pre><span></span><code>~/klippy-env/bin/pip install -v &quot;numpy&lt;1.26&quot;
+<div class="highlight"><pre><span></span><code>~/klippy-env/bin/pip install -v "numpy&lt;1.26"
 </code></pre></div>
 
 <p>Note that, depending on the performance of the CPU, it may take <em>a lot</em> of time, up to 10-20 minutes. Be patient and wait for the completion of the installation. On some occasions, if the board has too little RAM the installation may fail and you will need to enable swap. Also note the forced version, due to newer versions of NumPY having requirements that may not be satisfied in some klipper python environments.</p>
 <p>Once installed please check that no errors show from the command:</p>
-<div class="highlight"><pre><span></span><code>~/klippy-env/bin/python -c &#39;import numpy;&#39;
+<div class="highlight"><pre><span></span><code>~/klippy-env/bin/python -c 'import numpy;'
 </code></pre></div>
 
 <p>The correct output should simply be a new line.</p>
@@ -2306,12 +2306,12 @@ probe_points:
     # Da qualche parte leggermente sopra la metà del piano di stampa
     147,154, 20
 
-[output_pin power_mode] #Migliora la stabilità dell&#39; alimentazione
+[output_pin power_mode] #Migliora la stabilità dell' alimentazione
 pin: adxl:gpio23
 </code></pre></div>
 
 <p>Se imposti la configurazione di ADXL345 in un file separato, come mostrato sopra, ti consigliamo di modificare anche il file <code>printer.cfg</code> per includere questo:</p>
-<div class="highlight"><pre><span></span><code>[include adxl.cfg] # Commenta questo quando scolleghi l&#39;accelerometro
+<div class="highlight"><pre><span></span><code>[include adxl.cfg] # Commenta questo quando scolleghi l'accelerometro
 </code></pre></div>
 
 <p>Riavvia Klipper tramite il comando <code>RESTART</code>.</p>
@@ -2352,7 +2352,7 @@ probe_points:
 <h4 id="configure-mpu-9520-compatibles-with-pico">Configure MPU-9520 Compatibles With Pico<a class="headerlink" href="#configure-mpu-9520-compatibles-with-pico" title="Permanent link">&para;</a></h4>
 <p>Pico I2C is set to 400000 on default. Simply add the following to the printer.cfg:</p>
 <div class="highlight"><pre><span></span><code>[mcu pico]
-serial: /dev/serial/by-id/&lt;your Pico&#39;s serial ID&gt;
+serial: /dev/serial/by-id/&lt;your Pico's serial ID&gt;
 
 [mpu9250]
 i2c_mcu: pico
@@ -2371,7 +2371,7 @@ pins: pico:gpio23
 <h4 id="configure-mpu-9520-compatibles-with-avr">Configure MPU-9520 Compatibles with AVR<a class="headerlink" href="#configure-mpu-9520-compatibles-with-avr" title="Permanent link">&para;</a></h4>
 <p>AVR I2C will be set to 400000 by the mpu9250 option. Simply add the following to the printer.cfg:</p>
 <div class="highlight"><pre><span></span><code>[mcu nano]
-serial: /dev/serial/by-id/&lt;your nano&#39;s serial ID&gt;
+serial: /dev/serial/by-id/&lt;your nano's serial ID&gt;
 
 [mpu9250]
 i2c_mcu: nano
@@ -2422,16 +2422,16 @@ probe_points: ...
 
 <p>Questo script genererà i grafici <code>/tmp/shaper_calibrate_x.png</code> e <code>/tmp/shaper_calibrate_y.png</code> con le risposte in frequenza. Riceverai anche le frequenze suggerite per ogni input shaper, nonché quale input shaper è consigliato per la tua configurazione. Per esempio:</p>
 <p><img alt="Resonances" src="img/calibrate-y.png" /></p>
-<div class="highlight"><pre><span></span><code>Fitted shaper &#39;zv&#39; frequency = 34.4 Hz (vibrations = 4.0%, smoothing ~= 0.132)
-To avoid too much smoothing with &#39;zv&#39;, suggested max_accel &lt;= 4500 mm/sec^2
-Fitted shaper &#39;mzv&#39; frequency = 34.6 Hz (vibrations = 0.0%, smoothing ~= 0.170)
-To avoid too much smoothing with &#39;mzv&#39;, suggested max_accel &lt;= 3500 mm/sec^2
-Fitted shaper &#39;ei&#39; frequency = 41.4 Hz (vibrations = 0.0%, smoothing ~= 0.188)
-To avoid too much smoothing with &#39;ei&#39;, suggested max_accel &lt;= 3200 mm/sec^2
-Fitted shaper &#39;2hump_ei&#39; frequency = 51.8 Hz (vibrations = 0.0%, smoothing ~= 0.201)
-To avoid too much smoothing with &#39;2hump_ei&#39;, suggested max_accel &lt;= 3000 mm/sec^2
-Fitted shaper &#39;3hump_ei&#39; frequency = 61.8 Hz (vibrations = 0.0%, smoothing ~= 0.215)
-To avoid too much smoothing with &#39;3hump_ei&#39;, suggested max_accel &lt;= 2800 mm/sec^2
+<div class="highlight"><pre><span></span><code>Fitted shaper 'zv' frequency = 34.4 Hz (vibrations = 4.0%, smoothing ~= 0.132)
+To avoid too much smoothing with 'zv', suggested max_accel &lt;= 4500 mm/sec^2
+Fitted shaper 'mzv' frequency = 34.6 Hz (vibrations = 0.0%, smoothing ~= 0.170)
+To avoid too much smoothing with 'mzv', suggested max_accel &lt;= 3500 mm/sec^2
+Fitted shaper 'ei' frequency = 41.4 Hz (vibrations = 0.0%, smoothing ~= 0.188)
+To avoid too much smoothing with 'ei', suggested max_accel &lt;= 3200 mm/sec^2
+Fitted shaper '2hump_ei' frequency = 51.8 Hz (vibrations = 0.0%, smoothing ~= 0.201)
+To avoid too much smoothing with '2hump_ei', suggested max_accel &lt;= 3000 mm/sec^2
+Fitted shaper '3hump_ei' frequency = 61.8 Hz (vibrations = 0.0%, smoothing ~= 0.215)
+To avoid too much smoothing with '3hump_ei', suggested max_accel &lt;= 2800 mm/sec^2
 Recommended shaper is mzv @ 34.6 Hz
 </code></pre></div>
 
@@ -2452,7 +2452,7 @@ max_accel: 3000  # non dovrebbe superare il max_accel stimato per gli assi X e Y
 <p>Se la tua stampante ha un piatto scorrevole, dovrai cambiare la posizione dell'accelerometro tra le misurazioni per gli assi X e Y: misurare le risonanze dell'asse X con l'accelerometro collegato alla testa di stampa e le risonanze dell'asse Y - al piatto.</p>
 <p>However, you can also connect two accelerometers simultaneously, though the ADXL345 must be connected to different boards (say, to an RPi and printer MCU board), or to two different physical SPI interfaces on the same board (rarely available). Then they can be configured in the following manner:</p>
 <div class="highlight"><pre><span></span><code>[adxl345 hotend]
-# Supponendo che il chip &quot;hotend&quot; sia collegato a un RPi
+# Supponendo che il chip "hotend" sia collegato a un RPi
 cs_pin: rpi:None
 
 [adxl345 bed]
@@ -2490,36 +2490,36 @@ probe_points: ...
 <p>Tieni presente che lo input shaper può creare un po' di smoothing nelle parti. La regolazione automatica del input shaper eseguita dallo script <code>calibrate_shaper.py</code> o dal comando <code>SHAPER_CALIBRATE</code> cercano di non esacerbare lo smoothing, ma allo stesso tempo cercano di ridurre al minimo le vibrazioni risultanti. A volte possono fare una scelta non ottimale della frequenza dello shaper, o forse semplicemente preferisci avere meno smoothing in alcune parti a scapito di maggiori vibrazioni residue. In questi casi è possibile richiedere di limitare lo smoothing massimo dal input shaper.</p>
 <p>Consideriamo i seguenti risultati della sintonizzazione automatica:</p>
 <p><img alt="Resonances" src="img/calibrate-x.png" /></p>
-<div class="highlight"><pre><span></span><code>Fitted shaper &#39;zv&#39; frequency = 57.8 Hz (vibrations = 20.3%, smoothing ~= 0.053)
-To avoid too much smoothing with &#39;zv&#39;, suggested max_accel &lt;= 13000 mm/sec^2
-Fitted shaper &#39;mzv&#39; frequency = 34.8 Hz (vibrations = 3.6%, smoothing ~= 0.168)
-To avoid too much smoothing with &#39;mzv&#39;, suggested max_accel &lt;= 3600 mm/sec^2
-Fitted shaper &#39;ei&#39; frequency = 48.8 Hz (vibrations = 4.9%, smoothing ~= 0.135)
-To avoid too much smoothing with &#39;ei&#39;, suggested max_accel &lt;= 4400 mm/sec^2
-Fitted shaper &#39;2hump_ei&#39; frequency = 45.2 Hz (vibrations = 0.1%, smoothing ~= 0.264)
-To avoid too much smoothing with &#39;2hump_ei&#39;, suggested max_accel &lt;= 2200 mm/sec^2
-Fitted shaper &#39;3hump_ei&#39; frequency = 48.0 Hz (vibrations = 0.0%, smoothing ~= 0.356)
-To avoid too much smoothing with &#39;3hump_ei&#39;, suggested max_accel &lt;= 1500 mm/sec^2
+<div class="highlight"><pre><span></span><code>Fitted shaper 'zv' frequency = 57.8 Hz (vibrations = 20.3%, smoothing ~= 0.053)
+To avoid too much smoothing with 'zv', suggested max_accel &lt;= 13000 mm/sec^2
+Fitted shaper 'mzv' frequency = 34.8 Hz (vibrations = 3.6%, smoothing ~= 0.168)
+To avoid too much smoothing with 'mzv', suggested max_accel &lt;= 3600 mm/sec^2
+Fitted shaper 'ei' frequency = 48.8 Hz (vibrations = 4.9%, smoothing ~= 0.135)
+To avoid too much smoothing with 'ei', suggested max_accel &lt;= 4400 mm/sec^2
+Fitted shaper '2hump_ei' frequency = 45.2 Hz (vibrations = 0.1%, smoothing ~= 0.264)
+To avoid too much smoothing with '2hump_ei', suggested max_accel &lt;= 2200 mm/sec^2
+Fitted shaper '3hump_ei' frequency = 48.0 Hz (vibrations = 0.0%, smoothing ~= 0.356)
+To avoid too much smoothing with '3hump_ei', suggested max_accel &lt;= 1500 mm/sec^2
 Recommended shaper is 2hump_ei @ 45.2 Hz
 </code></pre></div>
 
-<p>Si noti che i valori di <code>smoothing</code> riportati sono alcuni valori proiettati. Questi valori possono essere utilizzati per confrontare diverse configurazioni: maggiore è il valore, maggiore sarà la levigatura creata da uno shaper. Tuttavia, questi punteggi di smoothing non rappresentano alcuna misura reale dello smoothing, perché lo smoothing effettivo dipende dai parametri <a href="#selecting-max-accel"><code>max_accel</code></a> e <code>square_corner_velocity</code>. Pertanto, è necessario eseguire alcune stampe di prova per vedere quanta smoothing crea esattamente una configurazione scelta.</p>
+<p>Note that the reported <code>smoothing</code> values are some abstract projected values. These values can be used to compare different configurations: the higher the value, the more smoothing a shaper will create. However, these smoothing scores do not represent any real measure of smoothing, because the actual smoothing depends on <a href="#selecting-max_accel"><code>max_accel</code></a> and <code>square_corner_velocity</code> parameters. Therefore, you should print some test prints to see how much smoothing exactly a chosen configuration creates.</p>
 <p>Nell'esempio sopra i parametri dello shaper suggeriti non sono male, ma cosa succede se si desidera ottenere meno smooting sull'asse X? Puoi provare a limitare lo smoothing massimo dello shaper usando il seguente comando:</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/calibrate_shaper.py /tmp/resonances_x_*.csv -o /tmp/shaper_calibrate_x.png --max_smoothing=0.2
 </code></pre></div>
 
 <p>che limita lo smoothing a un punteggio di 0.2. Ora puoi ottenere il seguente risultato:</p>
 <p><img alt="Resonances" src="img/calibrate-x-max-smoothing.png" /></p>
-<div class="highlight"><pre><span></span><code>Fitted shaper &#39;zv&#39; frequency = 55.4 Hz (vibrations = 19.7%, smoothing ~= 0.057)
-To avoid too much smoothing with &#39;zv&#39;, suggested max_accel &lt;= 12000 mm/sec^2
-Fitted shaper &#39;mzv&#39; frequency = 34.6 Hz (vibrations = 3.6%, smoothing ~= 0.170)
-To avoid too much smoothing with &#39;mzv&#39;, suggested max_accel &lt;= 3500 mm/sec^2
-Fitted shaper &#39;ei&#39; frequency = 48.2 Hz (vibrations = 4.8%, smoothing ~= 0.139)
-To avoid too much smoothing with &#39;ei&#39;, suggested max_accel &lt;= 4300 mm/sec^2
-Fitted shaper &#39;2hump_ei&#39; frequency = 52.0 Hz (vibrations = 2.7%, smoothing ~= 0.200)
-To avoid too much smoothing with &#39;2hump_ei&#39;, suggested max_accel &lt;= 3000 mm/sec^2
-Fitted shaper &#39;3hump_ei&#39; frequency = 72.6 Hz (vibrations = 1.4%, smoothing ~= 0.155)
-To avoid too much smoothing with &#39;3hump_ei&#39;, suggested max_accel &lt;= 3900 mm/sec^2
+<div class="highlight"><pre><span></span><code>Fitted shaper 'zv' frequency = 55.4 Hz (vibrations = 19.7%, smoothing ~= 0.057)
+To avoid too much smoothing with 'zv', suggested max_accel &lt;= 12000 mm/sec^2
+Fitted shaper 'mzv' frequency = 34.6 Hz (vibrations = 3.6%, smoothing ~= 0.170)
+To avoid too much smoothing with 'mzv', suggested max_accel &lt;= 3500 mm/sec^2
+Fitted shaper 'ei' frequency = 48.2 Hz (vibrations = 4.8%, smoothing ~= 0.139)
+To avoid too much smoothing with 'ei', suggested max_accel &lt;= 4300 mm/sec^2
+Fitted shaper '2hump_ei' frequency = 52.0 Hz (vibrations = 2.7%, smoothing ~= 0.200)
+To avoid too much smoothing with '2hump_ei', suggested max_accel &lt;= 3000 mm/sec^2
+Fitted shaper '3hump_ei' frequency = 72.6 Hz (vibrations = 1.4%, smoothing ~= 0.155)
+To avoid too much smoothing with '3hump_ei', suggested max_accel &lt;= 3900 mm/sec^2
 Recommended shaper is 3hump_ei @ 72.6 Hz
 </code></pre></div>
 
@@ -2627,16 +2627,16 @@ TEST_RESONANCES AXIS=0.866025404,-0.5 OUTPUT=raw_data
 
 <p>Questo eseguirà il test completo per entrambi gli assi e genererà l'output csv (<code>/tmp/calibration_data_*.csv</code> per impostazione predefinita) per la risposta in frequenza e gli input shaper suggeriti. Riceverai anche le frequenze suggerite per ciascun input shaper, nonché quale input shaper è consigliato per la tua configurazione, sulla console Octoprint. Per esempio:</p>
 <div class="highlight"><pre><span></span><code>Calculating the best input shaper parameters for y axis
-Fitted shaper &#39;zv&#39; frequency = 39.0 Hz (vibrations = 13.2%, smoothing ~= 0.105)
-To avoid too much smoothing with &#39;zv&#39;, suggested max_accel &lt;= 5900 mm/sec^2
-Fitted shaper &#39;mzv&#39; frequency = 36.8 Hz (vibrations = 1.7%, smoothing ~= 0.150)
-To avoid too much smoothing with &#39;mzv&#39;, suggested max_accel &lt;= 4000 mm/sec^2
-Fitted shaper &#39;ei&#39; frequency = 36.6 Hz (vibrations = 2.2%, smoothing ~= 0.240)
-To avoid too much smoothing with &#39;ei&#39;, suggested max_accel &lt;= 2500 mm/sec^2
-Fitted shaper &#39;2hump_ei&#39; frequency = 48.0 Hz (vibrations = 0.0%, smoothing ~= 0.234)
-To avoid too much smoothing with &#39;2hump_ei&#39;, suggested max_accel &lt;= 2500 mm/sec^2
-Fitted shaper &#39;3hump_ei&#39; frequency = 59.0 Hz (vibrations = 0.0%, smoothing ~= 0.235)
-To avoid too much smoothing with &#39;3hump_ei&#39;, suggested max_accel &lt;= 2500 mm/sec^2
+Fitted shaper 'zv' frequency = 39.0 Hz (vibrations = 13.2%, smoothing ~= 0.105)
+To avoid too much smoothing with 'zv', suggested max_accel &lt;= 5900 mm/sec^2
+Fitted shaper 'mzv' frequency = 36.8 Hz (vibrations = 1.7%, smoothing ~= 0.150)
+To avoid too much smoothing with 'mzv', suggested max_accel &lt;= 4000 mm/sec^2
+Fitted shaper 'ei' frequency = 36.6 Hz (vibrations = 2.2%, smoothing ~= 0.240)
+To avoid too much smoothing with 'ei', suggested max_accel &lt;= 2500 mm/sec^2
+Fitted shaper '2hump_ei' frequency = 48.0 Hz (vibrations = 0.0%, smoothing ~= 0.234)
+To avoid too much smoothing with '2hump_ei', suggested max_accel &lt;= 2500 mm/sec^2
+Fitted shaper '3hump_ei' frequency = 59.0 Hz (vibrations = 0.0%, smoothing ~= 0.235)
+To avoid too much smoothing with '3hump_ei', suggested max_accel &lt;= 2500 mm/sec^2
 Recommended shaper_type_y = mzv, shaper_freq_y = 36.8 Hz
 </code></pre></div>
 

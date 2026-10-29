@@ -1609,10 +1609,10 @@ optional arguments:
 <h2 id="_4">电路板定义<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>大多数常见的电路板都应该可用，但如有必要，可以添加新的电路板定义。 板定义位于<code>~/klipper/scripts/spi_flash/board_defs.py</code>。 定义存储在字典中，例如：</p>
 <div class="highlight"><pre><span></span><code><span class="n">BOARD_DEFS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;generic-lpc1768&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;mcu&#39;</span><span class="p">:</span> <span class="s2">&quot;lpc1768&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;spi_bus&#39;</span><span class="p">:</span> <span class="s2">&quot;ssp1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;cs_pin&quot;</span><span class="p">:</span> <span class="s2">&quot;P0.6&quot;</span>
+    <span class="s1">'generic-lpc1768'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'mcu'</span><span class="p">:</span> <span class="s2">"lpc1768"</span><span class="p">,</span>
+        <span class="s1">'spi_bus'</span><span class="p">:</span> <span class="s2">"ssp1"</span><span class="p">,</span>
+        <span class="s2">"cs_pin"</span><span class="p">:</span> <span class="s2">"P0.6"</span>
     <span class="p">},</span>
     <span class="o">...&lt;</span><span class="n">更多定义</span><span class="o">&gt;</span>
 <span class="p">}</span>
@@ -1635,7 +1635,7 @@ optional arguments:
 <p>在创建新板定义之前，应检查现有板定义是否满足新板所需的标准。 如果是这种情况，可以指定<code>BOARD_ALIAS</code>。 例如，可以添加以下别名来指定“my-new-board”作为“generic-lpc1768”的别名：</p>
 <div class="highlight"><pre><span></span><code><span class="n">BOARD_ALIASES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="o">...&lt;</span><span class="n">原先的别名</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="s1">&#39;my-new-board&#39;</span><span class="p">:</span> <span class="n">BOARD_DEFS</span><span class="p">[</span><span class="s1">&#39;generic-lpc1768&#39;</span><span class="p">],</span>
+    <span class="s1">'my-new-board'</span><span class="p">:</span> <span class="n">BOARD_DEFS</span><span class="p">[</span><span class="s1">'generic-lpc1768'</span><span class="p">],</span>
 <span class="p">}</span>
 </code></pre></div>
 

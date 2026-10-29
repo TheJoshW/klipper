@@ -1922,10 +1922,7 @@ gcode:
 <p>Also note that EI, 2HUMP_EI, and 3HUMP_EI are tuned to reduce vibrations to 5%, so the values for 10% vibration tolerance are provided only for the reference. However, a user can force a desired vibration tolerance for EI input shaper in a manner similar to MZV input shaper as, e.g. <code>ei(v_tol=0.02)</code> or <code>ei(v_tol=0.1)</code>, in which case the vibration reduction range will be different.</p>
 <p><strong>How to use this table:</strong></p>
 <ul>
-<li>“Shaper”持续时间会影响零件的平滑度——它越大，零件就越平滑。这种依赖性不是线性的，但可以让人感觉到哪些整形器在相同频率下更“平滑”。平滑排序如下：ZV&lt;MZV&lt;ZVD≈EI&lt;2HUMP_EI&lt;3HUMP_EI。此外，为整形器2HUMP_EI和3HUMP_EI设置shapper_freq＝谐振频率是不实际的（它们应该用于减少几个频率的振动）。</li>
-<li>可以估计整形器减少振动的频率范围。例如，shapper_freq=35Hz的MZV将频率[33.6,36.4]Hz的振动降低到5%。shaper_freq=50 Hz的3HUMP_EI将[27.5，75]Hz范围内的振动降低到5%。</li>
-<li>One can use this table to check which shaper they should be using if they need to reduce vibrations at several frequencies. For example, if one has resonances at 35 Hz and 60 Hz on the same axis: a) EI shaper needs to have shaper_freq = 35 / (1 - 0.2) = 43.75 Hz, and it will reduce resonances until 43.75 * (1 + 0.2) = 52.5 Hz, so it is not sufficient; b) 2HUMP_EI shaper needs to have shaper_freq = 35 / (1 - 0.4) = 58.3 Hz and will reduce vibrations until 58.3 * (1 + 0.45) = 84.5 Hz - so this is an acceptable configuration. Always try to use as high shaper_freq as possible for a given shaper (perhaps with some safety margin, so in this example shaper_freq ≈ 55 Hz would work best), and try to use a shaper with as small shaper duration as possible.</li>
-<li>如果需要减少几个非常不同频率（例如，30Hz和100Hz）的振动，他们可能会发现上表没有提供足够的信息。在这种情况下，使用<a href="https://github.com/Klipper3d/klipper/blob/master/scripts/graph_shaper.py">scripts/graph_shaper.py</a>脚本可能会更幸运，因为它更灵活。</li>
+<li>“Shaper”持续时间会影响零件的平滑度——它越大，零件就越平滑。这种依赖性不是线性的，但可以让人感觉到哪些整形器在相同频率下更“平滑”。平滑排序如下：ZV</li>
 </ul>
 
               
